@@ -9,9 +9,7 @@ import {
     StatusBar
 } from 'react-native';
 import AppStyles from '../../styles/Android';
-<<<<<<< HEAD
 import API from '../../services/Service';
-=======
 import Dialog, {
     DialogTitle,
     DialogContent,
@@ -24,10 +22,6 @@ import CountDown from 'react-native-countdown-component';
 //import CountDown to show the timer
 import moment from 'moment';
 import { GlobalConsumer } from '../../contexts/Context';
-import API from "../../services/Service"
-
->>>>>>> master
-
 
 class Home extends Component {
     constructor(props) {
@@ -65,7 +59,7 @@ class Home extends Component {
     
     // getitemfrom API
 
-    handleGetItem = () =>{
+    handleGetItem = () => {
         API.getRedeemItems().then((result) => {
             if(result.status){
                 let data = result.data
@@ -80,10 +74,7 @@ class Home extends Component {
     componentDidMount(){
         this.handleGetItem()
     }
-<<<<<<< HEAD
 
-=======
-    
     setUserData = () => {
         let user = {...this.props.globalState.loginData};
         this.setState({
@@ -131,7 +122,7 @@ class Home extends Component {
             )
         }
     }
->>>>>>> master
+
     render(){
         return(
             <ScrollView style={AppStyles.global.scrollView}>
@@ -145,7 +136,7 @@ class Home extends Component {
                         </View>
                         <View style={AppStyles.home.sectionBody}>
                             <View style={AppStyles.home.offerWallRow}>
-                                {/* <TouchableOpacity style={AppStyles.home.offerWallCol}>
+                                {/*<TouchableOpacity style={AppStyles.home.offerWallCol}>
                                     <View style={AppStyles.home.offerWallItem}>
                                         <Image source={require('../../assets/images/icons/check_in.png')} resizeMode="contain" style={{width : 40, height : 40, marginRight : -5 }} />
                                     </View>
@@ -178,9 +169,9 @@ class Home extends Component {
                                     </View>
                                     <Text style={AppStyles.home.textIcon}>History Point </Text>
                                 </TouchableOpacity>
-                            </View>
                         </View>
                     </View>
+                </View>
 
                     <View style={{marginBottom : 14}}></View>
 
@@ -192,9 +183,24 @@ class Home extends Component {
                         </View>
                         <View style={AppStyles.home.sectionBody}>
                             <View style={AppStyles.home.redeemItemRow}>
-                                <View style={AppStyles.home.redeemItemCol}>
-                                    <TouchableOpacity style={AppStyles.home.redeemItem}></TouchableOpacity>
-                                </View>
+
+                            {/* {
+                                this.state.items.length > 0 ? 
+                                this.state.items.map((value,index)=>{
+                                return(
+                                    <View style={AppStyles.home.redeemItemCol}>
+                                            <TouchableOpacity style={AppStyles.home.redeemItem}> 
+                                                <Text >{value.item_name}</Text>
+                                            </TouchableOpacity>
+                                    </View> 
+                                )
+                                })
+                                
+                                
+                                : <></>
+                            } */}
+
+                               
                             </View>
                         </View>
                     </View>
@@ -258,6 +264,7 @@ class Home extends Component {
                             </DialogContent>
                         )}
                     </Dialog>
+                
                 </SafeAreaView>
             </ScrollView>
         )
