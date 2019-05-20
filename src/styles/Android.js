@@ -89,8 +89,8 @@ let home = StyleSheet.create({
         borderWidth : 1,
         borderColor : "rgba(0,0,0,0.1)",
         backgroundColor : "#fff",
-        paddingBottom : '100%',
-        borderRadius:15
+        // paddingBottom : '100%',
+        borderRadius:10
     },
     viewMenu:{
         backgroundColor:'white',
