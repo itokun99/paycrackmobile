@@ -91,6 +91,55 @@ let home = StyleSheet.create({
         backgroundColor : "#fff",
         paddingBottom : '100%'
     },
+    viewMenu:{
+        backgroundColor:'white',
+        height:110,
+        flexDirection:'row'
+    },
+    buttonMenu:{
+        height:'100%',
+        width:75,
+        flexDirection:'column',
+        alignItems:'center',
+        marginLeft:30,
+    },
+    viewIcon:{
+        borderRadius:10,
+        backgroundColor:'#E61A80',
+        width:60,
+        height:60,
+        marginTop: 10,
+        padding:10
+    },
+    imageIcon:{
+        alignSelf:'center',
+        height:'100%',
+        width:'100%',
+    },
+    textIcon:{
+        fontSize:12,
+        textAlign: 'center',
+        alignItems: 'center',
+        marginTop:10
+    },
+    imageDialog:{
+        width:200,
+        height:200,
+        alignSelf: 'center',
+        margin:10
+    },
+    textDialog:{
+        color:'#ffffff',
+        width:'100%',
+        textAlign:'center',
+        marginTop: 10,
+        marginBottom:10
+    },
+    textCoin :{
+        color:'white',
+        textAlign: 'center',
+        fontSize: 20
+    }
     // redeemItemPic : {
        
     // }
