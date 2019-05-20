@@ -13,6 +13,7 @@ import ForgotPassword from '../containers/screen/ForgotPassword';
 import LoadingFirst from '../containers/screen/LoadingFirst';
 import DrawerIcon from '../components/DrawerIcon';
 import CoinCounter from '../components/CoinCounter';
+import Instruction from '../containers/screen/Instruction';
 
 
 // routing untuk user setelah login
@@ -33,6 +34,22 @@ const HomeStack = createStackNavigator({
     })
 })
 
+const InstructionStack = createStackNavigator({
+    Instruction : { 
+        screen : Instruction,
+        navigationOptions : ({ navigation }) => ({
+            headerLeft : <DrawerIcon navigation={navigation} />
+        }) 
+    }
+}, {
+    defaultNavigationOptions : ({ navigation }) => ({
+        headerStyle : {
+            backgroundColor : AppStyles.color.base 
+        },
+        headerTintColor : "#fff",
+    })
+})
+
 // routing untuk user sebelum login
 const LoginStack = createStackNavigator({
     Login : { screen : Login },
@@ -47,6 +64,9 @@ const LoginStack = createStackNavigator({
 const AppDrawer = createDrawerNavigator({
     Home : {
         screen : HomeStack,
+    },
+    Instruction :{
+        screen : InstructionStack,
     }
 }, {
     defaultNavigationOptions : {

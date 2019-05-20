@@ -311,11 +311,90 @@ let sidebar = StyleSheet.create({
         borderTopWidth : 1,
         paddingHorizontal : 24,
         paddingVertical : 14,
+        flexDirection: 'row',
     }
     ,footerText : {
         fontSize : 18,
-        fontWeight : "bold"
-    }
+        fontWeight : "bold",
+        marginLeft: 20,
+    },
+    containerDrawer : {
+        flex: 1,
+        backgroundColor : 'lightgray',
+    },
+    topLinks :{
+        height: 150,
+        backgroundColor : '#E61A80'
+    },
+    bootomLinks : {
+        flex : 1,
+        backgroundColor : 'white',
+        paddingTop: 10,
+        paddingBottom: 450,
+    },
+    text : {
+        fontSize : 20,
+        color: 'white',
+        textAlign: 'center'
+    },
+    textEmail : {
+        fontSize : 14,
+        color: 'white',
+        textAlign: 'center'
+    },
+    profile :{
+        flex : 1,
+        height:'100%',
+        width:'100%',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent : 'center',
+        borderBottomWidth: 1,
+        borderBottomColor: '#777777',
+    },
+    imgView :{
+        width: '100%',
+        height: '100%',
+        maxHeight: 70,
+        maxWidth: 70,
+        justifyContent: 'center',
+        resizeMode:'contain'
+    },
+    imgParent:{
+        width: '100%',
+        height: '100%',
+        maxHeight: 70,
+        maxWidth: 70,
+        justifyContent: 'center',
+    },
+    link :{
+        flex: 1,
+        fontSize: 20,
+        padding: 6,
+        paddingLeft: 10,
+        margin: 5,
+        textAlign: 'left'
+    },
+    footer : {
+        height : 50,
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor : 'white',
+        borderTopWidth: 1,
+        borderTopColor: 'lightgray',
+    },
+    version :{
+        flex : 1,
+        textAlign : 'right',
+        marginRight: 20,
+        color: 'gray',
+    },
+    description : {
+        flex : 1,
+        marginLeft: 10,
+        fontSize : 16,
+        flexDirection: 'row',
+    },
 })
 
 let cointIcon = StyleSheet.create({
