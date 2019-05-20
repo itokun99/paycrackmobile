@@ -418,6 +418,12 @@ let cointIcon = StyleSheet.create({
     }
 })
 
+let history = StyleSheet.create({
+    container : {
+
+    }
+})
+
 //store style ke objek
 const AppStyles = {
     global,
@@ -428,6 +434,7 @@ const AppStyles = {
     home,
     forgotpassword,
     cointIcon,
+    history
 }
 
 

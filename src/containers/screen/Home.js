@@ -11,13 +11,10 @@ import {
 import AppStyles from '../../styles/Android';
 import API,{Settings} from '../../services/Service';
 import Dialog, {
-    DialogTitle,
     DialogContent,
     DialogFooter,
     DialogButton,
-    SlideAnimation,
-    ScaleAnimation,
-} from 'react-native-popup-dialog';
+  } from 'react-native-popup-dialog';
 import CountDown from 'react-native-countdown-component';
 
 //import CountDown to show the timer
@@ -43,40 +40,13 @@ class Home extends Component {
             items: []
         }
     }
-    // konfigurasi
-    static navigationOptions = {
-        title: "Home",
-
-    }
-
-
-
-    // getitemfrom API
-
-    handleGetItem = () => {
-        API.getRedeemItems().then((result) => {
-            if (result.status) {
-                let data = result.data
-                this.setState({ items: data }, () => {
-                    // console.warn(this.state.items)
-                })
-            } else {
-            }
-        })
-    }
-
-    componentDidMount() {
-        this.handleGetItem()
-        this.setUserData();
-    }
-
-    setUserData = () => {
-        let user = { ...this.props.globalState.loginData };
+  
+   setUserData = () => {
+        let user = {...this.props.globalState.loginData};
         this.setState({
-            id: user.user_id
+            id : user.user_id
         })
     }
-
 
     postdaily = () => {
         if (this.state.id != null) {
@@ -116,6 +86,29 @@ class Home extends Component {
         }
     }
 
+    handleGetItem = () => {
+        API.getRedeemItems().then((result) => {
+            if (result.status) {
+                let data = result.data
+                this.setState({ items: data }, () => {
+                    // console.warn(this.state.items)
+                })
+            } else {
+            }
+        })
+    }
+
+    componentDidMount() {
+        this.handleGetItem()
+        this.setUserData();
+    }
+
+    setUserData = () => {
+        let user = { ...this.props.globalState.loginData };
+        this.setState({
+            id: user.user_id
+        })
+    }
     render() {
         return (
             <ScrollView style={AppStyles.global.scrollView}>
@@ -129,10 +122,7 @@ class Home extends Component {
                         </View>
                         <View style={AppStyles.home.sectionBody}>
                             <View style={AppStyles.home.offerWallRow}>
-                                <TouchableOpacity style={AppStyles.home.buttonMenu} onPress={() => {
-                                    this.postdaily();
-
-                                }}>
+                                <TouchableOpacity style={AppStyles.home.buttonMenu} onPress={this.postdaily}>
                                     <View style={AppStyles.home.viewIcon}>
                                         <Image
                                             resizeMode='center'
@@ -142,7 +132,7 @@ class Home extends Component {
                                     </View>
                                     <Text style={AppStyles.home.textIcon}>Daily Checkin </Text>
                                 </TouchableOpacity>
-                                <TouchableOpacity style={AppStyles.home.buttonMenu}>
+                                <TouchableOpacity onPress={() => this.props.navigation.push('HistoryPoint')} style={AppStyles.home.buttonMenu}>
                                     <View style={AppStyles.home.viewIcon}>
                                         <Image
                                             resizeMode='center'
@@ -193,19 +183,21 @@ class Home extends Component {
                         visible={this.state.defaultAnimationDialog}
                         rounded
                         actionsBordered
-                        footer={
+                        footer= {
                             <DialogFooter>
                                 <DialogButton
                                     text="OK"
                                     bordered
                                     onPress={() => {
-                                        this.setState({ defaultAnimationDialog: false });
+                                    this.setState({ defaultAnimationDialog: false });
                                     }}
                                     key="button-1"
                                 />
+                                <></>
                             </DialogFooter>
-                        }>
-                        {   this.state.status ?  (
+                        }
+                        >
+                        {this.state.status ?(
                             <DialogContent
                                 style={{
                                     backgroundColor: '#58A1C3',
