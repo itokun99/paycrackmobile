@@ -89,7 +89,8 @@ let home = StyleSheet.create({
         borderWidth : 1,
         borderColor : "rgba(0,0,0,0.1)",
         backgroundColor : "#fff",
-        paddingBottom : '100%'
+        paddingBottom : '100%',
+        borderRadius:15
     },
     // redeemItemPic : {
        

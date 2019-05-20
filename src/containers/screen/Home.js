@@ -9,19 +9,50 @@ import {
     StatusBar
 } from 'react-native';
 import AppStyles from '../../styles/Android';
+import API from '../../services/Service';
+
 
 class Home extends Component {
     // konfigurasi
     static navigationOptions = {
         title : "Home",
+        
     }
+    constructor(props)
+    {
+        super(props)
+        this.state = 
+        {
+            items:[]
+        }
+
+    }
+
+    
+    // getitemfrom API
+
+    handleGetItem = () =>{
+        API.getRedeemItems().then((result) => {
+            if(result.status){
+                let data = result.data
+                this.setState({items:data},()=>{
+                    console.warn(this.state.items)
+                })
+            }else{
+            }
+        })
+    } 
+    
+    componentDidMount(){
+        this.handleGetItem()
+    }
+
     render(){
         return(
             <ScrollView style={AppStyles.global.scrollView}>
                 <SafeAreaView style={AppStyles.home.main}>
                     <StatusBar barStyle="light-content" backgroundColor={AppStyles.loadingfirst.container.backgroundColor} />       
                     <View style={{marginBottom : 14}}></View>
-
                     {/* SECTION TOP */}
                     <View style={AppStyles.home.section}>
                         <View style={AppStyles.home.sectionHeader}>
@@ -52,29 +83,7 @@ class Home extends Component {
                         <View style={AppStyles.home.sectionBody}>
                             <View style={AppStyles.home.redeemItemRow}>
                                 <View style={AppStyles.home.redeemItemCol}>
-                                    <View style={AppStyles.home.redeemItem}>
-                                        
-                                    </View>
-                                </View>
-                                <View style={AppStyles.home.redeemItemCol}>
-                                    <View style={AppStyles.home.redeemItem}>
-                                    </View>
-                                </View>
-                                <View style={AppStyles.home.redeemItemCol}>
-                                    <View style={AppStyles.home.redeemItem}>
-                                    </View>
-                                </View>
-                                <View style={AppStyles.home.redeemItemCol}>
-                                    <View style={AppStyles.home.redeemItem}>
-                                    </View>
-                                </View>
-                                <View style={AppStyles.home.redeemItemCol}>
-                                    <View style={AppStyles.home.redeemItem}>
-                                    </View>
-                                </View>
-                                <View style={AppStyles.home.redeemItemCol}>
-                                    <View style={AppStyles.home.redeemItem}>
-                                    </View>
+                                    <TouchableOpacity style={AppStyles.home.redeemItem}></TouchableOpacity>
                                 </View>
                             </View>
                         </View>

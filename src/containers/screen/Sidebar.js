@@ -51,7 +51,12 @@ class Sidebar extends Component {
                     <View>
                         <TouchableNativeFeedback background={TouchableNativeFeedback.Ripple('rgba(0,0,0,0.3)')}>
                             <View style={{padding : 14}}>
-                                <Text>Test</Text>
+                                <Text>Home</Text>
+                            </View>
+                        </TouchableNativeFeedback>
+                        <TouchableNativeFeedback background={TouchableNativeFeedback.Ripple('rgba(0,0,0,0.3)')}>
+                            <View style={{padding : 14}}>
+                                <Text>Home</Text>
                             </View>
                         </TouchableNativeFeedback>
                     </View>
