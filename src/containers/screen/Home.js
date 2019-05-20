@@ -10,12 +10,9 @@ import {
 } from 'react-native';
 import AppStyles from '../../styles/Android';
 import Dialog, {
-    DialogTitle,
     DialogContent,
     DialogFooter,
     DialogButton,
-    SlideAnimation,
-    ScaleAnimation,
   } from 'react-native-popup-dialog';
 import CountDown from 'react-native-countdown-component';
 //import CountDown to show the timer
@@ -43,10 +40,6 @@ class Home extends Component {
             markedDate: ''
         }
     }
-    // konfigurasi
-    static navigationOptions = {
-        title : "Home",
-    }
     
     setUserData = () => {
         let user = {...this.props.globalState.loginData};
@@ -55,9 +48,7 @@ class Home extends Component {
         })
     }
 
-    componentDidMount(){
-        this.setUserData();
-    }
+   
     postdaily= () => {
         if (this.state.id != null) {
             const data ={
@@ -95,7 +86,12 @@ class Home extends Component {
             )
         }
     }
+
+    componentDidMount(){
+        this.setUserData();
+    }
     render(){
+        // console.warn(this.props);
         return(
             <ScrollView style={AppStyles.global.scrollView}>
                 <SafeAreaView style={AppStyles.home.main}>
@@ -109,20 +105,7 @@ class Home extends Component {
                         </View>
                         <View style={AppStyles.home.sectionBody}>
                             <View style={AppStyles.home.offerWallRow}>
-                                {/* <TouchableOpacity style={AppStyles.home.offerWallCol}>
-                                    <View style={AppStyles.home.offerWallItem}>
-                                        <Image source={require('../../assets/images/icons/check_in.png')} resizeMode="contain" style={{width : 40, height : 40, marginRight : -5 }} />
-                                    </View>
-                                </TouchableOpacity>
-                                <TouchableOpacity style={AppStyles.home.offerWallCol}>
-                                    <View style={AppStyles.home.offerWallItem}></View>
-                                </TouchableOpacity> */}
-                                <TouchableOpacity style={AppStyles.home.buttonMenu} onPress={()=>{
-                                    this.postdaily();                                    
-                                    // this.setState({
-                                    //     defaultAnimationDialog: true,
-                                    //   });
-                                }}>
+                                <TouchableOpacity style={AppStyles.home.buttonMenu} onPress={this.postdaily}>
                                     <View style={AppStyles.home.viewIcon}>
                                         <Image 
                                             resizeMode= 'center'
@@ -132,7 +115,7 @@ class Home extends Component {
                                     </View>
                                     <Text style={AppStyles.home.textIcon}>Daily Checkin </Text>
                                 </TouchableOpacity>
-                                <TouchableOpacity style={AppStyles.home.buttonMenu}>
+                                <TouchableOpacity onPress={() => this.props.navigation.push('HistoryPoint')} style={AppStyles.home.buttonMenu}>
                                     <View style={AppStyles.home.viewIcon}>
                                         <Image 
                                             resizeMode='center'
@@ -192,18 +175,21 @@ class Home extends Component {
                         visible={this.state.defaultAnimationDialog}
                         rounded
                         actionsBordered
-                        footer={
-                        <DialogFooter>
-                        <DialogButton
-                            text="OK"
-                            bordered
-                            onPress={() => {
-                            this.setState({ defaultAnimationDialog: false });
-                            }}
-                            key="button-1"
-                        />
-                        </DialogFooter>
-                    }>
+                        footer= {
+                            <DialogFooter>
+                                <DialogButton
+                                    text="OK"
+                                    bordered
+                                    onPress={() => {
+                                    this.setState({ defaultAnimationDialog: false });
+                                    }}
+                                    key="button-1"
+                                />
+                                <></>
+                            </DialogFooter>
+                            
+                        }
+                        >
                         {this.state.status ?(
                             <DialogContent
                                 style={{
