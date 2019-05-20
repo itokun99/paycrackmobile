@@ -27,6 +27,8 @@ class Login extends Component {
                 position : ""
             }
         }
+        this.handleEmailChange = this.handleEmailChange.bind(this);
+        this.handlePasswordChange = this.handlePasswordChange.bind(this);
     }
 
     handleValidateEmail = (email) => {
@@ -133,10 +135,10 @@ class Login extends Component {
                         <Image source={require('../../assets/images/icons/icon_app.png')} style={styles.loginIcon} resizeMode="contain" /> 
                         <View style={styles.formBody}>
                             <View style={styles.formGroup}>
-                                <TextInput onChangeText={(input) => this.handleEmailChange(input)} style={styles.formControl} placeholder="Email" />
+                                <TextInput onChangeText={this.handleEmailChange} style={styles.formControl} placeholder="Email" />
                             </View>
                             <View style={styles.formGroup}>
-                                <TextInput onChangeText={(input) => this.handlePasswordChange(input)} style={styles.formControl} placeholder="Password" secureTextEntry={true} />
+                                <TextInput onChangeText={this.handlePasswordChange} style={styles.formControl} placeholder="Password" secureTextEntry={true} />
                                 <Text onPress={() => this.props.navigation.push('ForgotPassword')} style={{textAlign : "right", marginTop : 8}}>Lupa Password?</Text>
                             </View>
                             <View style={styles.formGroup}>

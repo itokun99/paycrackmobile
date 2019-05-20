@@ -55,7 +55,7 @@ let home = StyleSheet.create({
         marginHorizontal : -14
     },
     offerWallCol : {
-        width : "33.33333%",
+        width : "25%",
         paddingHorizontal : 14,
         // paddingBottom : 24,
     },
@@ -64,9 +64,12 @@ let home = StyleSheet.create({
         width : "100%",
         overflow : "hidden",
         borderRadius : 14,
-        backgroundColor : color.base,
-        height : 0,
-        paddingBottom : "100%"
+        backgroundColor : "#fff",
+        height : 40,
+        justifyContent : "center",
+        alignItems : "center",
+        borderWidth : 1,
+        borderColor : "rgba(0,0,0,0.1)"
     },
     redeemItemRow : {
         flex : 1,
@@ -265,6 +268,27 @@ let sidebar = StyleSheet.create({
         fontWeight : "bold"
     }
 })
+
+let cointIcon = StyleSheet.create({
+    container : {
+        flex: 1,
+        flexDirection: "row",
+        marginRight: 14,
+        alignItems: "center",
+        borderWidth: 1,
+        borderColor: "#fff",
+        paddingVertical: 4,
+        paddingHorizontal: 8,
+        borderRadius: 16
+    },
+    coinText : {
+        color: "#fff",
+        marginRight: 4,
+        fontSize: 18,
+        fontWeight: "bold"
+    }
+})
+
 //store style ke objek
 const AppStyles = {
     global,
@@ -274,6 +298,7 @@ const AppStyles = {
     sidebar,
     home,
     forgotpassword,
+    cointIcon,
 }
 
 

@@ -12,6 +12,7 @@ import Sidebar from '../containers/screen/Sidebar';
 import ForgotPassword from '../containers/screen/ForgotPassword';
 import LoadingFirst from '../containers/screen/LoadingFirst';
 import DrawerIcon from '../components/DrawerIcon';
+import CoinCounter from '../components/CoinCounter';
 
 
 // routing untuk user setelah login
@@ -27,7 +28,8 @@ const HomeStack = createStackNavigator({
         headerStyle : {
             backgroundColor : AppStyles.color.base 
         },
-        headerTintColor : "#fff"
+        headerTintColor : "#fff",
+        headerRight : <CoinCounter navigation={navigation} />
     })
 })
 

@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {
     View,
     Text,
+    Image,
     ScrollView,
     TouchableOpacity,
     SafeAreaView,
@@ -29,10 +30,9 @@ class Home extends Component {
                         <View style={AppStyles.home.sectionBody}>
                             <View style={AppStyles.home.offerWallRow}>
                                 <TouchableOpacity style={AppStyles.home.offerWallCol}>
-                                    <View style={AppStyles.home.offerWallItem}></View>
-                                </TouchableOpacity>
-                                <TouchableOpacity style={AppStyles.home.offerWallCol}>
-                                    <View style={AppStyles.home.offerWallItem}></View>
+                                    <View style={AppStyles.home.offerWallItem}>
+                                        <Image source={require('../../assets/images/icons/check_in.png')} resizeMode="contain" style={{width : 40, height : 40, marginRight : -5 }} />
+                                    </View>
                                 </TouchableOpacity>
                                 <TouchableOpacity style={AppStyles.home.offerWallCol}>
                                     <View style={AppStyles.home.offerWallItem}></View>
@@ -53,6 +53,7 @@ class Home extends Component {
                             <View style={AppStyles.home.redeemItemRow}>
                                 <View style={AppStyles.home.redeemItemCol}>
                                     <View style={AppStyles.home.redeemItem}>
+                                        
                                     </View>
                                 </View>
                                 <View style={AppStyles.home.redeemItemCol}>

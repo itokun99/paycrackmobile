@@ -1,12 +1,19 @@
 import React from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
+import {View, Text, TouchableOpacity, Image} from 'react-native';
 import { GlobalConsumer } from '../contexts/Context';
+import AppStyles from '../styles/Android';
 
+// 
 
 const CointCounter = (props) => {
     return(
-        <View>
-            
+        <View style={AppStyles.cointIcon.container}>
+            <Text style={AppStyles.cointIcon.coinText}>{props.globalState.loginData.user_point}</Text>
+            <Image
+                source={require('../assets/images/icons/icon_coin.png')}
+                resizeMode="contain" 
+                style={{width : 25, height: 25}}
+            />
         </View>
     )
 }
