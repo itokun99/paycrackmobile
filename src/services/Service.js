@@ -70,6 +70,12 @@ const getUserData = (data = {}) => {
     return request(path)
 }
 
+const dailycheckin = (data = {}) => {
+    let url = 'api/users/dailycheckin';
+    let method = 'POST';
+    return request(url, method, data); 
+}
+
 
 //user API
 
@@ -77,6 +83,7 @@ const API = {
     getRedeemItems,
     userLogin,
     getUserData,
+    dailycheckin
 }
 
 export default API;

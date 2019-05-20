@@ -43,6 +43,16 @@ const GlobalProvider = (ChildComponent) => {
                             this.checkUpdateUserData(data.user_id);
                         })
                         break;
+                    case "UPDATE_POINT":
+                        let datas = action.data;
+                        let loginData = {
+                            ...this.state.loginData
+                        }
+                        loginData.user_point = parseInt(loginData.user_point) + datas;
+                        this.setState({
+                            loginData : loginData
+                        })
+                        break;
                     default:
                         return false;
                 }
