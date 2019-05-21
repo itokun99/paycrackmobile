@@ -140,7 +140,7 @@ class Login extends Component {
                     <View style={styles.Loginform}>
                         <Image source={require('../../assets/images/icons/icon_app.png')} style={styles.loginIcon} resizeMode="contain" /> 
                         <View style={styles.formBody}>
-                            <View style={styles.formGroup}>
+                            <View style={styles.textBoxBtnHolder}>
                                 <TextInput onChangeText={this.handleEmailChange} style={styles.formControl} placeholder="Email" />
                             </View>
                             <View style={styles.textBoxBtnHolder}>

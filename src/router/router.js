@@ -14,6 +14,7 @@ import LoadingFirst from '../containers/screen/LoadingFirst';
 import DrawerIcon from '../components/DrawerIcon';
 import CoinCounter from '../components/CoinCounter';
 import Instruction from '../containers/screen/Instruction';
+import PointHistory from '../containers/screen/PointHistory';
 
 
 // routing untuk user setelah login
@@ -21,8 +22,15 @@ const HomeStack = createStackNavigator({
     Home : { 
         screen : Home,
         navigationOptions : ({ navigation }) => ({
-            headerLeft : <DrawerIcon navigation={navigation} />
+            headerLeft : <DrawerIcon navigation={navigation} />,
+            title : "Home"
         }) 
+    },
+    HistoryPoint : {
+        screen : PointHistory,
+        navigationOptions : {
+            title : "History Point"
+        }
     }
 }, {
     defaultNavigationOptions : ({ navigation }) => ({
@@ -38,7 +46,8 @@ const InstructionStack = createStackNavigator({
     Instruction : { 
         screen : Instruction,
         navigationOptions : ({ navigation }) => ({
-            headerLeft : <DrawerIcon navigation={navigation} />
+            headerLeft : <DrawerIcon navigation={navigation} />,
+            title : "Instruction"
         }) 
     }
 }, {
@@ -47,6 +56,7 @@ const InstructionStack = createStackNavigator({
             backgroundColor : AppStyles.color.base 
         },
         headerTintColor : "#fff",
+        headerRight : <CoinCounter navigation={navigation} />
     })
 })
 

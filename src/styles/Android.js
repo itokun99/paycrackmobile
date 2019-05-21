@@ -89,7 +89,29 @@ let home = StyleSheet.create({
         borderWidth : 1,
         borderColor : "rgba(0,0,0,0.1)",
         backgroundColor : "#fff",
-        paddingBottom : '100%'
+        // paddingBottom : '100%',
+        borderRadius:4
+    },
+    redeemPic : {
+        width: "100%",
+        height: 0,
+        paddingBottom: "100%",
+        borderRadius: 14
+    },
+    redeemTitle : {
+        paddingHorizontal: 14,
+        paddingBottom: 14,
+        lineHeight: 18,
+        textAlign: "center",
+        fontSize: 18
+    },
+    redeemCoinText : {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: "center",
+        marginBottom: 14,
+        fontSize: 20
     },
     viewMenu:{
         backgroundColor:'white',
@@ -140,9 +162,6 @@ let home = StyleSheet.create({
         textAlign: 'center',
         fontSize: 20
     }
-    // redeemItemPic : {
-       
-    // }
 })
 
 
@@ -250,9 +269,6 @@ let login = StyleSheet.create({
     formGroup : {
         position : "relative",
         marginBottom : 24,
-        borderWidth : 2,
-        borderColor  : 'rgba(0,0,0,0.2)',
-        borderRadius : 14,
     },
     formControl : {
         width : '90%',
@@ -266,7 +282,6 @@ let login = StyleSheet.create({
         resizeMode: 'contain',
         height: 30,
         width: 30,
-        marginRight: 20,
         alignSelf: 'center',
     },
     textBoxBtnHolder:
@@ -275,9 +290,20 @@ let login = StyleSheet.create({
         position: 'relative',
         alignSelf: 'stretch',
         justifyContent: 'center',
+        marginBottom : 20,
         borderWidth : 2,
         borderColor  : 'rgba(0,0,0,0.2)',
         borderRadius : 14,
+    },
+     visibilityBtn:
+    {
+        position: 'absolute',
+        alignSelf: 'center',
+        right: 4,
+        height: 45,
+        width: 40,
+        top: 3,
+        padding: 4,
     },
 })
 
@@ -437,6 +463,38 @@ let cointIcon = StyleSheet.create({
     }
 })
 
+let history = StyleSheet.create({
+    container : {
+
+    },
+    ListItemCard : {
+        position : "relative",
+        display : 'flex',
+        flexDirection : "row",
+        marginBottom  :5,
+        justifyContent : "space-between",
+        padding : 24,
+        backgroundColor : "#fff"
+    },
+    ListItemCardLeft : {
+        position : "relative",
+    },
+    ListItemCardRight : {
+        position : "relative",
+        justifyContent : "center",
+        alignItems : "center"
+    },
+    listTitle : {
+        fontSize : 20,
+        fontWeight : "600",
+        marginBottom : 14
+    },
+    listDate : {
+        fontSize : 14,
+        fontWeight : '600'
+    }
+})
+
 //store style ke objek
 const AppStyles = {
     global,
@@ -447,6 +505,7 @@ const AppStyles = {
     home,
     forgotpassword,
     cointIcon,
+    history
 }
 
 

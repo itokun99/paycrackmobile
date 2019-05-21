@@ -85,11 +85,14 @@ const GlobalProvider = (ChildComponent) => {
             }
 
             componentDidMount(){
-
+                if(this.state.isLogin){
+                    setInterval(() => {
+                        this.checkUpdateUserData(this.state.loginData.user_id);
+                    }, 5000)
+                }
             }
 
             render(){
-                // console.log(this)
                 let stateManager = {
                     globalState : this.state,
                     globalAction : this.dispatch, 
