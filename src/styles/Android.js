@@ -238,6 +238,8 @@ let login = StyleSheet.create({
         paddingHorizontal : 14,
         paddingVertical : 14,
         borderRadius : 14,
+        marginBottom: 10,
+        marginTop: 10
     },
     btnText : {
         textAlign : "center",
@@ -248,17 +250,35 @@ let login = StyleSheet.create({
     formGroup : {
         position : "relative",
         marginBottom : 24,
-    },
-    formControl : {
-        width : '100%',
-        fontSize : 18,
-        paddingHorizontal : 14,
-        paddingVertical : 8,
         borderWidth : 2,
         borderColor  : 'rgba(0,0,0,0.2)',
         borderRadius : 14,
+    },
+    formControl : {
+        width : '90%',
+        fontSize : 18,
+        paddingHorizontal : 14,
+        paddingVertical : 8,
         textAlign : "center"
-    }
+    },
+    btnImage:
+    {
+        resizeMode: 'contain',
+        height: 30,
+        width: 30,
+        marginRight: 20,
+        alignSelf: 'center',
+    },
+    textBoxBtnHolder:
+    {
+        flexDirection: 'row',
+        position: 'relative',
+        alignSelf: 'stretch',
+        justifyContent: 'center',
+        borderWidth : 2,
+        borderColor  : 'rgba(0,0,0,0.2)',
+        borderRadius : 14,
+    },
 })
 
 let sidebar = StyleSheet.create({

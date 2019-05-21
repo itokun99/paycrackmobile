@@ -25,7 +25,8 @@ class Login extends Component {
                 message : "",
                 size : "",
                 position : ""
-            }
+            },
+            hidePassword: true,
         }
         this.handleEmailChange = this.handleEmailChange.bind(this);
         this.handlePasswordChange = this.handlePasswordChange.bind(this);
@@ -43,6 +44,11 @@ class Login extends Component {
         this.setState({
             loginData : loginData
         })
+    }
+
+    managePasswordVisibility = () =>
+    {
+        this.setState({ hidePassword: !this.state.hidePassword });
     }
 
     // method password change text
@@ -137,10 +143,15 @@ class Login extends Component {
                             <View style={styles.formGroup}>
                                 <TextInput onChangeText={this.handleEmailChange} style={styles.formControl} placeholder="Email" />
                             </View>
-                            <View style={styles.formGroup}>
-                                <TextInput onChangeText={this.handlePasswordChange} style={styles.formControl} placeholder="Password" secureTextEntry={true} />
-                                <Text onPress={() => this.props.navigation.push('ForgotPassword')} style={{textAlign : "right", marginTop : 8}}>Lupa Password?</Text>
+                            <View style={styles.textBoxBtnHolder}>
+                                <TextInput onChangeText={this.handlePasswordChange} style={styles.formControl} placeholder="Password" secureTextEntry={this.state.hidePassword} />
+                                <TouchableOpacity activeOpacity = { 0.8 } style = { styles.visibilityBtn } onPress = { this.managePasswordVisibility }>
+                                    <Image source = { ( this.state.hidePassword ) ? require('../../assets/images/icons/hide.png') : require('../../assets/images/icons/view.png') } style = { styles.btnImage } />
+                                </TouchableOpacity>
                             </View>
+                            <TouchableOpacity onPress={() => this.props.navigation.push('ForgotPassword')} style={{alignItems: 'flex-end', marginTop : 8}}>
+                                    <Text >Lupa Password?</Text>
+                                </TouchableOpacity>
                             <View style={styles.formGroup}>
                                 <TouchableOpacity onPress={this.handleLogin} style={styles.btn}>
                                     <Text style={styles.btnText}>Login</Text>
