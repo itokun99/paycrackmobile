@@ -127,7 +127,7 @@ let home = StyleSheet.create({
     },
     viewIcon:{
         borderRadius:10,
-        backgroundColor:'#E61A80',
+        backgroundColor:color.base,
         width:60,
         height:60,
         marginTop: 10,
@@ -444,7 +444,7 @@ let history = StyleSheet.create({
         position : "relative",
         display : 'flex',
         flexDirection : "row",
-        marginBottom  :5,
+        marginBottom  :2,
         justifyContent : "space-between",
         padding : 24,
         backgroundColor : "#fff"
@@ -464,7 +464,8 @@ let history = StyleSheet.create({
     },
     listDate : {
         fontSize : 14,
-        fontWeight : '600'
+        fontWeight : '600',
+        color : "rgba(0,0,0,0.3)"
     }
 })
 
