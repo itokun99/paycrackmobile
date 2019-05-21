@@ -48,14 +48,8 @@ class Sidebar extends Component {
     }
     navlink(nav,text,image){   
         return(
-            <TouchableOpacity style = {{height: 50,flexDirection: 'row',}} onPress={()=>{
-                this.props.navigation.navigate(nav,{
-                            email       : this.state.userEmail,
-                            id          : this.state.id,
-                            username    : this.state.username,
-                            fullname    : this.state.fullname,
-                            userpoint   : this.state.userpoint
-                        })
+            <TouchableNativeFeedback background={TouchableNativeFeedback.Ripple('rgba(0,0,0,0.3)')} onPress={()=>{
+                this.props.navigation.navigate(nav);
             }}>
                 <Image 
                     resizeMode='center'
@@ -63,7 +57,8 @@ class Sidebar extends Component {
                     style={{width:25,height:25,alignSelf: 'center',marginLeft: 10,marginTop: -2}}>
                 </Image>
                 <Text style={AppStyles.sidebar.link}>{text}</Text>
-            </TouchableOpacity>
+                </View>
+            </TouchableNativeFeedback>
         )
     }
 
@@ -85,6 +80,7 @@ class Sidebar extends Component {
                                 {this.navlink("Instruction","Instruction",require("../../assets/images/icons/question.png"))}
                             </View>
                         </TouchableNativeFeedback>
+
                     </View>
                 </View>
                 <TouchableNativeFeedback onPress={() => {this.setState({ defaultAnimationDialog: true })}} background={TouchableNativeFeedback.Ripple('rgba(0,0,0,0.3)')}>

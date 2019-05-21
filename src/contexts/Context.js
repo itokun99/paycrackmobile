@@ -85,11 +85,13 @@ const GlobalProvider = (ChildComponent) => {
             }
 
             componentDidMount(){
-                if(this.state.isLogin){
-                    setInterval(() => {
-                        this.checkUpdateUserData(this.state.loginData.user_id);
-                    }, 5000)
-                }
+                setTimeout(() => {
+                    if(this.state.isLogin){
+                        setInterval(() => {
+                            this.checkUpdateUserData(this.state.loginData.user_id);
+                        }, 5000)
+                    }
+                }, 3000)
             }
 
             render(){

@@ -6,6 +6,7 @@ import {
     StatusBar,
     SafeAreaView,
     FlatList,
+    Dimensions
 } from 'react-native';
 import AppStyles from '../../styles/Android';
 import { GlobalConsumer } from '../../contexts/Context';
@@ -77,7 +78,7 @@ class PointHistory extends Component {
                                 }
                             }
                         />
-                        : <></>
+                        : <View style={{justifyContent : "center", alignItems : "center", flexDireaction : "row", height: Dimensions.get('window').height}}><Text style={{fontSize : 20}}>No history data</Text></View>
                     }
                 </SafeAreaView>
             </ScrollView>
