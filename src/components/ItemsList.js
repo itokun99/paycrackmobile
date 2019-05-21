@@ -3,10 +3,11 @@ import {View, Text, TouchableOpacity, Image} from 'react-native';
 import AppStyles from '../styles/Android';
 import {Settings} from '../services/Service';
 
+
 const ItemsList = (props) => {
     return(
         <View key={props.data.item_id} style={AppStyles.home.redeemItemCol}>
-            <TouchableOpacity style={AppStyles.home.redeemItem}>
+            <TouchableOpacity style={AppStyles.home.redeemItem} onPress={() => props.onClick(props.data)}>
                 <View style={{padding : 14}}>
                     <Image source={{uri: `${Settings.basePath}${props.data.item_pic}`}}  resizeMode="cover" style={AppStyles.home.redeemPic}></Image>
                 </View>
