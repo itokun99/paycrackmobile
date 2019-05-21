@@ -51,12 +51,13 @@ class Sidebar extends Component {
             <TouchableNativeFeedback background={TouchableNativeFeedback.Ripple('rgba(0,0,0,0.3)')} onPress={()=>{
                 this.props.navigation.navigate(nav);
             }}>
-                <Image 
-                    resizeMode='center'
-                    source={image}
-                    style={{width:25,height:25,alignSelf: 'center',marginLeft: 10,marginTop: -2}}>
-                </Image>
-                <Text style={AppStyles.sidebar.link}>{text}</Text>
+                <View style={AppStyles.sidebar.navLink}>
+                    <Image 
+                        resizeMode='center'
+                        source={image}
+                        style={AppStyles.sidebar.navLinkIcon}>
+                    </Image>
+                    <Text style = {AppStyles.sidebar.navLinkText}>{text}</Text>
                 </View>
             </TouchableNativeFeedback>
         )
@@ -73,14 +74,9 @@ class Sidebar extends Component {
                         <Text style={AppStyles.sidebar.userName}>{this.state.user.user_fullname}</Text>
                         <Text style={AppStyles.sidebar.userEmail}>{this.state.user.user_email}</Text>
                     </View>
-                    <View>
-                        <TouchableNativeFeedback background={TouchableNativeFeedback.Ripple('rgba(0,0,0,0.3)')}>
-                            <View style={{padding : 14}}>
-                                {this.navlink("Home","Home",require("../../assets/images/icons/home.png"))}
-                                {this.navlink("Instruction","Instruction",require("../../assets/images/icons/question.png"))}
-                            </View>
-                        </TouchableNativeFeedback>
-
+                    <View style={AppStyles.sidebar.navBody}>
+                        {this.navlink("Home","Home",require("../../assets/images/icons/home.png"))}
+                        {this.navlink("Instruction","Instruction",require("../../assets/images/icons/question.png"))}
                     </View>
                 </View>
                 <TouchableNativeFeedback onPress={() => {this.setState({ defaultAnimationDialog: true })}} background={TouchableNativeFeedback.Ripple('rgba(0,0,0,0.3)')}>
@@ -94,54 +90,25 @@ class Sidebar extends Component {
                     </View>
                 </TouchableNativeFeedback>
                 <Dialog
-                    onDismiss={() => {
-                        this.setState({ defaultAnimationDialog: false });
-                    }}
+                    onDismiss={() => {this.setState({ defaultAnimationDialog: false })}}
                     width={0.9}
                     visible={this.state.defaultAnimationDialog}
                     rounded
                     actionsBordered
                     dialogTitle={
-                        <DialogTitle
-                        title="Log Out"
-                        style={{
-                            backgroundColor: '#F7F7F8',
-                        }}
-                        hasTitleBar={false}
-                        align="left"
-                        />
+                        <DialogTitle title="Log Out" style={{backgroundColor: '#F7F7F8'}} hasTitleBar={false} align="left"/>
                     }
-                    footer={
+                    footer = {
                         <DialogFooter>
-                        <DialogButton
-                            text="CANCEL"
-                            bordered
-                            onPress={() => {
-                            this.setState({ defaultAnimationDialog: false });
-                            }}
-                            key="button-1"
-                        />
-                        <DialogButton
-                            text="OK"
-                            bordered
-                            onPress={() => {
-                            this.setState({ 
-                                defaultAnimationDialog: false });
-                                this.handleLogOut();
-                            }}
-                            key="button-2"
-                        />
+                            <DialogButton text="CANCEL" borderedonPress={() => {this.setState({ defaultAnimationDialog: false });}} key="button-1"/>
+                            <DialogButton text="OK" bordered onPress={() => { this.setState({ defaultAnimationDialog: false }); this.handleLogOut();}} key="button-2"/>
                         </DialogFooter>
                     }
                     >
-                    <DialogContent
-                        style={{
-                        backgroundColor: '#F7F7F8',
-                        }}
-                    >
+                    <DialogContent style={{ backgroundColor: '#F7F7F8'}} >
                         <Text>Apa anda yakin ingin keluar dari akun anda?</Text>
                     </DialogContent>
-                    </Dialog>
+                </Dialog>
             </View>
         )
     }

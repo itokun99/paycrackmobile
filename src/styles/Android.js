@@ -413,8 +413,28 @@ let sidebar = StyleSheet.create({
         maxWidth: 70,
         justifyContent: 'center',
     },
+    navWrap : {
+        flex : 1,
+        flexDirection : "row",
+    },
+    navLink : {
+        display: "flex",
+        flexDirection: "row",
+        paddingVertical: 14,
+        paddingHorizontal: 10
+    },
+    navLinkIcon : {
+        width: 25,
+        height: 25,
+        alignSelf: 'center',
+        marginRight: 10,
+        marginTop: -2
+    },
+    navLinkText : {
+        fontSize: 18,
+        fontWeight: "600"
+    },
     link :{
-        flex: 1,
         fontSize: 20,
         padding: 6,
         paddingLeft: 10,
