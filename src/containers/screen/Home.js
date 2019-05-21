@@ -49,6 +49,10 @@ class Home extends Component {
         })
     }
 
+    setDetailMenu = (Data) => {
+            this.props.navigation.push("DetailMenu",Data)
+    }
+
     postdaily = () => {
         if (this.state.id != null) {
             const data = {
@@ -162,7 +166,7 @@ class Home extends Component {
                                     this.state.items.length > 0 ?
                                     this.state.items.map((value, index) => {
                                         return (
-                                            <ItemsList key={index} data={value} />
+                                            <ItemsList key={index} data={value} onClick={(data)=> this.setDetailMenu(data)}/>
                                         );
                                     })    : <></>
                                 }

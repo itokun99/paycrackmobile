@@ -15,6 +15,7 @@ import DrawerIcon from '../components/DrawerIcon';
 import CoinCounter from '../components/CoinCounter';
 import Instruction from '../containers/screen/Instruction';
 import PointHistory from '../containers/screen/PointHistory';
+import DetailMenu from '../containers/screen/DetailMenu';
 
 
 // routing untuk user setelah login
@@ -30,6 +31,12 @@ const HomeStack = createStackNavigator({
         screen : PointHistory,
         navigationOptions : {
             title : "History Point"
+        }
+    },
+    DetailMenu:{
+        screen :DetailMenu,
+        navigationOptions : {
+            title : "Detail Items"
         }
     }
 }, {
