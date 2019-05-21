@@ -56,6 +56,7 @@ const InstructionStack = createStackNavigator({
             backgroundColor : AppStyles.color.base 
         },
         headerTintColor : "#fff",
+        headerRight : <CoinCounter navigation={navigation} />
     })
 })
 

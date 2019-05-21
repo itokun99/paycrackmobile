@@ -20,6 +20,7 @@ import CountDown from 'react-native-countdown-component';
 //import CountDown to show the timer
 import moment from 'moment';
 import { GlobalConsumer } from '../../contexts/Context';
+import ItemsList from '../../components/ItemsList';
 
 class Home extends Component {
     constructor(props) {
@@ -159,16 +160,11 @@ class Home extends Component {
 
                                 {
                                     this.state.items.length > 0 ?
-                                        this.state.items.map((value, index) => {
-                                            return (
-                                                <View style={AppStyles.home.redeemItemCol}>
-                                                    <TouchableOpacity style={AppStyles.home.redeemItem}>
-                                                        <Image source={{uri: `${Settings.basePath}${value.item_pic}`}}  resizeMode="cover"    style={{width : "100%", height:"100%"}}></Image>
-                                                        <Text style={{fontSize:10,textAlign:"center"}} >{value.item_name}</Text>
-                                                    </TouchableOpacity>
-                                                </View>
-                                            )
-                                        })    : <></>
+                                    this.state.items.map((value, index) => {
+                                        return (
+                                            <ItemsList key={index} data={value} />
+                                        );
+                                    })    : <></>
                                 }
 
 

@@ -90,7 +90,28 @@ let home = StyleSheet.create({
         borderColor : "rgba(0,0,0,0.1)",
         backgroundColor : "#fff",
         // paddingBottom : '100%',
-        borderRadius:10
+        borderRadius:4
+    },
+    redeemPic : {
+        width: "100%",
+        height: 0,
+        paddingBottom: "100%",
+        borderRadius: 14
+    },
+    redeemTitle : {
+        paddingHorizontal: 14,
+        paddingBottom: 14,
+        lineHeight: 18,
+        textAlign: "center",
+        fontSize: 18
+    },
+    redeemCoinText : {
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: "center",
+        marginBottom: 14,
+        fontSize: 20
     },
     viewMenu:{
         backgroundColor:'white',
@@ -141,9 +162,6 @@ let home = StyleSheet.create({
         textAlign: 'center',
         fontSize: 20
     }
-    // redeemItemPic : {
-       
-    // }
 })
 
 
@@ -421,6 +439,32 @@ let cointIcon = StyleSheet.create({
 let history = StyleSheet.create({
     container : {
 
+    },
+    ListItemCard : {
+        position : "relative",
+        display : 'flex',
+        flexDirection : "row",
+        marginBottom  :5,
+        justifyContent : "space-between",
+        padding : 24,
+        backgroundColor : "#fff"
+    },
+    ListItemCardLeft : {
+        position : "relative",
+    },
+    ListItemCardRight : {
+        position : "relative",
+        justifyContent : "center",
+        alignItems : "center"
+    },
+    listTitle : {
+        fontSize : 20,
+        fontWeight : "600",
+        marginBottom : 14
+    },
+    listDate : {
+        fontSize : 14,
+        fontWeight : '600'
     }
 })
 

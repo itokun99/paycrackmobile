@@ -66,7 +66,7 @@ const getUserData = (data = {}) => {
         params++;
     }
     
-    let path = `api/users${params > 0 ? "?" : "" }${typeof(data.id) !== "undefined" ? params > 1 ? "&id="+data.id : data.id : "" }`;
+    let path = `api/users${params > 0 ? "?" : "" }${typeof(data.id) !== "undefined" ? params > 1 ? "&id="+data.id : 'id='+data.id : "" }`;
     return request(path)
 }
 
@@ -76,6 +76,16 @@ const dailycheckin = (data = {}) => {
     return request(url, method, data); 
 }
 
+const historyPoint = (data = {}) => {
+    params = 0;
+    for(let key in data){
+        params++
+    }
+    
+    let path = `api/history/point${params > 0 ? "?" : ""}${typeof(data.user_id) !== "undefined" ? params > 1 ? "&user_id="+data.user_id : "user_id="+data.user_id :""}`;
+
+    return request(path);
+}
 
 //user API
 
@@ -83,7 +93,8 @@ const API = {
     getRedeemItems,
     userLogin,
     getUserData,
-    dailycheckin
+    dailycheckin,
+    historyPoint,
 }
 
 export default API;

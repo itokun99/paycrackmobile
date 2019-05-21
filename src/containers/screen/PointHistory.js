@@ -5,34 +5,85 @@ import {
     ScrollView,
     StatusBar,
     SafeAreaView,
-    FlatList
+    FlatList,
 } from 'react-native';
 import AppStyles from '../../styles/Android';
+import { GlobalConsumer } from '../../contexts/Context';
+import API from '../../services/Service';
+import { AndroidToast } from '../../components/Toast';
+import ListItem from '../../components/ListItem';
 
 class PointHistory extends Component {
     constructor(props){
         super(props);
         this.state = {
             historyPoint : [],
+            isLoading : true,
+            toastData : {}
+        }
+    }
+
+    getHistoryPoint = () => {
+        let login_data = this.props.globalState.loginData
+        // console.warn(login_data);
+        if(typeof(login_data) !== "undefined"){
+            let user_id = login_data.user_id;
+            let params = {
+                user_id : user_id
+            }
+            API.historyPoint(params)
+            .then((result) => {
+                if(result.status){
+                    let history_data = result.data;
+                    // console.warn(history_data);
+                    this.setState({
+                        historyPoint : history_data
+                    })
+                } else {
+                    this.setState({
+                        toastData : {
+                            show : true,
+                            size : "long",
+                            message : "Failed to load History Point",
+                            position : "bottom"
+                        }
+                    })
+                }
+            })
         }
     }
 
     componentDidMount(){
-
+        this.getHistoryPoint();
     }
 
     render(){
+        // console.warn(this.state.historyPoint)
         return(
             <ScrollView contentContainerStyle={AppStyles.global.scrollView}>
                 <SafeAreaView>
                     <StatusBar barStyle="light-content" backgroundColor={AppStyles.loadingfirst.container.backgroundColor} />
-                    {/* <FlatList
-                        data = {}
-                    /> */}
+                    {
+                        this.state.historyPoint.length > 0 ? 
+                        <FlatList
+                            data = {this.state.historyPoint}
+                            keyExtractor={item => item.ph_id}
+                            renderItem = {
+                                ({item}) => {
+                                    // console.warn(item);
+                                    return(
+                                        <ListItem data={item} />
+                                    )
+                                }
+                            }
+                        />
+                        : <></>
+                    }
                 </SafeAreaView>
             </ScrollView>
         )
     }
 }
 
-export default PointHistory;
+
+export default GlobalConsumer(PointHistory);
