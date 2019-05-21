@@ -46,26 +46,16 @@ class Sidebar extends Component {
     componentDidMount(){
         this.setUserData();
     }
-    navlink(nav,text,image){        
+    navlink(nav,text,image){   
         return(
             <TouchableNativeFeedback background={TouchableNativeFeedback.Ripple('rgba(0,0,0,0.3)')} onPress={()=>{
                 this.props.navigation.navigate(nav);
             }}>
-            <View style={{paddingVertical : 10,flexDirection: 'row',}}>
-                {nav == 'Home' ?(
-                    <Image 
-                        resizeMode='center'
-                        source={require('../../assets/images/icons/home.png')}
-                        style={{width:25,height:25,alignSelf: 'center',marginLeft: 10,marginTop: -2}}>
-                    </Image>
-                ):(
-                    <Image 
-                        resizeMode='center'
-                        source={require('../../assets/images/icons/question.png')}
-                        style={{width:25,height:25,alignSelf: 'center',marginLeft: 10,marginTop: -2}}>
-                    </Image>
-                )}
-                
+                <Image 
+                    resizeMode='center'
+                    source={image}
+                    style={{width:25,height:25,alignSelf: 'center',marginLeft: 10,marginTop: -2}}>
+                </Image>
                 <Text style={AppStyles.sidebar.link}>{text}</Text>
                 </View>
             </TouchableNativeFeedback>
@@ -84,8 +74,13 @@ class Sidebar extends Component {
                         <Text style={AppStyles.sidebar.userEmail}>{this.state.user.user_email}</Text>
                     </View>
                     <View>
-                        {this.navlink("Home","Home",'home.png')}
-                        {this.navlink("Instruction","Instruction","question.png")}
+                        <TouchableNativeFeedback background={TouchableNativeFeedback.Ripple('rgba(0,0,0,0.3)')}>
+                            <View style={{padding : 14}}>
+                                {this.navlink("Home","Home",require("../../assets/images/icons/home.png"))}
+                                {this.navlink("Instruction","Instruction",require("../../assets/images/icons/question.png"))}
+                            </View>
+                        </TouchableNativeFeedback>
+
                     </View>
                 </View>
                 <TouchableNativeFeedback onPress={() => {this.setState({ defaultAnimationDialog: true })}} background={TouchableNativeFeedback.Ripple('rgba(0,0,0,0.3)')}>
