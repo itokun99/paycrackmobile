@@ -46,7 +46,7 @@ class Sidebar extends Component {
     componentDidMount(){
         this.setUserData();
     }
-    navlink(nav,text,image){        
+    navlink(nav,text,image){   
         return(
             <TouchableOpacity style = {{height: 50,flexDirection: 'row',}} onPress={()=>{
                 this.props.navigation.navigate(nav,{
@@ -57,26 +57,11 @@ class Sidebar extends Component {
                             userpoint   : this.state.userpoint
                         })
             }}>
-                    {/* <Image 
-                        resizeMode='center'
-                        source={{ uri: '../../components/icons/' + image}}
-                        style={{width:25,height:25,alignSelf: 'center',marginLeft: 10,marginTop: -2}}>
-                    </Image> */}
-            
-                {nav == 'Home' ?(
-                    <Image 
-                        resizeMode='center'
-                        source={require('../../assets/images/icons/home.png')}
-                        style={{width:25,height:25,alignSelf: 'center',marginLeft: 10,marginTop: -2}}>
-                    </Image>
-                ):(
-                    <Image 
-                        resizeMode='center'
-                        source={require('../../assets/images/icons/question.png')}
-                        style={{width:25,height:25,alignSelf: 'center',marginLeft: 10,marginTop: -2}}>
-                    </Image>
-                )}
-                
+                <Image 
+                    resizeMode='center'
+                    source={image}
+                    style={{width:25,height:25,alignSelf: 'center',marginLeft: 10,marginTop: -2}}>
+                </Image>
                 <Text style={AppStyles.sidebar.link}>{text}</Text>
             </TouchableOpacity>
         )
@@ -96,8 +81,8 @@ class Sidebar extends Component {
                     <View>
                         <TouchableNativeFeedback background={TouchableNativeFeedback.Ripple('rgba(0,0,0,0.3)')}>
                             <View style={{padding : 14}}>
-                                {this.navlink("Home","Home",'home.png')}
-                                {this.navlink("Instruction","Instruction","question.png")}
+                                {this.navlink("Home","Home",require("../../assets/images/icons/home.png"))}
+                                {this.navlink("Instruction","Instruction",require("../../assets/images/icons/question.png"))}
                             </View>
                         </TouchableNativeFeedback>
                     </View>
