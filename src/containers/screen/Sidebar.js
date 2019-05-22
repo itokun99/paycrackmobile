@@ -54,7 +54,7 @@ class Sidebar extends Component {
     }
     navlink(nav,text,image){   
         return(
-            <TouchableNativeFeedback background={TouchableNativeFeedback.Ripple('rgba(0,0,0,0.3)')} onPress={()=>{
+            <TouchableOpacity background={TouchableNativeFeedback.Ripple('rgba(0,0,0,0.3)')} onPress={()=>{
                 this.props.navigation.navigate(nav);
             }}>
                 <View style={AppStyles.sidebar.navLink}>
@@ -65,7 +65,7 @@ class Sidebar extends Component {
                     </Image>
                     <Text style = {AppStyles.sidebar.navLinkText}>{text}</Text>
                 </View>
-            </TouchableNativeFeedback>
+            </TouchableOpacity>
         )
     }
 
@@ -85,7 +85,7 @@ class Sidebar extends Component {
                         {this.navlink("Instruction","Instruction",require("../../assets/images/icons/question.png"))}
                     </View>
                 </View>
-                <TouchableNativeFeedback onPress={() => {this.setState({ defaultAnimationDialog: true })}} background={TouchableNativeFeedback.Ripple('rgba(0,0,0,0.3)')}>
+                <TouchableOpacity onPress={() => {this.setState({ defaultAnimationDialog: true })}} background={TouchableNativeFeedback.Ripple('rgba(0,0,0,0.3)')}>
                     <View style={AppStyles.sidebar.footer}>
                         <Image 
                             resizeMode='center'
@@ -94,7 +94,7 @@ class Sidebar extends Component {
                         </Image>
                         <Text style={AppStyles.sidebar.footerText}>Log Out</Text>
                     </View>
-                </TouchableNativeFeedback>
+                </TouchableOpacity>
                 <Dialog
                     onDismiss={() => {this.setState({ defaultAnimationDialog: false })}}
                     width={0.9}

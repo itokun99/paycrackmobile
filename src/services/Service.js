@@ -1,9 +1,9 @@
 import NetInfo from "@react-native-community/netinfo";
 
 export const Settings = {
-    isOnline : false,
-    basePath : "http://192.168.100.5/paycrack/",
-    onlinePath : "http://192.168.100.5/paycrack/",
+    isOnline : true,
+    basePath : "http://kes.co.id/dev/paycrack/",
+    onlinePath : "http://kes.co.id/dev/paycrack/",
     offlinePath : "http://192.168.100.5/paycrack/",
 }
 
