@@ -516,6 +516,83 @@ let history = StyleSheet.create({
     }
 })
 
+let detailItem = StyleSheet.create({
+    container : {
+        // flex: 1,
+        width: '100%',
+        paddingHorizontal: 14
+    },
+    imageHolder : {
+        paddingHorizontal: 24,
+        flexDirection: "row",
+        justifyContent: "center",
+        marginTop: 24,
+        marginBottom : 14
+    },
+    imageItem : {
+        width: '100%',
+        paddingBottom: '100%',
+        borderRadius: 40
+    },
+    itemTitle : {
+        textAlign: "center",
+        fontSize: 24,
+        fontWeight: "600"
+    },
+    itemDesc : {
+        textAlign: "center",
+        fontSize: 16,
+        color: 'rgba(0,0,0,0.4)'
+    },
+    btn : {
+        width : '80%',
+        padding : 10,
+        backgroundColor : color.base,
+        borderRadius :14
+    }
+
+})
+
+let redeemHistory = StyleSheet.create({
+    container : {
+
+    },
+    redeemItem : {
+        flex : 1,
+        // flexWrap : "wrap",
+        flexDirection : "row",
+        justifyContent : "space-between",
+        position : "relative",
+        padding : 14,
+        marginBottom : 5,
+        backgroundColor : "#ffffff"
+    },
+    redeemItemLeft : {
+        flex: 1,
+        flexDirection : "row",
+    },
+    redeemImageWrapper : {
+        width: 80,
+        height : 80,
+        marginRight :14,
+    },
+    redeemTitleWrapper : {
+        paddingVertical : 4,
+        justifyContent : "space-around"
+    },
+    redeemItemRight : {
+        justifyContent : "center"
+    },
+    redeemStatusText : {
+        paddingVertical : 2,
+        paddingHorizontal : 8,
+        borderWidth : 1,
+        borderColor : "#222",
+        borderRadius : 14,
+
+    }
+
+})
 //store style ke objek
 const AppStyles = {
     global,
@@ -526,7 +603,9 @@ const AppStyles = {
     home,
     forgotpassword,
     cointIcon,
-    history
+    history,
+    detailItem,
+    redeemHistory
 }
 
 

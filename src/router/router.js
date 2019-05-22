@@ -16,6 +16,7 @@ import CoinCounter from '../components/CoinCounter';
 import Instruction from '../containers/screen/Instruction';
 import PointHistory from '../containers/screen/PointHistory';
 import DetailMenu from '../containers/screen/DetailMenu';
+import RedeemHistory from '../containers/screen/RedeemHistory';
 
 
 // routing untuk user setelah login
@@ -37,6 +38,12 @@ const HomeStack = createStackNavigator({
         screen :DetailMenu,
         navigationOptions : {
             title : "Detail Items"
+        }
+    },
+    HistoryRedeem : {
+        screen : RedeemHistory,
+        navigationOptions : {
+            title : "History Redeem"
         }
     }
 }, {

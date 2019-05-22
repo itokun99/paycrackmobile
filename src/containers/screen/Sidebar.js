@@ -29,8 +29,14 @@ class Sidebar extends Component {
 
     handleLogOut = async () => {
         try{
+            let action = {
+                type : "USER_LOGOUT"
+            }
+            this.props.globalAction(action);
             await AsyncStorage.clear();
-            this.props.navigation.navigate('Auth');
+            setTimeout(() => {
+                this.props.navigation.navigate('Loading');
+            }, 500)
         }catch(error){
 
         }

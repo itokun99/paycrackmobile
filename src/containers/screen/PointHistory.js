@@ -61,9 +61,9 @@ class PointHistory extends Component {
     render(){
         // console.warn(this.state.historyPoint)
         return(
-            <ScrollView contentContainerStyle={AppStyles.global.scrollView}>
+            <ScrollView contentContainerStyle={{...AppStyles.global.scrollView, backgroundColor : AppStyles.color.backgroundLayer, height : '100%'}}>
                 <SafeAreaView>
-                    <StatusBar barStyle="light-content" backgroundColor={AppStyles.loadingfirst.container.backgroundColor} />
+                    <StatusBar barStyle="light-content" backgroundColor={AppStyles.color.base} />
                     {
                         this.state.historyPoint.length > 0 ? 
                         <FlatList
@@ -78,7 +78,7 @@ class PointHistory extends Component {
                                 }
                             }
                         />
-                        : <View style={{justifyContent : "center", alignItems : "center", flexDireaction : "row", height: Dimensions.get('window').height}}><Text style={{fontSize : 20}}>No history data</Text></View>
+                        : <View style={{justifyContent : "center", alignItems : "center", flexDireaction : "row", height: 200}}><Text style={{fontSize : 20}}>No history data</Text></View>
                     }
                 </SafeAreaView>
             </ScrollView>
