@@ -11,6 +11,7 @@ import { GlobalConsumer } from '../../contexts/Context';
 import ListRedeem from '../../components/ListRedeem';
 import AppStyles from '../../styles/Android';
 import API from '../../services/Service';
+import AsyncStorage from '@react-native-community/async-storage';
 
 class RedeemHistory extends Component {
     constructor(props){
@@ -22,24 +23,56 @@ class RedeemHistory extends Component {
         }
     }
 
+    saveToLocal = (data) => {
+        AsyncStorage.setItem('historyRedeem', JSON.stringify(data));
+    }
+
     getRedeemHistory = () => {
         let user = {...this.state.user};
         let params = {
             user_id : user.user_id 
         }
+        let redeem  = this.state.redeem;
         API.historyRedeem(params)
         .then((result) => {
             if(result.status){
                 let data = result.data
-                this.setState({
-                    redeem : data
-                })
+                if(redeem.length !== data.length){
+                    this.setState({
+                        redeem : data
+                    }, () => {
+                        this.saveToLocal(data);
+                    })
+                }
             }
         })
     }
 
+    loadDataHistory = async () => {
+        try{
+            var historyRedeem = await AsyncStorage.getItem('historyRedeem');
+            if(historyRedeem !== null){
+                historyRedeem = JSON.parse(historyRedeem);
+                if(historyRedeem.length > 0){
+                    this.setState({
+                        redeem : historyRedeem
+                    }, () => {
+                        this.getRedeemHistory()    
+                    })
+                } else {
+                    this.getRedeemHistory()
+                }
+            } else {
+                this.getRedeemHistory()
+            }
+        }catch(error){
+            this.getRedeemHistory()
+        }
+    }
+
     componentDidMount(){
-        this.getRedeemHistory();
+        // this.getRedeemHistory();
+        this.loadDataHistory();
     }
 
     render(){

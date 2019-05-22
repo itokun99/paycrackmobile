@@ -1,6 +1,7 @@
 import React, {Component, createContext} from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
 import API from '../services/Service';
+import Toast from 'react-native-easy-toast';
 
 /*
     Dokumentasi tentang React Context
@@ -12,7 +13,6 @@ import API from '../services/Service';
 const Context = createContext();
 const Provider = Context.Provider;
 const Consumer = Context.Consumer;
-
 
 /*
     Context Menggunakan High Order Component (HOC);
@@ -27,7 +27,8 @@ const GlobalProvider = (ChildComponent) => {
             // state global disini bisa disebuat store.
             state = {
                 isLogin : false,
-                loginData : {}
+                loginData : {},
+                internet : false,
             }
 
             // action global konsep mirip redux dispatcher.
@@ -38,7 +39,8 @@ const GlobalProvider = (ChildComponent) => {
                         let data = action.data;
                         this.setState({
                             isLogin : true,
-                            loginData : data
+                            loginData : data,
+                            // internet : true,
                         }, () => {
                             this.checkUpdateUserData(data.user_id);
                         })
@@ -84,8 +86,17 @@ const GlobalProvider = (ChildComponent) => {
                                 loginData : data
                             })
                         }
+                        this.setState({
+                            internet : true,
+                        })
                     } else {
-                        console.log(result);
+                        // console.log(result);
+                        if(result.code === 1){
+                            this.setState({
+                                internet : false,
+                            })
+                            this.refs.toast.show(result.message, 5000);
+                        }
                     }
                 })
             }
@@ -95,7 +106,7 @@ const GlobalProvider = (ChildComponent) => {
                     if(this.state.isLogin){
                         setInterval(() => {
                             this.checkUpdateUserData(this.state.loginData.user_id);
-                        }, 5000)
+                        }, 3000)
                     }
                 }, 3000)
             }
@@ -108,6 +119,7 @@ const GlobalProvider = (ChildComponent) => {
                 return(
                     <Provider value={stateManager}>
                         <ChildComponent {...this.props} />
+                        <Toast ref="toast" />
                     </Provider>
                 )
             }

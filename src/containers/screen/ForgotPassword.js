@@ -10,7 +10,7 @@ class ForgotPassword extends Component {
             <View style={AppStyles.forgotpassword.container}>
                 <View style={AppStyles.forgotpassword.formWrapper}>
                     <View style={AppStyles.forgotpassword.formGroup}>
-                        <Text style={AppStyles.forgotpassword.formTitle}>Lupa Password?</Text>
+                        <Text style={AppStyles.forgotpassword.formTitle}>Lost Your Password?</Text>
                     </View>
                     <View style={AppStyles.forgotpassword.formGroup}>
                         <TextInput style={AppStyles.forgotpassword.formControl} keyboardType="email-address" placeholder="Email" />
@@ -20,7 +20,7 @@ class ForgotPassword extends Component {
                             <Text style={AppStyles.forgotpassword.btnText}>Submit</Text>
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => this.props.navigation.goBack()} style={{...AppStyles.forgotpassword.btn, backgroundColor : "#888", marginTop : 8}}>
-                            <Text style={AppStyles.forgotpassword.btnText}>Kembali</Text>
+                            <Text style={AppStyles.forgotpassword.btnText}>Back</Text>
                         </TouchableOpacity>
                     </View>
                 </View>

@@ -6,13 +6,14 @@ import {
     StatusBar,
     SafeAreaView,
     FlatList,
-    Dimensions
+    Dimensions,
 } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 import AppStyles from '../../styles/Android';
 import { GlobalConsumer } from '../../contexts/Context';
 import API from '../../services/Service';
-import { AndroidToast } from '../../components/Toast';
 import ListItem from '../../components/ListItem';
+import Toast, {DURATION} from 'react-native-easy-toast';
 
 class PointHistory extends Component {
     constructor(props){
@@ -24,9 +25,13 @@ class PointHistory extends Component {
         }
     }
 
+    saveToStorage = (data) => {
+        AsyncStorage.setItem('historyPoint', JSON.stringify(data));
+    }
+
     getHistoryPoint = () => {
+        let prevState = this.state.historyPoint;
         let login_data = this.props.globalState.loginData
-        // console.warn(login_data);
         if(typeof(login_data) !== "undefined"){
             let user_id = login_data.user_id;
             let params = {
@@ -36,26 +41,46 @@ class PointHistory extends Component {
             .then((result) => {
                 if(result.status){
                     let history_data = result.data;
-                    // console.warn(history_data);
-                    this.setState({
-                        historyPoint : history_data
-                    })
+                    if(prevState.length !== history_data.length){
+                        // console.warn('masuk1')
+                        this.setState({
+                            historyPoint : history_data
+                        }, () => {
+                            this.saveToStorage(history_data);
+                        })
+                    }
                 } else {
-                    this.setState({
-                        toastData : {
-                            show : true,
-                            size : "long",
-                            message : "Failed to load History Point",
-                            position : "bottom"
-                        }
-                    })
+                    if(result.code !== 404){
+                        this.refs.toasts.show(result.message);
+                    }
                 }
             })
         }
     }
 
+    loadDataHistory = async () => {
+        try{
+            var historyPoint = await AsyncStorage.getItem('historyPoint');
+            if(historyPoint !== null){
+                historyPoint = JSON.parse(historyPoint);
+                if(historyPoint.length > 0){
+                    this.setState({
+                        historyPoint : historyPoint
+                    }, () => {
+                        this.getHistoryPoint()
+                    })
+                }
+            } else {
+                this.getHistoryPoint();
+            }
+        }catch(error){
+            this.getHistoryPoint();
+        }
+    }
+
     componentDidMount(){
-        this.getHistoryPoint();
+        // this.getHistoryPoint();
+        this.loadDataHistory()
     }
 
     render(){
@@ -81,6 +106,7 @@ class PointHistory extends Component {
                         : <View style={{justifyContent : "center", alignItems : "center", flexDireaction : "row", height: 200}}><Text style={{fontSize : 20}}>No history data</Text></View>
                     }
                 </SafeAreaView>
+                <Toast ref="toast" />
             </ScrollView>
         )
     }

@@ -275,7 +275,8 @@ let login = StyleSheet.create({
         fontSize : 18,
         paddingHorizontal : 14,
         paddingVertical : 8,
-        textAlign : "center"
+        textAlign : "center",
+        minHeight : 45,
     },
     btnImage:
     {
