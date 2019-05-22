@@ -60,6 +60,7 @@ const userLogin = (data = {}) => {
     return request(path, method, data);
 }
 
+// getUser data
 const getUserData = (data = {}) => {
     let params = 0;
     for(let key in data){
@@ -70,12 +71,14 @@ const getUserData = (data = {}) => {
     return request(path)
 }
 
+//daily checkin
 const dailycheckin = (data = {}) => {
     let url = 'api/users/dailycheckin';
     let method = 'POST';
     return request(url, method, data); 
 }
 
+// get history point
 const historyPoint = (data = {}) => {
     params = 0;
     for(let key in data){
@@ -87,6 +90,22 @@ const historyPoint = (data = {}) => {
     return request(path);
 }
 
+// redeem item
+const redeemPoint = (data = {}) => {
+    let path = 'api/users/redeempoint';
+    let method = "POST";
+    return request(path, method, data);
+}
+
+const historyRedeem = (data = {}) => {
+    let params = 0;
+    for(key in data){
+        params++;
+    }
+    let path = `api/history/redeem${params > 0 ? "?" : "" }${typeof(data.user_id) !== "undefined" ? params > 1 ? "&user_id="+data.user_id : "user_id="+data.user_id : "" }`;
+    return request(path);
+}
+
 //user API
 
 const API = {
@@ -95,6 +114,8 @@ const API = {
     getUserData,
     dailycheckin,
     historyPoint,
+    redeemPoint,
+    historyRedeem
 }
 
 export default API;

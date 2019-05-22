@@ -147,6 +147,16 @@ class Home extends Component {
                                     </View>
                                     <Text style={AppStyles.home.textIcon}>  History Point </Text>
                                 </TouchableOpacity>
+                                <TouchableOpacity onPress={() => this.props.navigation.push('HistoryRedeem')} style={AppStyles.home.buttonMenu}>
+                                    <View style={AppStyles.home.viewIcon}>
+                                        <Image
+                                            resizeMode='center'
+                                            source={require('../../assets/images/icons/horee.png')}
+                                            style={AppStyles.home.imageIcon}>
+                                        </Image>
+                                    </View>
+                                    <Text style={AppStyles.home.textIcon}>  My Redeem </Text>
+                                </TouchableOpacity>
                             </View>
                         </View>
                     </View>

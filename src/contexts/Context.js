@@ -53,6 +53,12 @@ const GlobalProvider = (ChildComponent) => {
                             loginData : loginData
                         })
                         break;
+                    case "USER_LOGOUT":
+                        this.setState({
+                            isLogin : false,
+                            loginData : {}
+                        })
+                        break;
                     default:
                         return false;
                 }
