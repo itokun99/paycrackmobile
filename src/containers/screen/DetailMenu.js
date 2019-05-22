@@ -95,6 +95,15 @@ class DetailMenu extends Component {
             this.navigateToHistoryRedeeem();
         })
     }
+    closeDialogReset  = () => {
+        let dialog = {...this.state.dialog};
+        dialog.visible = false;
+        dialog.message = "";
+        this.setState({
+            dialog : dialog,
+            redeemSuccess : 0,
+        })
+    }
     navigateToHistoryRedeeem = () => {
         this.props.navigation.push('HistoryRedeem');
     }
