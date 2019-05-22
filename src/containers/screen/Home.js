@@ -6,7 +6,8 @@ import {
     ScrollView,
     TouchableOpacity,
     SafeAreaView,
-    StatusBar
+    StatusBar,
+    ActivityIndicator
 } from 'react-native';
 import AppStyles from '../../styles/Android';
 import API,{Settings} from '../../services/Service';
@@ -38,7 +39,9 @@ class Home extends Component {
             status: '',
             datacheck: [],
             markedDate: '',
-            items: []
+            items: [],
+            itemIsLoading : true,
+            internet  : this.props.globalState.internet
         }
     }
   
@@ -91,21 +94,19 @@ class Home extends Component {
         }
     }
 
-    handleGetItem = () => {
+    handleGetItem = async () => {
         API.getRedeemItems().then((result) => {
             if (result.status) {
                 let data = result.data
-                this.setState({ items: data }, () => {
-                    // console.warn(this.state.items)
+                this.setState({
+                    items: data,
+                    itemIsLoading : false,
+                    internet : true,
                 })
             } else {
+                
             }
         })
-    }
-
-    componentDidMount() {
-        this.handleGetItem()
-        this.setUserData();
     }
 
     setUserData = () => {
@@ -114,7 +115,25 @@ class Home extends Component {
             id: user.user_id
         })
     }
+
+    checkInet = () => {
+        this.setState({
+            internet : this.props.globalState.internet
+        })
+    }
+
+    componentDidMount() {
+        this.handleGetItem()
+        this.setUserData();
+        // setInterval(() => {
+        //     this.checkInet()
+        // }, 1000)
+    }
+
+
     render() {
+        // console.warn(this.props.globalState)
+
         return (
             <ScrollView style={AppStyles.global.scrollView}>
                 <SafeAreaView style={AppStyles.home.main}>
@@ -178,7 +197,18 @@ class Home extends Component {
                                         return (
                                             <ItemsList key={index} data={value} onClick={(data)=> this.setDetailMenu(data)}/>
                                         );
-                                    })    : <></>
+                                    })
+                                    :
+                                    <View style={{justifyContent : "center", paddingHorizontal : 100, height: '100%', width : '100%'}}>
+                                        {
+                                            this.state.internet ? 
+                                                <ActivityIndicator size = "large"  color={AppStyles.color.base} />
+                                            :
+                                                <TouchableOpacity onPress={this.handleGetItem} style={{paddingVertical : 4, paddingHorizontal : 8, backgroundColor : "#f8f8f8", maxWidth : 150}}>
+                                                    <Text style={{textAlign : "center", fontSize : 18}}>Reload?</Text>
+                                                </TouchableOpacity>
+                                        }
+                                    </View>
                                 }
 
 

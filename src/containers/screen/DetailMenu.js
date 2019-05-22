@@ -84,14 +84,19 @@ class DetailMenu extends Component {
             dialog : dialog
         })
     }
-    closeDialogReset  = () => {
+    closeDialogSuccess  = () => {
         let dialog = {...this.state.dialog};
         dialog.visible = false;
         dialog.message = "";
         this.setState({
             dialog : dialog,
             redeemSuccess : 0,
+        }, () => {
+            this.navigateToHistoryRedeeem();
         })
+    }
+    navigateToHistoryRedeeem = () => {
+        this.props.navigation.push('HistoryRedeem');
     }
 
 
@@ -132,7 +137,7 @@ class DetailMenu extends Component {
                         :
                         this.state.redeemSuccess === 2 ?
                         <DialogFooter>
-                            <DialogButton text="Ok" onPress={this.closeDialogReset} />
+                            <DialogButton text="Ok" onPress={this.closeDialogSuccess} />
                             <></>
                         </DialogFooter>
                         :

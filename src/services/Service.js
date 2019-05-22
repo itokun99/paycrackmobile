@@ -1,3 +1,5 @@
+import NetInfo from "@react-native-community/netinfo";
+
 export const Settings = {
     isOnline : false,
     basePath : "http://192.168.100.5/paycrack/",
@@ -25,17 +27,28 @@ const request = (path, method, data, formData = false ) => {
             }
         }
 
-        fetch(url, option)
-        .then((response) => {
-            // console.log(response);
-            if(response.ok){
-                resolve(response.json())
+        NetInfo.fetch().then((state) => {
+            if(state.isConnected){
+                fetch(url, option)
+                .then((response) => {
+                    // console.log(response);
+                    if(response.ok){
+                        resolve(response.json())
+                    } else {
+                        resolve(response.json())
+                    }
+                }).catch((response) => {
+                    console.log(response);
+                    resolve(response)
+                })
             } else {
-                resolve(response.json())
+                let lossInternet = {
+                    status : false,
+                    code : 1,
+                    message : "Not Connected to Internet"
+                }
+                resolve(lossInternet)
             }
-        }).catch(() => {
-            console.log(response);
-            resolve(response)
         })
     })
 

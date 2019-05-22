@@ -5,6 +5,7 @@ import { AndroidToast } from '../../components/Toast';
 import API from '../../services/Service';
 import AsyncStorage from '@react-native-community/async-storage';
 import { GlobalConsumer } from '../../contexts/Context';
+import Toast, {DURATION} from 'react-native-easy-toast';
 
 // init screen style 
 const styles = AppStyles.login;
@@ -60,14 +61,6 @@ class Login extends Component {
         })
     }
 
-    hideToast = () => {
-        this.setState({
-            ToastData : {
-                show  : false
-            }
-        })
-    }
-
     handleLogin = () => {
         let loginData = {...this.state.loginData};
         let noValue = false;
@@ -77,51 +70,24 @@ class Login extends Component {
             }
         }
         if(noValue){
-            let toast = {
-                show : true,
-                message : "Please fill the form!",
-                size : "long",
-                position : "bottom"
-            }
-            this.setState({
-                showToast : true,
-                ToastData : toast
-            })
+            this.refs.toast.show("Please fill the form!");
         } else {
             // login user dengan REST API
             API.userLogin(loginData)
             .then((result) => {
                 if(result.status){
                     let user_data = result.data;
-                    let toast = {
-                        show : true,
-                        message : result.message,
-                        size : "long",
-                        position : "bottom"
-                    }
-                    this.setState({
-                        ToastData : toast
-                    }, () => {
-                        this.hideToast();
-                    })
                     AsyncStorage.setItem('loginData', JSON.stringify(user_data));
                     this.props.globalAction({
                         type : "USER_LOGIN",
                         data : user_data
                     })
-                    this.props.navigation.navigate('App');
+                    this.refs.toast.show(result.message)
+                    setTimeout(() => {
+                        this.props.navigation.navigate('App');
+                    }, 300)
                 } else {
-                    let toast = {
-                        show : true,
-                        message : result.message,
-                        size : "long",
-                        position : "bottom"
-                    }
-                    this.setState({
-                        ToastData : toast
-                    }, () => {
-                        this.hideToast();
-                    } )
+                    this.refs.toast.show(result.message);
                 }
             })
         }
@@ -136,7 +102,7 @@ class Login extends Component {
             // scrollview untuk menghindari lock focus input 
             <ScrollView contentContainerStyle={styles.container} >
                 <View style={styles.mainWrapper}>
-                    <AndroidToast data={this.state.ToastData} />
+                    {/* <AndroidToast data={this.state.ToastData} /> */}
                     <View style={styles.Loginform}>
                         <Image source={require('../../assets/images/icons/icon_app.png')} style={styles.loginIcon} resizeMode="contain" /> 
                         <View style={styles.formBody}>
@@ -150,7 +116,7 @@ class Login extends Component {
                                 </TouchableOpacity>
                             </View>
                             <TouchableOpacity onPress={() => this.props.navigation.push('ForgotPassword')} style={{alignItems: 'flex-end', marginTop : 8}}>
-                                    <Text >Lupa Password?</Text>
+                                    <Text >Forgot Password?</Text>
                                 </TouchableOpacity>
                             <View style={styles.formGroup}>
                                 <TouchableOpacity onPress={this.handleLogin} style={styles.btn}>
@@ -159,7 +125,8 @@ class Login extends Component {
                             </View>
                         </View>
                     </View>
-                </View>                
+                </View>
+                <Toast ref="toast" />                
             </ScrollView>
         )
     }
