@@ -86,9 +86,6 @@ const GlobalProvider = (ChildComponent) => {
                                 loginData : data
                             })
                         }
-                        this.setState({
-                            internet : true,
-                        })
                     } else {
                         // console.log(result);
                         if(result.code === 1){
