@@ -16,7 +16,7 @@ class Login extends Component {
         super(props);
         this.state = {
             loginData : {
-                email : "",
+                username : "",
                 password : "",
             },
             isLoading : false,
@@ -29,7 +29,7 @@ class Login extends Component {
             },
             hidePassword: true,
         }
-        this.handleEmailChange = this.handleEmailChange.bind(this);
+        this.handleUsernameChange = this.handleUsernameChange.bind(this);
         this.handlePasswordChange = this.handlePasswordChange.bind(this);
     }
 
@@ -39,9 +39,9 @@ class Login extends Component {
     }
 
     // method email change text
-    handleEmailChange = (input) => {
+    handleUsernameChange = (input) => {
         let loginData = {...this.state.loginData};
-        loginData.email = input;
+        loginData.username = input;
         this.setState({
             loginData : loginData
         })
@@ -107,7 +107,7 @@ class Login extends Component {
                         <Image source={require('../../assets/images/icons/icon_app.png')} style={styles.loginIcon} resizeMode="contain" /> 
                         <View style={styles.formBody}>
                             <View style={styles.textBoxBtnHolder}>
-                                <TextInput onChangeText={this.handleEmailChange} style={styles.formControl} placeholder="Email" />
+                                <TextInput onChangeText={this.handleUsernameChange} style={styles.formControl} placeholder="Username" />
                             </View>
                             <View style={styles.textBoxBtnHolder}>
                                 <TextInput onChangeText={this.handlePasswordChange} style={styles.formControl} placeholder="Password" secureTextEntry={this.state.hidePassword} />
