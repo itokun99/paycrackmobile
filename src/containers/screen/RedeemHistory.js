@@ -37,13 +37,13 @@ class RedeemHistory extends Component {
         .then((result) => {
             if(result.status){
                 let data = result.data
-                if(redeem.length !== data.length){
+                // if(redeem.length === data.length){
                     this.setState({
                         redeem : data
                     }, () => {
                         this.saveToLocal(data);
                     })
-                }
+                // }
             }
         })
     }
