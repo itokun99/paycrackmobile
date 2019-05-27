@@ -42,7 +42,8 @@ const GlobalProvider = (ChildComponent) => {
                             loginData : data,
                             // internet : true,
                         }, () => {
-                            this.checkUpdateUserData(data.user_id);
+                            // this.checkUpdateUserData(data.user_id);
+                            this.runCheckUser();
                         })
                         break;
                     case "UPDATE_POINT":
@@ -66,11 +67,12 @@ const GlobalProvider = (ChildComponent) => {
                 }
             }
 
-            checkUpdateUserData = (user_id) => {
-                let params = {
-                    id : user_id
-                }
+            checkUpdateUserData = () => {
                 let loginData = {...this.state.loginData};
+                let params = {
+                    appkey : loginData.appkey,
+                    id : loginData
+                }
                 API.getUserData(params)
                 .then((result) => {
                     if(result.status){
@@ -98,12 +100,20 @@ const GlobalProvider = (ChildComponent) => {
                 })
             }
 
+            runCheckUser = () => {
+                setInterval(() => {
+                    if(this.state.isLogin){
+                        this.checkUpdateUserData(this.state.loginData.user_id);
+                    } else {
+                        clearInterval()
+                    }
+                }, 3000)
+            }
+
             componentDidMount(){
                 setTimeout(() => {
                     if(this.state.isLogin){
-                        setInterval(() => {
-                            this.checkUpdateUserData(this.state.loginData.user_id);
-                        }, 3000)
+                        this.runCheckUser();
                     }
                 }, 3000)
             }

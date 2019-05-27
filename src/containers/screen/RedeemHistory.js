@@ -28,8 +28,10 @@ class RedeemHistory extends Component {
     }
 
     getRedeemHistory = () => {
+        let loginData = this.props.globalState.loginData
         let user = {...this.state.user};
         let params = {
+            appkey : loginData.appkey,
             user_id : user.user_id 
         }
         let redeem  = this.state.redeem;

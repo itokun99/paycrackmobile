@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {View, Text, Image, TouchableNativeFeedback,TouchableOpacity} from 'react-native';
 import AppStyles from '../../styles/Android';
 import { GlobalConsumer } from '../../contexts/Context';
-import { Settings } from '../../services/Service';
+import API, { Settings } from '../../services/Service';
 import AsyncStorage from '@react-native-community/async-storage';
 
 import Dialog, {
@@ -12,7 +12,9 @@ import Dialog, {
     DialogButton,
     SlideAnimation,
     ScaleAnimation,
-  } from 'react-native-popup-dialog';
+} from 'react-native-popup-dialog';
+
+import Toast from 'react-native-easy-toast';
 
 class Sidebar extends Component {
     constructor(props){
@@ -27,19 +29,28 @@ class Sidebar extends Component {
             
     }
 
-    handleLogOut = async () => {
-        try{
-            let action = {
-                type : "USER_LOGOUT"
-            }
-            this.props.globalAction(action);
-            await AsyncStorage.clear();
-            setTimeout(() => {
-                this.props.navigation.navigate('Loading');
-            }, 500)
-        }catch(error){
-
+    handleLogOut = () => {
+        let loginData = this.props.globalState.loginData;
+        let params = {
+            appkey : loginData.appkey
         }
+        // console.warn(loginData);
+        API.userLogout(params)
+        .then((result) => {
+            if(result.status){
+                this.refs.toast.show(result.message);
+                let action = {
+                    type : "USER_LOGOUT"
+                }
+                this.props.globalAction(action);
+                AsyncStorage.clear();
+                setTimeout(() => {
+                    this.props.navigation.navigate('Loading');
+                }, 500)
+            } else {
+                this.refs.toast.show(result.message);
+            }
+        })
     }
 
     setUserData = () => {
@@ -115,6 +126,7 @@ class Sidebar extends Component {
                         <Text>Apa anda yakin ingin keluar dari akun anda?</Text>
                     </DialogContent>
                 </Dialog>
+                <Toast ref="toast" />
             </View>
         )
     }
