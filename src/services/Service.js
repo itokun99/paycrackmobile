@@ -62,8 +62,8 @@ const getRedeemItems = (data = {}) => {
     for(let key in data){
         params++;
     }
-    
-    let path = `api/items${params > 0 ? "?" : "" }`;
+    let appkey = `${typeof(data.appkey) !== "undefined" ? params > 1 ? "&appkey="+data.appkey : "appkey="+data.appkey : ""}`;    
+    let path = `api/items${params > 0 ? "?" : "" }${appkey}`;
     return request(path)
 }
 
@@ -74,14 +74,21 @@ const userLogin = (data = {}) => {
     return request(path, method, data);
 }
 
+const userLogout = (data = {}) => {
+    let path = "api/users/userlogout";
+    let method = "POST";
+    return request(path,method, data);
+}
+
 // getUser data
 const getUserData = (data = {}) => {
     let params = 0;
     for(let key in data){
         params++;
     }
-    
-    let path = `api/users${params > 0 ? "?" : "" }${typeof(data.id) !== "undefined" ? params > 1 ? "&id="+data.id : 'id='+data.id : "" }`;
+    let appkey = `${typeof(data.appkey) !== "undefined" ? params > 1 ? "&appkey="+data.appkey : "appkey="+data.appkey : ""}`;
+    let id = `${typeof(data.id) !== "undefined" ? params > 1 ? "&id="+data.id : 'id='+data.id : "" }`;
+    let path = `api/users${params > 0 ? "?" : "" }${appkey}${id}`;
     return request(path)
 }
 
@@ -99,7 +106,9 @@ const historyPoint = (data = {}) => {
         params++
     }
     
-    let path = `api/history/point${params > 0 ? "?" : ""}${typeof(data.user_id) !== "undefined" ? params > 1 ? "&user_id="+data.user_id : "user_id="+data.user_id :""}`;
+    let appkey = `${typeof(data.appkey) !== "undefined" ? params > 1 ? "&appkey="+data.appkey : "appkey="+data.appkey : ""}`;
+    let user_id = `${typeof(data.user_id) !== "undefined" ? params > 1 ? "&user_id="+data.user_id : "user_id="+data.user_id :""}`;
+    let path = `api/history/point${params > 0 ? "?" : ""}${appkey}${user_id}`;
 
     return request(path);
 }
@@ -116,7 +125,10 @@ const historyRedeem = (data = {}) => {
     for(key in data){
         params++;
     }
-    let path = `api/history/redeem${params > 0 ? "?" : "" }${typeof(data.user_id) !== "undefined" ? params > 1 ? "&user_id="+data.user_id : "user_id="+data.user_id : "" }`;
+    
+    let appkey = `${typeof(data.appkey) !== "undefined" ? params > 1 ? "&appkey="+data.appkey : "appkey="+data.appkey : ""}`;
+    let user_id = `${typeof(data.user_id) !== "undefined" ? params > 1 ? "&user_id="+data.user_id : "user_id="+data.user_id :""}`;
+    let path = `api/history/redeem${params > 0 ? "?" : "" }${appkey}${user_id}`;
     return request(path);
 }
 
@@ -125,6 +137,7 @@ const historyRedeem = (data = {}) => {
 const API = {
     getRedeemItems,
     userLogin,
+    userLogout,
     getUserData,
     dailycheckin,
     historyPoint,

@@ -35,6 +35,7 @@ class PointHistory extends Component {
         if(typeof(login_data) !== "undefined"){
             let user_id = login_data.user_id;
             let params = {
+                appkey : login_data.appkey,
                 user_id : user_id
             }
             API.historyPoint(params)

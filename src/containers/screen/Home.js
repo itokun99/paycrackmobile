@@ -22,6 +22,7 @@ import CountDown from 'react-native-countdown-component';
 import moment from 'moment';
 import { GlobalConsumer } from '../../contexts/Context';
 import ItemsList from '../../components/ItemsList';
+import Toast from 'react-native-easy-toast';
 
 class Home extends Component {
     constructor(props) {
@@ -41,7 +42,7 @@ class Home extends Component {
             markedDate: '',
             items: [],
             itemIsLoading : true,
-            internet  : this.props.globalState.internet
+            internet  : true,
         }
     }
   
@@ -58,7 +59,9 @@ class Home extends Component {
 
     postdaily = () => {
         if (this.state.id != null) {
+            let loginData = this.props.globalState.loginData;
             const data = {
+                appkey : loginData.appkey,
                 user_id: this.state.id,
             }
             API.dailycheckin(data).then(
@@ -95,7 +98,12 @@ class Home extends Component {
     }
 
     handleGetItem = async () => {
-        API.getRedeemItems().then((result) => {
+        let loginData = this.props.globalState.loginData;
+        // console.warn(loginData);
+        let params = {
+            appkey : loginData.appkey
+        }
+        API.getRedeemItems(params).then((result) => {
             if (result.status) {
                 let data = result.data
                 this.setState({
@@ -104,7 +112,11 @@ class Home extends Component {
                     internet : true,
                 })
             } else {
-                
+                if(result.code === 1){
+                    this.checkInet()
+                } else {
+                    this.refs.toast.show(result.message);
+                }
             }
         })
     }
@@ -125,6 +137,7 @@ class Home extends Component {
     componentDidMount() {
         this.handleGetItem()
         this.setUserData();
+        // this.checkInet();
         // setInterval(() => {
         //     this.checkInet()
         // }, 1000)

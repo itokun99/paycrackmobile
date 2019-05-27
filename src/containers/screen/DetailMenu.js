@@ -31,9 +31,11 @@ class DetailMenu extends Component {
     }
 
     handleRedeemItem = () => {
+
         let item = {...this.state.item};
         let user = {...this.state.user};
         let data = {
+            appkey : user.appkey,
             item_id : item.item_id,
             user_id : user.user_id
         }
