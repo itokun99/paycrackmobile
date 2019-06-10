@@ -119,7 +119,7 @@ let home = StyleSheet.create({
         flexDirection:'row'
     },
     buttonMenu:{
-        height:'100%',
+        height:100,
         width:75,
         flexDirection:'column',
         alignItems:'center',

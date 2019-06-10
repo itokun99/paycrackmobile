@@ -12,6 +12,7 @@
     "moment": "^2.24.0",
     "react": "16.8.3",
     "react-native": "0.59.8",
+    "react-native-casino-roulette": "^1.6.0",
     "react-native-countdown-component": "^2.4.0",
     "react-native-device-info": "^2.0.1",
     "react-native-easy-toast": "^1.2.0",

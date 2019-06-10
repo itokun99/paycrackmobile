@@ -17,6 +17,7 @@ import Instruction from '../containers/screen/Instruction';
 import PointHistory from '../containers/screen/PointHistory';
 import DetailMenu from '../containers/screen/DetailMenu';
 import RedeemHistory from '../containers/screen/RedeemHistory';
+import SpinWheel from '../containers/screen/SpinWheel';
 import DailyLogin from '../containers/screen/DailyLogin';
 
 
@@ -47,12 +48,18 @@ const HomeStack = createStackNavigator({
             title : "History Redeem"
         }
     },
+    SpinWheel : {
+        screen : SpinWheel,
+        navigationOptions : {
+            title : "Lucky Change"
+        }
+    },
     DailyLogin : {
         screen : DailyLogin,
         navigationOptions : {
             title : "Daily Checkin"
         }
-    },
+    }
 }, {
     defaultNavigationOptions : ({ navigation }) => ({
         headerStyle : {
