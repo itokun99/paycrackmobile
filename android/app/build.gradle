@@ -149,6 +149,8 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-image-sequence')
+    implementation project(':react-native-device-info')
     implementation project(':@react-native-community_netinfo')
     implementation project(':@react-native-community_async-storage')
     implementation project(':react-native-gesture-handler')

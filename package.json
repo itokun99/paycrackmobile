@@ -14,11 +14,15 @@
     "react-native": "0.59.8",
     "react-native-casino-roulette": "^1.6.0",
     "react-native-countdown-component": "^2.4.0",
+    "react-native-device-info": "^2.0.1",
     "react-native-easy-toast": "^1.2.0",
     "react-native-gesture-handler": "^1.2.1",
     "react-native-hide-show-password-input": "^1.1.0",
+    "react-native-image-animation": "^1.0.2",
+    "react-native-image-sequence": "^0.6.1",
     "react-native-popup-dialog": "^0.18.2",
-    "react-navigation": "^3.11.0"
+    "react-navigation": "^3.11.0",
+    "react-timer-mixin": "^0.13.4"
   },
   "devDependencies": {
     "@babel/core": "^7.4.4",

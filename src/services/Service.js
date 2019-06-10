@@ -98,6 +98,24 @@ const dailycheckin = (data = {}) => {
     return request(url, method, data); 
 }
 
+//daily checkin
+const dailycheckin2 = (data = {}) => {
+    let url = 'api/users/dailycheckin2';
+    let method = 'POST';
+    return request(url, method, data); 
+}
+
+// get point
+const dailyPoint = (data = {}) => {
+    params = 0;
+    for(let key in data){
+        params++
+    }
+    let appkey = `${typeof(data.appkey) !== "undefined" ? params > 1 ? "&appkey="+data.appkey : "appkey="+data.appkey : ""}`;
+    let path = `api/dailypoint/set${params > 0 ? "?" : ""}${appkey}`;
+    return request(path);
+}
+
 // get history point
 const historyPoint = (data = {}) => {
     params = 0;
@@ -108,7 +126,6 @@ const historyPoint = (data = {}) => {
     let appkey = `${typeof(data.appkey) !== "undefined" ? params > 1 ? "&appkey="+data.appkey : "appkey="+data.appkey : ""}`;
     let user_id = `${typeof(data.user_id) !== "undefined" ? params > 1 ? "&user_id="+data.user_id : "user_id="+data.user_id :""}`;
     let path = `api/history/point${params > 0 ? "?" : ""}${appkey}${user_id}`;
-
     return request(path);
 }
 
@@ -142,17 +159,18 @@ const getSpinnerValue = (data = {}) => {
 }
 
 //user API
-
 const API = {
     getRedeemItems,
     userLogin,
     userLogout,
     getUserData,
     dailycheckin,
+    dailycheckin2,
     historyPoint,
     redeemPoint,
     historyRedeem,
-    getSpinnerValue
+    getSpinnerValue,
+    dailyPoint
 }
 
 export default API;

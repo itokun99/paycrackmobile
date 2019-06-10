@@ -3,6 +3,8 @@ package com.redeemapp;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import dk.madslee.imageSequence.RCTImageSequencePackage;
+import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.reactnativecommunity.netinfo.NetInfoPackage;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
@@ -26,6 +28,8 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RCTImageSequencePackage(),
+            new RNDeviceInfo(),
             new NetInfoPackage(),
             new AsyncStoragePackage(),
             new RNGestureHandlerPackage()

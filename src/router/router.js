@@ -18,6 +18,7 @@ import PointHistory from '../containers/screen/PointHistory';
 import DetailMenu from '../containers/screen/DetailMenu';
 import RedeemHistory from '../containers/screen/RedeemHistory';
 import SpinWheel from '../containers/screen/SpinWheel';
+import DailyLogin from '../containers/screen/DailyLogin';
 
 
 // routing untuk user setelah login
@@ -51,6 +52,12 @@ const HomeStack = createStackNavigator({
         screen : SpinWheel,
         navigationOptions : {
             title : "Lucky Change"
+        }
+    },
+    DailyLogin : {
+        screen : DailyLogin,
+        navigationOptions : {
+            title : "Daily Checkin"
         }
     }
 }, {
