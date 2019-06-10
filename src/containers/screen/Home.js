@@ -260,7 +260,6 @@ class Home extends Component {
                     <View style={AppStyles.home.section}>
                         <View style={{ ...AppStyles.home.sectionHeader, display: 'flex', flexDirection: "row", justifyContent: "space-between" }}>
                             <Text style={{ fontWeight: "bold" }}>Reedem Items</Text>
-                            <Text style={{ fontWeight: "bold" }}>Filter</Text>
                         </View>
                         <View style={AppStyles.home.sectionBody}>
                             <View style={AppStyles.home.redeemItemRow}>

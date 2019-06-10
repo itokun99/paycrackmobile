@@ -123,7 +123,7 @@ let home = StyleSheet.create({
         width:75,
         flexDirection:'column',
         alignItems:'center',
-        marginLeft:30,
+        marginLeft:20,
     },
     viewIcon:{
         borderRadius:10,
@@ -131,7 +131,7 @@ let home = StyleSheet.create({
         width:60,
         height:60,
         marginTop: 10,
-        padding:10
+        padding:10,
     },
     imageIcon:{
         alignSelf:'center',
