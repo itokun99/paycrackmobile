@@ -189,6 +189,16 @@ class Home extends Component {
                                     </View>
                                     <Text style={AppStyles.home.textIcon}>  My Redeem </Text>
                                 </TouchableOpacity>
+                                <TouchableOpacity onPress={() => this.props.navigation.push('SpinWheel')} style={AppStyles.home.buttonMenu}>
+                                    <View style={AppStyles.home.viewIcon}>
+                                        <Image
+                                            resizeMode='center'
+                                            source={require('../../assets/images/icons/horee.png')}
+                                            style={AppStyles.home.imageIcon}>
+                                        </Image>
+                                    </View>
+                                    <Text style={AppStyles.home.textIcon}>  Lucky Change </Text>
+                                </TouchableOpacity>
                             </View>
                         </View>
                     </View>

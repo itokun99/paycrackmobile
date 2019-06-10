@@ -17,6 +17,7 @@ import Instruction from '../containers/screen/Instruction';
 import PointHistory from '../containers/screen/PointHistory';
 import DetailMenu from '../containers/screen/DetailMenu';
 import RedeemHistory from '../containers/screen/RedeemHistory';
+import SpinWheel from '../containers/screen/SpinWheel';
 
 
 // routing untuk user setelah login
@@ -44,6 +45,12 @@ const HomeStack = createStackNavigator({
         screen : RedeemHistory,
         navigationOptions : {
             title : "History Redeem"
+        }
+    },
+    SpinWheel : {
+        screen : SpinWheel,
+        navigationOptions : {
+            title : "Lucky Change"
         }
     }
 }, {

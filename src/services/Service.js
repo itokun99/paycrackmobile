@@ -32,7 +32,6 @@ const request = (path, method, data, formData = false ) => {
             if(state.isConnected){
                 fetch(url, option)
                 .then((response) => {
-                    // console.log(response);
                     if(response.ok){
                         resolve(response.json())
                     } else {
@@ -131,6 +130,16 @@ const historyRedeem = (data = {}) => {
     let path = `api/history/redeem${params > 0 ? "?" : "" }${appkey}${user_id}`;
     return request(path);
 }
+const getSpinnerValue = (data = {}) => {
+    let params = 0;
+    for(key in data){
+        params++;
+    }
+    
+    let appkey = `${typeof(data.appkey) !== "undefined" ? params > 1 ? "&appkey="+data.appkey : "appkey="+data.appkey : ""}`;
+    let path = `api/spinner/show${params > 0 ? "?" : "" }${appkey}`;
+    return request(path);
+}
 
 //user API
 
@@ -142,7 +151,8 @@ const API = {
     dailycheckin,
     historyPoint,
     redeemPoint,
-    historyRedeem
+    historyRedeem,
+    getSpinnerValue
 }
 
 export default API;

@@ -5126,6 +5126,11 @@ react-lifecycles-compat@^3.0.4:
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
 
+react-native-casino-roulette@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/react-native-casino-roulette/-/react-native-casino-roulette-1.6.0.tgz#22336dc5ccb212f48c9f6b013733737df02d246b"
+  integrity sha512-6sFU5jtS595LnhpXJ74y7wT1G5ix0ZtJcBJsu7X2GWgdhMendUfi58wzsU2sSVSxUiMwQ8gvC3efHYk606acMQ==
+
 react-native-countdown-component@^2.4.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/react-native-countdown-component/-/react-native-countdown-component-2.4.0.tgz#b7ecd384105f18f4cb2542e13680942d8499f313"
