@@ -7,7 +7,8 @@ import {
     TouchableOpacity,
     SafeAreaView,
     StatusBar,
-    ActivityIndicator
+    ActivityIndicator,
+    RefreshControl
 } from 'react-native';
 import AppStyles from '../../styles/Android';
 import API,{Settings} from '../../services/Service';
@@ -23,6 +24,44 @@ import moment from 'moment';
 import { GlobalConsumer } from '../../contexts/Context';
 import ItemsList from '../../components/ItemsList';
 import Toast from 'react-native-easy-toast';
+import ImageSequence from 'react-native-image-sequence';
+
+const images = [
+  require('../../assets/images/icons/telor/1.png'),
+  require('../../assets/images/icons/telor/2.png'),
+  require('../../assets/images/icons/telor/3.png'),
+  require('../../assets/images/icons/telor/4.png'),
+  require('../../assets/images/icons/telor/5.png'),
+  require('../../assets/images/icons/telor/6.png'),
+  require('../../assets/images/icons/telor/7.png'),
+  require('../../assets/images/icons/telor/8.png'),
+  require('../../assets/images/icons/telor/9.png'),
+  require('../../assets/images/icons/telor/10.png'),
+  require('../../assets/images/icons/telor/11.png'),
+  require('../../assets/images/icons/telor/12.png'),
+  require('../../assets/images/icons/telor/13.png'),
+  require('../../assets/images/icons/telor/14.png'),
+  require('../../assets/images/icons/telor/15.png'),
+  require('../../assets/images/icons/telor/16.png'),
+  require('../../assets/images/icons/telor/17.png'),
+  require('../../assets/images/icons/telor/18.png'),
+  require('../../assets/images/icons/telor/19.png'),
+  require('../../assets/images/icons/telor/20.png'),
+  require('../../assets/images/icons/telor/21.png'),
+  require('../../assets/images/icons/telor/22.png'),
+  require('../../assets/images/icons/telor/23.png'),
+  require('../../assets/images/icons/telor/24.png'),
+  require('../../assets/images/icons/telor/25.png'),
+  require('../../assets/images/icons/telor/26.png'),
+  require('../../assets/images/icons/telor/27.png'),
+  require('../../assets/images/icons/telor/28.png'),
+  require('../../assets/images/icons/telor/29.png'),
+  require('../../assets/images/icons/telor/30.png'),
+  require('../../assets/images/icons/telor/31.png'),
+];
+
+const centerIndex = Math.round(images.length / 1);
+
 
 class Home extends Component {
     constructor(props) {
@@ -43,6 +82,7 @@ class Home extends Component {
             items: [],
             itemIsLoading : true,
             internet  : true,
+            refreshing: false,
         }
     }
   
@@ -57,6 +97,10 @@ class Home extends Component {
             this.props.navigation.push("DetailMenu",Data)
     }
 
+    _onRefresh = () => {
+        this.setState({refreshing: true});
+        this.handleGetItem()
+    }
     postdaily = () => {
         if (this.state.id != null) {
             let loginData = this.props.globalState.loginData;
@@ -110,6 +154,7 @@ class Home extends Component {
                     items: data,
                     itemIsLoading : false,
                     internet : true,
+                    refreshing : false,
                 })
             } else {
                 if(result.code === 1){
@@ -148,7 +193,13 @@ class Home extends Component {
         // console.warn(this.props.globalState)
 
         return (
-            <ScrollView style={AppStyles.global.scrollView}>
+            <ScrollView style={AppStyles.global.scrollView} 
+                refreshControl={
+                    <RefreshControl
+                        refreshing={this.state.refreshing}
+                        onRefresh={this._onRefresh}
+                    />
+                }>
                 <SafeAreaView style={AppStyles.home.main}>
                     <StatusBar barStyle="light-content" backgroundColor={AppStyles.loadingfirst.container.backgroundColor} />
                     <View style={{ marginBottom: 14 }}></View>
@@ -159,7 +210,7 @@ class Home extends Component {
                         </View>
                         <View style={AppStyles.home.sectionBody}>
                             <View style={AppStyles.home.offerWallRow}>
-                                <TouchableOpacity style={AppStyles.home.buttonMenu} onPress={this.postdaily}>
+                                <TouchableOpacity style={AppStyles.home.buttonMenu} onPress={()=> this.props.navigation.push('DailyLogin')}>
                                     <View style={AppStyles.home.viewIcon}>
                                         <Image
                                             resizeMode='center'
@@ -228,69 +279,6 @@ class Home extends Component {
                             </View>
                         </View>
                     </View>
-                    <Dialog
-                        onDismiss={() => {
-                            this.setState({ defaultAnimationDialog: false });
-                        }}
-                        width={0.9}
-                        visible={this.state.defaultAnimationDialog}
-                        rounded
-                        actionsBordered
-                        footer= {
-                            <DialogFooter>
-                                <DialogButton
-                                    text="OK"
-                                    bordered
-                                    onPress={() => {
-                                    this.setState({ defaultAnimationDialog: false });
-                                    }}
-                                    key="button-1"
-                                />
-                                <></>
-                            </DialogFooter>
-                        }
-                        >
-                        {this.state.status ?(
-                            <DialogContent
-                                style={{
-                                    backgroundColor: '#58A1C3',
-                                }}>
-                                <Text style={AppStyles.home.textCoin}>Anda berhasil check in hari ini, anda mendapat {this.state.userpoint} point</Text>
-                            </DialogContent>
-                            ):(
-                                <DialogContent
-                                    style={{
-                                        backgroundColor: '#58A1C3',
-                                    }}
-                                >
-                                    <Image
-                                        resizeMode='center'
-                                        source={require('../../assets/images/icons/horee.png')}
-                                        style={AppStyles.home.imageDialog}>
-                                    </Image>
-                                    <Text style={AppStyles.home.textDialog}>Daily Reward Taken Allready Try Again After</Text>
-                                    <CountDown
-                                        until={parseInt(this.state.totalDuration)}
-                                        // until={1000}
-                                        //duration of countdown in seconds
-                                        digitStyle={{ backgroundColor: '#FFF', borderWidth: 2, borderColor: '#58A1C3' }}
-                                        digitTxtStyle={{ color: '#58A1C3' }}
-                                        timeLabelStyle={{ color: 'red', fontWeight: 'bold' }}
-                                        separatorStyle={{ color: '#ffffff' }}
-                                        timeToShow={['H', 'M', 'S']}
-                                        timeLabels={{ m: null, s: null }}
-                                        //formate to show
-                                        onFinish={() => alert('finished')}
-                                        //on Finish call
-                                        onPress={() => alert('hello')}
-                                        //on Press call
-                                        size={20}
-                                        showSeparator
-                                    />
-                                </DialogContent>
-                            )}
-                    </Dialog>
-
                 </SafeAreaView>
             </ScrollView>
         )

@@ -17,6 +17,7 @@ import Instruction from '../containers/screen/Instruction';
 import PointHistory from '../containers/screen/PointHistory';
 import DetailMenu from '../containers/screen/DetailMenu';
 import RedeemHistory from '../containers/screen/RedeemHistory';
+import DailyLogin from '../containers/screen/DailyLogin';
 
 
 // routing untuk user setelah login
@@ -45,7 +46,13 @@ const HomeStack = createStackNavigator({
         navigationOptions : {
             title : "History Redeem"
         }
-    }
+    },
+    DailyLogin : {
+        screen : DailyLogin,
+        navigationOptions : {
+            title : "Daily Checkin"
+        }
+    },
 }, {
     defaultNavigationOptions : ({ navigation }) => ({
         headerStyle : {
