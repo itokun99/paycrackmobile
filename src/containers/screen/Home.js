@@ -101,6 +101,7 @@ class Home extends Component {
         this.setState({refreshing: true});
         this.handleGetItem()
     }
+
     postdaily = () => {
         if (this.state.id != null) {
             let loginData = this.props.globalState.loginData;
@@ -110,32 +111,11 @@ class Home extends Component {
             }
             API.dailycheckin(data).then(
                 (result) => {
-                    this.setState({
-                        status: result.status,
-                        datacheck: result.data,
-                        defaultAnimationDialog: true,
-                        userpoint: result.data.point,
-                    })
-                    var dates = moment().utcOffset('+07:00').format('YYYY-MM-DD HH:mm:ss');
-                    var expirydate = result.data.date_server;
-                    //Let suppose we have to show the countdown for above date-time 
-                    var diffr = moment.duration(moment(expirydate).diff(moment(dates)));
-                    //difference of the expiry date-time given and current date-time
-                    var hours = parseInt(diffr.asHours());
-                    var minutes = parseInt(diffr.minutes());
-                    var seconds = parseInt(diffr.seconds());
-                    var d = hours * 60 * 60 + minutes * 60 + seconds;
-                    //converting in seconds
-                    this.setState({ totalDuration: d });
-                    if (result.status) {
-                        this.props.globalAction({
-                            type: 'UPDATE_POINT',
-                            data: result.data.point
+                    this.props.navigation.navigate('DailyLogin',{
+                            userstatus  : result.status,
+                            usertime    : result.data.date_server,
                         })
-                    } else {
-                        null
-                    }
-
+                    
                 }
             )
         }
@@ -143,7 +123,6 @@ class Home extends Component {
 
     handleGetItem = async () => {
         let loginData = this.props.globalState.loginData;
-        // console.warn(loginData);
         let params = {
             appkey : loginData.appkey
         }
@@ -210,7 +189,7 @@ class Home extends Component {
                         </View>
                         <View style={AppStyles.home.sectionBody}>
                             <View style={AppStyles.home.offerWallRow}>
-                                <TouchableOpacity style={AppStyles.home.buttonMenu} onPress={()=> this.props.navigation.push('DailyLogin')}>
+                                <TouchableOpacity style={AppStyles.home.buttonMenu} onPress={()=> this.postdaily()}>
                                     <View style={AppStyles.home.viewIcon}>
                                         <Image
                                             resizeMode='center'
@@ -244,7 +223,7 @@ class Home extends Component {
                                     <View style={AppStyles.home.viewIcon}>
                                         <Image
                                             resizeMode='center'
-                                            source={require('../../assets/images/icons/horee.png')}
+                                            source={require('../../assets/images/icons/icon_lucky.png')}
                                             style={AppStyles.home.imageIcon}>
                                         </Image>
                                     </View>

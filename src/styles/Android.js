@@ -51,6 +51,8 @@ let home = StyleSheet.create({
     offerWallRow : {
         flex : 1,
         flexDirection : "row",
+        alignItems: 'center',
+        justifyContent: 'center',
         flexWrap : "wrap",
         marginHorizontal : -14
     },
@@ -123,7 +125,7 @@ let home = StyleSheet.create({
         width:75,
         flexDirection:'column',
         alignItems:'center',
-        marginLeft:20,
+        marginLeft:10,
     },
     viewIcon:{
         borderRadius:10,
@@ -161,6 +163,19 @@ let home = StyleSheet.create({
         color:'white',
         textAlign: 'center',
         fontSize: 20
+    },
+    textHeader : {
+        color : 'black',
+        textAlign: 'center',
+        margin: 5,
+        fontSize: 20,
+        fontWeight: 'bold'
+    },
+    textSub : {
+        color : 'black',
+        textAlign: 'center',
+        margin: 10,
+        fontSize: 16
     }
 })
 

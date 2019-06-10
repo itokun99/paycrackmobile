@@ -86,27 +86,46 @@ class DailyLogin extends Component{
     constructor(props) {
             super(props);
             const { navigation } = this.props;
+            const userstatus = navigation.getParam('userstatus', '');
+            const usertime = navigation.getParam('usertime', '');
             this.state = {
-                userEmail: "",
-                id: "",
-                username: "",
-                fullname: "",
-                userpoint: "",
-                defaultAnimationDialog: false,
-                totalDuration: '',
-                date: '',
-                status: '',
-                datacheck: [],
-                markedDate: '',
-                items: [],
-                itemIsLoading : true,
-                internet  : true,
-                refreshing: false,
-                visible : false,
-                last : false,
-                index : 0,
+                userEmail               : "",
+                id                      : "",
+                username                : "",
+                fullname                : "",
+                userpoint               : "",
+                defaultAnimationDialog  : false,
+                totalDuration           : '',
+                date                    : '',
+                status                  : '',
+                datacheck               : [],
+                markedDate              : '',
+                items                   : [],
+                itemIsLoading           : true,
+                internet                : true,
+                refreshing              : false,
+                visible                 : false,
+                last                    : false,
+                index                   : 0,
+                userstatus              : userstatus,
+                usertime                : usertime,
             }
+            
         }
+    
+    componentDidMount(){
+        var dates = moment().utcOffset('+07:00').format('YYYY-MM-DD HH:mm:ss');
+        var expirydate = this.state.usertime;
+        //Let suppose we have to show the countdown for above date-time 
+        var diffr = moment.duration(moment(expirydate).diff(moment(dates)));
+        //difference of the expiry date-time given and current date-time
+        var hours = parseInt(diffr.asHours());
+        var minutes = parseInt(diffr.minutes());
+        var seconds = parseInt(diffr.seconds());
+        var d = hours * 60 * 60 + minutes * 60 + seconds;
+        //converting in seconds
+        this.setState({ totalDuration: d });
+    }
 
     timeout = () => {
         setTimeout(() => {
@@ -156,20 +175,9 @@ class DailyLogin extends Component{
                     this.setState({
                         status: result.status,
                         datacheck: result.data,
-                        defaultAnimationDialog: true,
+                        defaultAnimationDialog  : true,
                         userpoint: result.data.point,
                     })
-                    var dates = moment().utcOffset('+07:00').format('YYYY-MM-DD HH:mm:ss');
-                    var expirydate = result.data.date_server;
-                    //Let suppose we have to show the countdown for above date-time 
-                    var diffr = moment.duration(moment(expirydate).diff(moment(dates)));
-                    //difference of the expiry date-time given and current date-time
-                    var hours = parseInt(diffr.asHours());
-                    var minutes = parseInt(diffr.minutes());
-                    var seconds = parseInt(diffr.seconds());
-                    var d = hours * 60 * 60 + minutes * 60 + seconds;
-                    //converting in seconds
-                    this.setState({ totalDuration: d });
                     if (result.status) {
                         this.props.globalAction({
                             type: 'UPDATE_POINT',
@@ -214,41 +222,66 @@ class DailyLogin extends Component{
                 <SafeAreaView style={AppStyles.home.main}>
                     <StatusBar barStyle="light-content" backgroundColor={AppStyles.loadingfirst.container.backgroundColor} />
                     <View style={{flex: 1,flexDirection: 'row',position:'relative'}}>
+                        {this.state.userstatus === true ? 
                         <Image
                             resizeMode='cover'
                             source={require('../../assets/images/icons/bg_telor2.png')}
                             style={{width:'100%',height: 604}}>
                         </Image>
-                        <View style={{width:'100%',position:'absolute',bottom:100,left:5}}>
-                            {this.state.visible === false ? 
-                                <TouchableOpacity 
-                                    onPress = {()=> this.setState({visible : true},this.timeout(),this.handleGetItem())}
-                                    style={{width: 300, height: 300,alignItems: 'center',alignSelf: 'center',justifyContent:'center'}}>
-                                    {/* <Image
-                                        resizeMode='center'
-                                        source={require('../../assets/images/icons/telor/1.png')}
-                                        style={{width: '100%', height:'100%'}} /> */}
-                                    <ImageSequence
-                                        images={gerak}
-                                        startFrameIndex={centerGerak}
-                                        framesPerSecond={7}
-                                        style={{width: '100%', height: '100%'}} />    
-                                </TouchableOpacity>
-                            :   
-                                <View style={{width: 300, height: 300,alignItems: 'center',alignSelf: 'center',justifyContent:'center'}}>
-                                    <ImageSequence
-                                        images={images}
-                                        startFrameIndex={centerIndex}
-                                        framesPerSecond={7}
-                                        loop={false}
-                                        style={{width: '100%', height: '100%'}} />
-                                    {/* <Image
-                                        resizeMode='center'
-                                        source={this.images[this.state.index]}
-                                        style={{width: '100%', height: '100%'}} /> */}
-                                </View>
-                            }
+                        :
+                        <Image
+                            resizeMode='cover'
+                            source={require('../../assets/images/icons/no_telor_2.png')}
+                            style={{width:'100%',height: 604}}>
+                        </Image>
+                        }
+                        {this.state.userstatus === true ? 
+                            <View style={{width:'100%',position:'absolute',bottom:100,left:5}}>
+                                {this.state.visible === false ? 
+                                    <TouchableOpacity 
+                                        onPress = {()=> this.setState({visible : true},this.timeout(),this.handleGetItem())}
+                                        style={{width: 300, height: 300,alignItems: 'center',alignSelf: 'center',justifyContent:'center'}}>
+                                        <ImageSequence
+                                            images={gerak}
+                                            startFrameIndex={centerGerak}
+                                            framesPerSecond={7}
+                                            style={{width: '100%', height: '100%'}} />    
+                                    </TouchableOpacity>
+                                :   
+                                    <View style={{width: 300, height: 300,alignItems: 'center',alignSelf: 'center',justifyContent:'center'}}>
+                                        <ImageSequence
+                                            images={images}
+                                            startFrameIndex={centerIndex}
+                                            framesPerSecond={7}
+                                            loop={false}
+                                            style={{width: '100%', height: '100%'}} />
+                                    </View>
+                                }
+                            </View>
+                        : 
+                        <View style={{width:'100%',position:'absolute',top:50}}>
+                            <Text style={AppStyles.home.textHeader}>Daily prizes have been taken</Text>
+                            <Text style={AppStyles.home.textSub}>Try again after</Text>
+                            <CountDown
+                                until={parseInt(this.state.totalDuration)}
+                                // until={1000}
+                                //duration of countdown in seconds
+                                digitStyle={{ backgroundColor: '#FFF', borderWidth: 2, borderColor: '#58A1C3' }}
+                                digitTxtStyle={{ color: '#58A1C3' }}
+                                timeLabelStyle={{ color: 'red', fontWeight: 'bold' }}
+                                separatorStyle={{ color: '#58A1C3' }}
+                                timeToShow={['H', 'M', 'S']}
+                                timeLabels={{ m: null, s: null }}
+                                //formate to show
+                                onFinish={() => alert('finished')}
+                                //on Finish call
+                                onPress={() => alert('hello')}
+                                //on Press call
+                                size={20}
+                                showSeparator
+                                />
                         </View>
+                        }
                     </View>
                     <Dialog
                         onDismiss={() => {
@@ -264,7 +297,7 @@ class DailyLogin extends Component{
                                     text="OK"
                                     bordered
                                     onPress={() => {
-                                    this.setState({ defaultAnimationDialog: false });
+                                    this.setState({ defaultAnimationDialog: false ,userstatus : false});
                                     }}
                                     key="button-1"
                                 />
@@ -272,45 +305,12 @@ class DailyLogin extends Component{
                             </DialogFooter>
                         }
                         >
-                        {this.state.status ?(
-                            <DialogContent
+                        <DialogContent
                             style={{
                             backgroundColor: '#58A1C3',
                             }}>
                             <Text style={AppStyles.home.textCoin}>Anda berhasil check in hari ini, anda mendapat {this.state.userpoint} point</Text>
-                            </DialogContent>
-                        ):(
-                            <DialogContent
-                            style={{
-                            backgroundColor: '#58A1C3',
-                            }}
-                            >
-                            <Image
-                            resizeMode='center'
-                            source={require('../../assets/images/icons/horee.png')}
-                        style={AppStyles.home.imageDialog}>
-                            </Image>
-                            <Text style={AppStyles.home.textDialog}>Daily Reward Taken Allready Try Again After</Text>
-                                <CountDown
-                            until={parseInt(this.state.totalDuration)}
-                            // until={1000}
-                            //duration of countdown in seconds
-                            digitStyle={{ backgroundColor: '#FFF', borderWidth: 2, borderColor: '#58A1C3' }}
-                            digitTxtStyle={{ color: '#58A1C3' }}
-                            timeLabelStyle={{ color: 'red', fontWeight: 'bold' }}
-                            separatorStyle={{ color: '#ffffff' }}
-                            timeToShow={['H', 'M', 'S']}
-                            timeLabels={{ m: null, s: null }}
-                            //formate to show
-                            onFinish={() => alert('finished')}
-                            //on Finish call
-                            onPress={() => alert('hello')}
-                            //on Press call
-                            size={20}
-                            showSeparator
-                            />
-                                </DialogContent>
-                            )}
+                        </DialogContent>
                     </Dialog>
                 </SafeAreaView>
              </ScrollView>
