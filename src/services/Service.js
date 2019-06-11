@@ -158,6 +158,20 @@ const getSpinnerValue = (data = {}) => {
     return request(path);
 }
 
+const changePassword = (data = {}) => {
+    let path = "api/users/change_password";
+    let method = "POST";
+
+    return request(path, method, data);
+}
+
+const changeAddress = (data = {}) => {
+    let path = "api/users/change_address";
+    let method = "POST";
+
+    return request(path, method, data);
+}
+
 //user API
 const API = {
     getRedeemItems,
@@ -170,7 +184,9 @@ const API = {
     redeemPoint,
     historyRedeem,
     getSpinnerValue,
-    dailyPoint
+    dailyPoint,
+    changePassword,
+    changeAddress
 }
 
 export default API;

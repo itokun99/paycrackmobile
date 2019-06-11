@@ -5180,6 +5180,13 @@ react-native-image-sequence@^0.6.1:
   resolved "https://registry.yarnpkg.com/react-native-image-sequence/-/react-native-image-sequence-0.6.1.tgz#a07fd3be325168a312299b70cfc01ca83bc3223a"
   integrity sha512-f6sMbzUjMDu0MVu6n8pMtYfMmx/axlFA9V/hGuxzGeGdcq1ZLfXhitoxqYMlj/uCVkqqDiQSCSR8dijS/TrITw==
 
+react-native-loading-spinner-overlay@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/react-native-loading-spinner-overlay/-/react-native-loading-spinner-overlay-1.0.1.tgz#07f85a072b6f7d05b8749668cd626df4cc330347"
+  integrity sha512-njZZWs+cgyq6Ni7tkYEowMmuAuHVljuH4CqTWA0plNOfSzZhEcrW209y7WcgHjRWz0RvvEYF5oWGT8DWtTq8bA==
+  dependencies:
+    prop-types "^15.6.2"
+
 react-native-material-textfield@^0.12.0:
   version "0.12.0"
   resolved "https://registry.yarnpkg.com/react-native-material-textfield/-/react-native-material-textfield-0.12.0.tgz#3fba19d76ab89f67052c81e082152fc243d82a3f"
