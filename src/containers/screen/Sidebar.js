@@ -4,6 +4,7 @@ import AppStyles from '../../styles/Android';
 import { GlobalConsumer } from '../../contexts/Context';
 import API, { Settings } from '../../services/Service';
 import AsyncStorage from '@react-native-community/async-storage';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 import Dialog, {
     DialogTitle,
@@ -65,15 +66,11 @@ class Sidebar extends Component {
     }
     navlink(nav,text,image){   
         return(
-            <TouchableOpacity background={TouchableNativeFeedback.Ripple('rgba(0,0,0,0.3)')} onPress={()=>{
+            <TouchableOpacity onPress={()=>{
                 this.props.navigation.navigate(nav);
             }}>
                 <View style={AppStyles.sidebar.navLink}>
-                    <Image 
-                        resizeMode='center'
-                        source={image}
-                        style={AppStyles.sidebar.navLinkIcon}>
-                    </Image>
+                    <Icon name={image} color={AppStyles.color.base} size={28} style={AppStyles.sidebar.navLinkIcon} />
                     <Text style = {AppStyles.sidebar.navLinkText}>{text}</Text>
                 </View>
             </TouchableOpacity>
@@ -92,11 +89,12 @@ class Sidebar extends Component {
                         <Text style={AppStyles.sidebar.userEmail}>{this.state.user.user_email}</Text>
                     </View>
                     <View style={AppStyles.sidebar.navBody}>
-                        {this.navlink("Home","Home",require("../../assets/images/icons/home.png"))}
-                        {this.navlink("Instruction","Instruction",require("../../assets/images/icons/question.png"))}
+                        {this.navlink("Home","Home","home")}
+                        {this.navlink("Instruction","Instruction","question-circle-o")}
+                        {this.navlink("Setting","Setting", "gear")}
                     </View>
                 </View>
-                <TouchableOpacity onPress={() => {this.setState({ defaultAnimationDialog: true })}} background={TouchableNativeFeedback.Ripple('rgba(0,0,0,0.3)')}>
+                <TouchableOpacity onPress={() => {this.setState({ defaultAnimationDialog: true })}}>
                     <View style={AppStyles.sidebar.footer}>
                         <Image 
                             resizeMode='center'

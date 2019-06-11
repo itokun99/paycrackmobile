@@ -3,6 +3,7 @@ package com.redeemapp;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.oblador.vectoricons.VectorIconsPackage;
 import dk.madslee.imageSequence.RCTImageSequencePackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.reactnativecommunity.netinfo.NetInfoPackage;
@@ -28,6 +29,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new VectorIconsPackage(),
             new RCTImageSequencePackage(),
             new RNDeviceInfo(),
             new NetInfoPackage(),

@@ -5140,6 +5140,11 @@ react-native-countdown-component@^2.4.0:
     prop-types "^15.5.8"
     sprintf-js "^1.1.1"
 
+react-native-device-info@^2.0.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/react-native-device-info/-/react-native-device-info-2.1.1.tgz#c6ddc022033756a5e4c5899eb83e390b5a18cc17"
+  integrity sha512-H0qq9UdP3zGESYH4HMPuv2A/FwOMszVbktj0JWuT/eVhW97PyRkYcobhFd1ggW0U+ksVSewSyX+JenQejGp7+w==
+
 react-native-easy-toast@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/react-native-easy-toast/-/react-native-easy-toast-1.2.0.tgz#0f70bcb99e3306cda4800c244bfb4a67d42276ed"
@@ -5164,6 +5169,16 @@ react-native-hide-show-password-input@^1.1.0:
     prop-types "^15.7.2"
     react-native-material-textfield "^0.12.0"
     react-native-vector-icons "^6.4.2"
+
+react-native-image-animation@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/react-native-image-animation/-/react-native-image-animation-1.0.2.tgz#36d9918a1d8742b5f1461ad24577d6a9237cb464"
+  integrity sha1-NtmRih2HQrXxRhrSRXfWqSN8tGQ=
+
+react-native-image-sequence@^0.6.1:
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/react-native-image-sequence/-/react-native-image-sequence-0.6.1.tgz#a07fd3be325168a312299b70cfc01ca83bc3223a"
+  integrity sha512-f6sMbzUjMDu0MVu6n8pMtYfMmx/axlFA9V/hGuxzGeGdcq1ZLfXhitoxqYMlj/uCVkqqDiQSCSR8dijS/TrITw==
 
 react-native-material-textfield@^0.12.0:
   version "0.12.0"
@@ -5212,6 +5227,15 @@ react-native-vector-icons@^6.4.2:
   version "6.4.2"
   resolved "https://registry.yarnpkg.com/react-native-vector-icons/-/react-native-vector-icons-6.4.2.tgz#ee0b097e783387544ed160a3192a437c097e551d"
   integrity sha512-G7Y5HksOQkCanFWKJ+fjwP38XL8tQREOSnw7jrbq28AFrrv41YtafOF4uDSDS7HxMRXs17HeEzn24OzJb63iuA==
+  dependencies:
+    lodash "^4.0.0"
+    prop-types "^15.6.2"
+    yargs "^13.2.2"
+
+react-native-vector-icons@^6.5.0:
+  version "6.5.0"
+  resolved "https://registry.yarnpkg.com/react-native-vector-icons/-/react-native-vector-icons-6.5.0.tgz#bf925f62a47fed2f02a26392eed385058b7f137e"
+  integrity sha512-24Y5hkNTbpwK4OQFQQhJ20vBFWltGOcunJPztjO7E/4QpF3YmpbZIWjjf07wHOAlpeqCz3gEWr5iDI0Y2zLNnA==
   dependencies:
     lodash "^4.0.0"
     prop-types "^15.6.2"
@@ -5323,6 +5347,11 @@ react-test-renderer@16.8.3:
     prop-types "^15.6.2"
     react-is "^16.8.3"
     scheduler "^0.13.3"
+
+react-timer-mixin@^0.13.4:
+  version "0.13.4"
+  resolved "https://registry.yarnpkg.com/react-timer-mixin/-/react-timer-mixin-0.13.4.tgz#75a00c3c94c13abe29b43d63b4c65a88fc8264d3"
+  integrity sha512-4+ow23tp/Tv7hBM5Az5/Be/eKKF7DIvJ09voz5LyHGQaqqz9WV8YMs31eFvcYQs7d451LSg7kDJV70XYN/Ug/Q==
 
 react-transform-hmr@^1.0.4:
   version "1.0.4"
