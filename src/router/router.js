@@ -19,6 +19,9 @@ import DetailMenu from '../containers/screen/DetailMenu';
 import RedeemHistory from '../containers/screen/RedeemHistory';
 import SpinWheel from '../containers/screen/SpinWheel';
 import DailyLogin from '../containers/screen/DailyLogin';
+import SettingScreen from '../containers/screen/SettingScreen';
+import Profile from '../containers/screen/Profile';
+import ChangePassword from '../containers/screen/ChangePassword';
 
 
 // routing untuk user setelah login
@@ -58,6 +61,27 @@ const HomeStack = createStackNavigator({
         screen : DailyLogin,
         navigationOptions : {
             title : "Daily Checkin"
+        }
+    },
+    Setting : {
+        screen : SettingScreen,
+        navigationOptions : {
+            title : "Setting",
+            headerRight : null
+        }
+    },
+    Profile : {
+        screen : Profile,
+        navigationOptions : {
+            title : "Profile Setting",
+            headerRight : null
+        }
+    },
+    ChangePassword : {
+        screen : ChangePassword,
+        navigationOptions : {
+            title : "Change Password",
+            headerRight : null
         }
     }
 }, {
@@ -106,6 +130,7 @@ const AppDrawer = createDrawerNavigator({
     Instruction :{
         screen : InstructionStack,
     }
+
 }, {
     defaultNavigationOptions : {
         gesturesEnabled : true,

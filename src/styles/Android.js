@@ -436,13 +436,11 @@ let sidebar = StyleSheet.create({
     navLink : {
         display: "flex",
         flexDirection: "row",
+        alignItems : "center",
         paddingVertical: 14,
         paddingHorizontal: 10
     },
     navLinkIcon : {
-        width: 25,
-        height: 25,
-        alignSelf: 'center',
         marginRight: 10,
         marginTop: -2
     },
@@ -609,6 +607,49 @@ let redeemHistory = StyleSheet.create({
     }
 
 })
+
+const profile = StyleSheet.create({
+    container : {
+        paddingVertical : 8,
+    },
+    listWrap : {
+        paddingVertical : 10, 
+        paddingHorizontal : 24,
+        borderBottomWidth : .5,
+        borderBottomColor : 'rgba(0,0,0,0.1)'
+    },
+    listWrap2 : {
+        paddingVertical : 10, 
+        paddingHorizontal : 24,
+    },
+    listTitle : {
+        fontSize : 18, 
+        fontWeight : "600", 
+        marginBottom : 10
+    },
+    listValue : {
+        fontSize : 18
+    },
+    listInput : {
+        paddingVertical : 4,
+        borderBottomColor : "rgba(0,0,0,0.2)",
+        borderBottomWidth : 2,
+        marginBottom : 10,
+        fontSize : 18
+    },
+    saveButton : {
+        paddingVertical : 14,
+        paddingHorizontal : 24,
+        backgroundColor : color.base,
+        borderRadius : 8,
+    },
+    saveButtonText : {
+        fontSize : 18,
+        color : "#fff",
+        fontWeight : "600",
+        textAlign : "center",
+    }
+})
 //store style ke objek
 const AppStyles = {
     global,
@@ -621,7 +662,8 @@ const AppStyles = {
     cointIcon,
     history,
     detailItem,
-    redeemHistory
+    redeemHistory,
+    profile,
 }
 
 
