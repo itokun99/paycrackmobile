@@ -648,6 +648,13 @@ const profile = StyleSheet.create({
         color : "#fff",
         fontWeight : "600",
         textAlign : "center",
+    },
+    eye : {
+        position : "absolute",
+        top : 0,
+        right : 0,
+        padding : 5,
+        // backgroundColor : "#222"
     }
 })
 //store style ke objek

@@ -34,15 +34,14 @@ const GlobalProvider = (ChildComponent) => {
             // action global konsep mirip redux dispatcher.
             // https://redux.js.org/basics/actions
             dispatch = (action) => {
+                let data = {};
                 switch(action.type){
                     case "USER_LOGIN":
-                        let data = action.data;
+                        data = action.data;
                         this.setState({
                             isLogin : true,
                             loginData : data,
-                            // internet : true,
                         }, () => {
-                            // this.checkUpdateUserData(data.user_id);
                             this.runCheckUser();
                         })
                         break;
@@ -60,6 +59,12 @@ const GlobalProvider = (ChildComponent) => {
                         this.setState({
                             isLogin : false,
                             loginData : {}
+                        })
+                        break;
+                    case "USER_UPDATE":
+                        data = action.data;
+                        this.setState({
+                            loginData : data,
                         })
                         break;
                     default:
@@ -89,7 +94,6 @@ const GlobalProvider = (ChildComponent) => {
                             })
                         }
                     } else {
-                        // console.log(result);
                         if(result.code === 1){
                             this.setState({
                                 internet : false,

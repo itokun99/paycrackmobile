@@ -115,7 +115,7 @@ class Sidebar extends Component {
                     }
                     footer = {
                         <DialogFooter>
-                            <DialogButton text="CANCEL" borderedonPress={() => {this.setState({ defaultAnimationDialog: false });}} key="button-1"/>
+                            <DialogButton text="CANCEL" bordered onPress={() => {this.setState({ defaultAnimationDialog: false });}} key="button-1"/>
                             <DialogButton text="OK" bordered onPress={() => { this.setState({ defaultAnimationDialog: false }); this.handleLogOut();}} key="button-2"/>
                         </DialogFooter>
                     }
