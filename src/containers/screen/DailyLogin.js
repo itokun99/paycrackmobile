@@ -7,6 +7,7 @@ import {
     TouchableOpacity,
     SafeAreaView,
     StatusBar,
+    Dimensions,
     ActivityIndicator,
     RefreshControl,
     Alert
@@ -218,7 +219,10 @@ class DailyLogin extends Component{
 
     render(){  
         return(
-             <ScrollView style={AppStyles.global.scrollView}>
+             <ScrollView 
+                style={AppStyles.global.scrollView}
+                // contentContainerStyle={{flex : 1}}
+             >
                 <SafeAreaView style={AppStyles.home.main}>
                     <StatusBar barStyle="light-content" backgroundColor={AppStyles.loadingfirst.container.backgroundColor} />
                     <View style={{flex: 1,flexDirection: 'row',position:'relative'}}>
@@ -226,13 +230,13 @@ class DailyLogin extends Component{
                         <Image
                             resizeMode='cover'
                             source={require('../../assets/images/icons/bg_telor2.png')}
-                            style={{width:'100%',height: 604}}>
+                            style={{width:'100%',height: Dimensions.get('window').height * 0.96}}>
                         </Image>
                         :
                         <Image
                             resizeMode='cover'
                             source={require('../../assets/images/icons/no_telor_2.png')}
-                            style={{width:'100%',height: 604}}>
+                            style={{width:'100%',height: Dimensions.get('window').height * 0.96}}>
                         </Image>
                         }
                         {this.state.userstatus === true ? 
@@ -273,9 +277,9 @@ class DailyLogin extends Component{
                                 timeToShow={['H', 'M', 'S']}
                                 timeLabels={{ m: null, s: null }}
                                 //formate to show
-                                onFinish={() => alert('finished')}
+                                // onFinish={() => alert('finished')}
                                 //on Finish call
-                                onPress={() => alert('hello')}
+                                // onPress={() => alert('hello')}
                                 //on Press call
                                 size={20}
                                 showSeparator
