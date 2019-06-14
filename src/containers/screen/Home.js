@@ -83,6 +83,7 @@ class Home extends Component {
             itemIsLoading : true,
             internet  : true,
             refreshing: false,
+            showDialog : false,
         }
     }
   
@@ -112,12 +113,21 @@ class Home extends Component {
             API.dailycheckin(data).then(
                 (result) => {
                     this.props.navigation.navigate('DailyLogin',{
-                            userstatus  : result.status,
-                            usertime    : result.data.date_server,
-                        })
+                        userstatus  : result.status,
+                        usertime    : result.data.date_server,
+                    })
                     
                 }
             )
+        }
+    }
+
+    checkUserPassword = () => {
+        let loginData = this.props.globalState.loginData;
+        if(loginData.user_change_password !== "1"){
+            this.setState({
+
+            })   
         }
     }
 
@@ -136,7 +146,7 @@ class Home extends Component {
                     refreshing : false,
                 })
             } else {
-                if(result.code === 1){
+                if(result.code === 1 || result.code === 2){
                     this.checkInet()
                 } else {
                     this.refs.toast.show(result.message);
@@ -159,12 +169,8 @@ class Home extends Component {
     }
 
     componentDidMount() {
-        this.handleGetItem()
+        this.handleGetItem();
         this.setUserData();
-        // this.checkInet();
-        // setInterval(() => {
-        //     this.checkInet()
-        // }, 1000)
     }
 
 

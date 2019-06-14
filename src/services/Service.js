@@ -29,16 +29,26 @@ const request = (path, method, data, formData = false ) => {
         }
 
         NetInfo.fetch().then((state) => {
+            // console.warn(state);
             if(state.isConnected){
                 fetch(url, option)
                 .then((response) => {
                     if(response.ok){
-                        resolve(response.json())
+                        if(response.url !== url){
+                            let notConnectToServer = {
+                                status : false,
+                                code : 2,
+                                message : "Not connected to server!"
+                            }
+                            resolve(notConnectToServer);
+                        } else {
+                            resolve(response.json())
+                        }
                     } else {
                         resolve(response.json())
                     }
                 }).catch((response) => {
-                    console.log(response);
+                    console.warn(response);
                     resolve(response)
                 })
             } else {
@@ -88,6 +98,7 @@ const getUserData = (data = {}) => {
     let appkey = `${typeof(data.appkey) !== "undefined" ? params > 1 ? "&appkey="+data.appkey : "appkey="+data.appkey : ""}`;
     let id = `${typeof(data.id) !== "undefined" ? params > 1 ? "&id="+data.id : 'id='+data.id : "" }`;
     let path = `api/users${params > 0 ? "?" : "" }${appkey}${id}`;
+    // console.warn(data);
     return request(path)
 }
 
@@ -158,6 +169,17 @@ const getSpinnerValue = (data = {}) => {
     return request(path);
 }
 
+const getSpinnerProbs = (data = {}) => {
+    let params = 0;
+    for(key in data){
+        params++;
+    }
+
+    let appkey = `${typeof(data.appkey) !== "undefined" ? params > 1 ? "&appkey="+data.appkey : "appkey="+data.appkey : ""}`;
+    let path = `api/spinner/probs_hit${params > 0 ? "?" : "" }${appkey}`;
+    return request(path);
+}
+
 const changePassword = (data = {}) => {
     let path = "api/users/change_password";
     let method = "POST";
@@ -172,8 +194,25 @@ const changeAddress = (data = {}) => {
     return request(path, method, data);
 }
 
+const playSpinner = (data = {}) => {
+    let path = "api/spinner/play";
+    let method = "POST";
+    
+    return request(path, method, data)
+}
+
+const sendSpinnerResult = (data = {}) => {
+    let path = "api/spinner/result";
+    let method = "POST";
+    
+    return request(path, method, data)
+}
+
+
+
 //user API
 const API = {
+    getSpinnerProbs,
     getRedeemItems,
     userLogin,
     userLogout,
@@ -186,7 +225,9 @@ const API = {
     getSpinnerValue,
     dailyPoint,
     changePassword,
-    changeAddress
+    changeAddress,
+    playSpinner,
+    sendSpinnerResult
 }
 
 export default API;

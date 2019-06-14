@@ -60,7 +60,11 @@ const HomeStack = createStackNavigator({
     DailyLogin : {
         screen : DailyLogin,
         navigationOptions : {
-            title : "Daily Checkin"
+            title : "Daily Checkin",
+            headerTransparent : true,
+            headerStyle : {
+                backgroundColor : "transparent"
+            }
         }
     },
     Setting : {
@@ -87,9 +91,11 @@ const HomeStack = createStackNavigator({
 }, {
     defaultNavigationOptions : ({ navigation }) => ({
         headerStyle : {
-            backgroundColor : AppStyles.color.base 
+            backgroundColor : AppStyles.color.secondary,
+            elevation : 0,
+            showOpacity : 0
         },
-        headerTintColor : "#fff",
+        headerTintColor : AppStyles.color.base,
         headerRight : <CoinCounter navigation={navigation} />
     })
 })
