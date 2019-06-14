@@ -42,7 +42,8 @@ const HomeStack = createStackNavigator({
     DetailMenu:{
         screen :DetailMenu,
         navigationOptions : {
-            title : "Detail Items"
+            title : "Detail Items",
+            drawerLockMode : "locked-closed"
         }
     },
     HistoryRedeem : {

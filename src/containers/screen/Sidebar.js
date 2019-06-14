@@ -96,12 +96,10 @@ class Sidebar extends Component {
                 </View>
                 <TouchableOpacity onPress={() => {this.setState({ defaultAnimationDialog: true })}}>
                     <View style={AppStyles.sidebar.footer}>
-                        <Image 
-                            resizeMode='center'
-                            source={require('../../assets/images/icons/logout.png')}
-                            style={{width:25,height:25,alignSelf: 'center',marginLeft: 10,marginTop: -2}}>
-                        </Image>
-                        <Text style={AppStyles.sidebar.footerText}>Log Out</Text>
+                        <View style={AppStyles.sidebar.navLink}>
+                            <Icon name="sign-out" color={AppStyles.color.base} size={28} style={AppStyles.sidebar.navLinkIcon} />
+                            <Text style = {AppStyles.sidebar.navLinkText}>Log Out</Text>
+                        </View>
                     </View>
                 </TouchableOpacity>
                 <Dialog

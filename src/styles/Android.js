@@ -39,14 +39,11 @@ let home = StyleSheet.create({
         backgroundColor : "#fff",
     },
     sectionHeader : {
-        borderWidth : 1,
-        borderColor : 'rgba(0,0,0,0.1)',
         width : Dimensions.get('window').width,
-        paddingVertical : 14,
         paddingHorizontal : 24,
     },
     sectionBody : {
-        paddingVertical : 24,
+        paddingVertical : 14,
         paddingHorizontal : 24,
     },
     offerWallRow : {

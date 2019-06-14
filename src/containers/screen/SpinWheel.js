@@ -7,6 +7,7 @@ import {
     ScrollView,
     ActivityIndicator,
     Button,
+    Image,
     Alert,
     AlertIOS,
     Platform,
@@ -18,6 +19,7 @@ import { GlobalConsumer } from '../../contexts/Context';
 import Toast from 'react-native-easy-toast';
 import AppStyles from '../../styles/Android';
 import marker from '../../assets/images/roulette/marker2.png'
+import hore from '../../assets/images/roulette/hore.png'
 import wheel from '../../assets/images/roulette/wheel.png'
 import Spinner from 'react-native-loading-spinner-overlay';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -107,8 +109,10 @@ class SpinWheel extends Component {
                         showDialog : true,
                         dialogData : {
                             dialogTitle : "Congratulation!",
-                            dialogMessage : result.message
-                        }
+                            dialogMessage : result.message,
+                        },
+                        ...spinner_slot === 1 ? { isJackpot : true } : null
+
                     })
                 } else {
                     this.setState({
@@ -199,8 +203,23 @@ class SpinWheel extends Component {
 
     jackDialogContent = (text) => {
         return(
-            <View>
-                <Text style={{fontSize : 20, textAlign : "center"}}>{text}</Text>
+            <View style={{padding : 14}}>
+                <View>
+                    <Text style={{textAlign : "center", fontSize : 20, fontWeight : "600"}}>{this.state.dialogData.dialogTitle}</Text>
+                </View>
+                <View style={{position : "relative", height : 280}}>
+                    <View>
+                        <Text style={{textAlign : "center", fontSize : 18}}>{this.state.dialogData.dialogMessage}</Text>
+                    </View>
+                    <View style={{position : "absolute", left : 0, top : 0, height : '100%', width : '100%'}}>
+                        <Image source={require('../../assets/images/roulette/hore.png')} style={{width : '100%', height : '100%'}} resizeMode="center" />
+                    </View>
+                </View>
+                <View style={{justifyContent : "center", flexDirection : "row"}}>
+                    <TouchableOpacity onPress={this.closeDialog} style={{backgroundColor : AppStyles.color.base, paddingVertical: 8, paddingHorizontal : 24, borderRadius : 100}}>
+                        <Text style={{textAlign : "center", fontSize : 18, fontWeight : "600", color : "#fff"}}>OK</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
         )
     }
@@ -263,7 +282,8 @@ class SpinWheel extends Component {
             dialogData : {
                 dialogTitle : null,
                 dialogMessage : null,
-            }
+            },
+            isJackpot : false,
         })
     }
 
@@ -349,7 +369,7 @@ class SpinWheel extends Component {
                 >
                     <View>
                     {
-                        this.state.isJackpot ? null :
+                        this.state.isJackpot ? this.jackDialogContent() :
                         this.genericDialogContent()
                     }
                     </View>
