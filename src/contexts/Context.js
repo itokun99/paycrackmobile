@@ -76,7 +76,7 @@ const GlobalProvider = (ChildComponent) => {
                 let loginData = {...this.state.loginData};
                 let params = {
                     appkey : loginData.appkey,
-                    id : loginData
+                    id : loginData.user_id
                 }
                 API.getUserData(params)
                 .then((result) => {
@@ -94,7 +94,7 @@ const GlobalProvider = (ChildComponent) => {
                             })
                         }
                     } else {
-                        if(result.code === 1){
+                        if(result.code === 1 || result.code === 2){
                             this.setState({
                                 internet : false,
                             })

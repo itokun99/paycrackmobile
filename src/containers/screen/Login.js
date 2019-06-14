@@ -6,7 +6,7 @@ import API from '../../services/Service';
 import AsyncStorage from '@react-native-community/async-storage';
 import { GlobalConsumer } from '../../contexts/Context';
 import Toast, {DURATION} from 'react-native-easy-toast';
-
+import Spinner from 'react-native-loading-spinner-overlay';
 // init screen style 
 const styles = AppStyles.login;
 
@@ -72,23 +72,39 @@ class Login extends Component {
         if(noValue){
             this.refs.toast.show("Please fill the form!");
         } else {
-            // login user dengan REST API
-            API.userLogin(loginData)
-            .then((result) => {
-                if(result.status){
-                    let user_data = result.data;
-                    AsyncStorage.setItem('loginData', JSON.stringify(user_data));
-                    this.props.globalAction({
-                        type : "USER_LOGIN",
-                        data : user_data
-                    })
-                    this.refs.toast.show(result.message)
-                    setTimeout(() => {
-                        this.props.navigation.navigate('App');
-                    }, 300)
-                } else {
-                    this.refs.toast.show(result.message);
-                }
+            this.setState({
+                isLoading : true,
+            }, () => {
+                // login user dengan REST API
+                API.userLogin(loginData)
+                .then((result) => {
+                    if(result.status){
+                        let user_data = result.data;
+                        AsyncStorage.setItem('loginData', JSON.stringify(user_data));
+                        this.props.globalAction({
+                            type : "USER_LOGIN",
+                            data : user_data
+                        })
+                        this.setState({
+                            isLoading : false,
+                        }, () => {
+                            setTimeout(() => {
+                                this.refs.toast.show(result.message)
+                                setTimeout(() => {
+                                    this.props.navigation.navigate('App');
+                                }, 300)
+                            },300)
+                        })
+                    } else {
+                        this.setState({
+                            isLoading : false
+                        }, () => {
+                            setTimeout(() => {
+                                this.refs.toast.show(result.message);
+                            },300)
+                        })
+                    }
+                })
             })
         }
     }
@@ -101,6 +117,11 @@ class Login extends Component {
         return(
             // scrollview untuk menghindari lock focus input 
             <ScrollView contentContainerStyle={styles.container} >
+                <Spinner
+                    visible={this.state.isLoading}
+                    textContent="Loading..."
+                    textStyle={{color : "#fff"}} 
+                />
                 <View style={styles.mainWrapper}>
                     {/* <AndroidToast data={this.state.ToastData} /> */}
                     <View style={styles.Loginform}>

@@ -2,8 +2,9 @@ import {StyleSheet, Dimensions} from 'react-native';
 
 //setting up
 let color = {
-    base : '#E61A80',
-    secondary : "",
+    // base : '#E61A80',
+    base : "#d0011b",
+    secondary : "#fff",
     backgroundLayer : "#eee",
     defaultFont : "#222",
     linkFont : "#E61A80",
@@ -17,7 +18,7 @@ let global = StyleSheet.create({
     //     // height : '100%'
     // },
     scrollView : {
-        backgroundColor : color.backgroundLayer,
+        backgroundColor : color.secondary,
   
     },
     scrollContainer : {
@@ -128,12 +129,22 @@ let home = StyleSheet.create({
         marginLeft:10,
     },
     viewIcon:{
-        borderRadius:10,
+        borderRadius:200,
         backgroundColor:color.base,
         width:60,
         height:60,
         marginTop: 10,
-        padding:10,
+        padding:15,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 4,
+        },
+        shadowOpacity: 0.30,
+        shadowRadius: 4.65,
+
+        elevation: 8,
+
     },
     imageIcon:{
         alignSelf:'center',
@@ -484,13 +495,13 @@ let cointIcon = StyleSheet.create({
         marginRight: 14,
         alignItems: "center",
         borderWidth: 1,
-        borderColor: "#fff",
+        borderColor: color.base,
         paddingVertical: 4,
         paddingHorizontal: 8,
         borderRadius: 16
     },
     coinText : {
-        color: "#fff",
+        color: color.base,
         marginRight: 4,
         fontSize: 18,
         fontWeight: "bold"
@@ -657,6 +668,35 @@ const profile = StyleSheet.create({
         // backgroundColor : "#222"
     }
 })
+
+const spinnerWheel = StyleSheet.create({
+    container : {
+        flex: 1,
+        alignItems: "center",
+        justifyContent: "center"
+    },
+    spinButton : {
+        textAlign : "center",
+        justifyContent : "center",
+        paddingVertical : 14,
+        paddingHorizontal : 24,
+        backgroundColor: color.base,
+        borderRadius : 100,
+    },
+    spinButtonText : {
+        color : "#fff",
+        fontSize : 20
+    },
+    spinButtonLoading : {
+        textAlign : "center",
+        justifyContent : "center",
+        paddingVertical : 14,
+        paddingHorizontal : 24,
+        backgroundColor: "#ddd",
+        borderRadius : 100,
+    }
+
+})
 //store style ke objek
 const AppStyles = {
     global,
@@ -671,6 +711,7 @@ const AppStyles = {
     detailItem,
     redeemHistory,
     profile,
+    spinnerWheel,
 }
 
 
