@@ -36,20 +36,23 @@ const HomeStack = createStackNavigator({
     HistoryPoint : {
         screen : PointHistory,
         navigationOptions : {
-            title : "History Point"
+            title : "History Point",
+            headerRight : null,
         }
     },
     DetailMenu:{
         screen :DetailMenu,
         navigationOptions : {
             title : "Detail Items",
-            drawerLockMode : "locked-closed"
+            drawerLockMode : "locked-closed",
+            // headerRight : null,
         }
     },
     HistoryRedeem : {
         screen : RedeemHistory,
         navigationOptions : {
-            title : "History Redeem"
+            title : "History Redeem",
+            headerRight : null,
         }
     },
     SpinWheel : {
@@ -105,8 +108,14 @@ const InstructionStack = createStackNavigator({
     Instruction : { 
         screen : Instruction,
         navigationOptions : ({ navigation }) => ({
+            headerStyle : {
+                backgroundColor : AppStyles.color.secondary,
+                elevation : 0,
+                showOpacity : 0
+            },
             headerLeft : <DrawerIcon navigation={navigation} />,
-            title : "Instruction"
+            title : "Instruction",
+            headerTintColor : AppStyles.color.base,
         }) 
     }
 }, {
@@ -133,6 +142,11 @@ const LoginStack = createStackNavigator({
 const AppDrawer = createDrawerNavigator({
     Home : {
         screen : HomeStack,
+        navigationOptions : ( navigation ) => {
+            return {
+                
+            }
+        }
     },
     Instruction :{
         screen : InstructionStack,

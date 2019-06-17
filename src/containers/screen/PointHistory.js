@@ -51,6 +51,7 @@ class PointHistory extends Component {
                         })
                     }
                 } else {
+                    // console.warn(result);
                     if(result.code !== 404){
                         this.refs.toasts.show(result.message);
                     }
