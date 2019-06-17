@@ -29,40 +29,40 @@ import Toast from 'react-native-easy-toast';
 import ImageSequence from 'react-native-image-sequence';
 
 const images = [
-  require('../../assets/images/icons/telor2/1.png'),
-  require('../../assets/images/icons/telor2/2.png'),
-  require('../../assets/images/icons/telor2/3.png'),
-  require('../../assets/images/icons/telor2/4.png'),
-  require('../../assets/images/icons/telor2/5.png'),
-  require('../../assets/images/icons/telor2/6.png'),
-  require('../../assets/images/icons/telor2/7.png'),
-  require('../../assets/images/icons/telor2/8.png'),
-  require('../../assets/images/icons/telor2/9.png'),
-  require('../../assets/images/icons/telor2/10.png'),
-  require('../../assets/images/icons/telor2/11.png'),
-  require('../../assets/images/icons/telor2/12.png'),
-  require('../../assets/images/icons/telor2/13.png'),
-  require('../../assets/images/icons/telor2/14.png'),
-  require('../../assets/images/icons/telor2/15.png'),
-  require('../../assets/images/icons/telor2/16.png'),
-  require('../../assets/images/icons/telor2/17.png'),
-  require('../../assets/images/icons/telor2/18.png'),
-  require('../../assets/images/icons/telor2/19.png'),
-  require('../../assets/images/icons/telor2/20.png'),
-  require('../../assets/images/icons/telor2/21.png'),
-  require('../../assets/images/icons/telor2/22.png'),
-  require('../../assets/images/icons/telor2/23.png'),
-  require('../../assets/images/icons/telor2/24.png'),
-  require('../../assets/images/icons/telor2/25.png'),
-  require('../../assets/images/icons/telor2/26.png'),
-  require('../../assets/images/icons/telor2/27.png'),
-  require('../../assets/images/icons/telor2/28.png'),
-  require('../../assets/images/icons/telor2/29.png'),
-  require('../../assets/images/icons/telor2/30.png'),
-  require('../../assets/images/icons/telor2/31.png'),
-  require('../../assets/images/icons/telor2/32.png'),
-  require('../../assets/images/icons/telor2/33.png'),
-  require('../../assets/images/icons/telor2/34.png'),
+  require('../../assets/images/icons/kado/1.png'),
+  require('../../assets/images/icons/kado/2.png'),
+  require('../../assets/images/icons/kado/3.png'),
+  require('../../assets/images/icons/kado/4.png'),
+  require('../../assets/images/icons/kado/5.png'),
+  require('../../assets/images/icons/kado/6.png'),
+  require('../../assets/images/icons/kado/7.png'),
+  require('../../assets/images/icons/kado/8.png'),
+  require('../../assets/images/icons/kado/9.png'),
+  require('../../assets/images/icons/kado/10.png'),
+  require('../../assets/images/icons/kado/11.png'),
+  require('../../assets/images/icons/kado/12.png'),
+//   require('../../assets/images/icons/kado/13.png'),
+//   require('../../assets/images/icons/kado/14.png'),
+//   require('../../assets/images/icons/kado/15.png'),
+//   require('../../assets/images/icons/kado/16.png'),
+//   require('../../assets/images/icons/kado/17.png'),
+//   require('../../assets/images/icons/kado/18.png'),
+//   require('../../assets/images/icons/kado/19.png'),
+//   require('../../assets/images/icons/kado/20.png'),
+//   require('../../assets/images/icons/kado/21.png'),
+//   require('../../assets/images/icons/kado/22.png'),
+//   require('../../assets/images/icons/kado/23.png'),
+//   require('../../assets/images/icons/kado/24.png'),
+//   require('../../assets/images/icons/kado/25.png'),
+//   require('../../assets/images/icons/kado/26.png'),
+//   require('../../assets/images/icons/kado/27.png'),
+//   require('../../assets/images/icons/kado/28.png'),
+//   require('../../assets/images/icons/kado/29.png'),
+//   require('../../assets/images/icons/kado/30.png'),
+//   require('../../assets/images/icons/kado/31.png'),
+//   require('../../assets/images/icons/kado/32.png'),
+//   require('../../assets/images/icons/kado/33.png'),
+//   require('../../assets/images/icons/kado/34.png'),
 ];
 
 const gerak = [
@@ -131,12 +131,11 @@ class DailyLogin extends Component{
     timeout = () => {
         setTimeout(() => {
            this.postdaily()
-        }, 4500);
+        }, 2000);
     }
     
     handleGetItem = async () => {
         let loginData = this.props.globalState.loginData;
-        // console.warn(loginData);
         let params = {
             appkey : loginData.appkey
         }
