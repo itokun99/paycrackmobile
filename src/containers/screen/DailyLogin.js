@@ -66,18 +66,22 @@ const images = [
 ];
 
 const gerak = [
-  require('../../assets/images/icons/gerak/1.png'),
-  require('../../assets/images/icons/gerak/2.png'),
-  require('../../assets/images/icons/gerak/3.png'),
-  require('../../assets/images/icons/gerak/4.png'),
-  require('../../assets/images/icons/gerak/5.png'),
-  require('../../assets/images/icons/gerak/6.png'),
-  require('../../assets/images/icons/gerak/7.png'),
-  require('../../assets/images/icons/gerak/8.png'),
-  require('../../assets/images/icons/gerak/9.png'),
-  require('../../assets/images/icons/gerak/10.png'),
-  require('../../assets/images/icons/gerak/11.png'),
-  require('../../assets/images/icons/gerak/12.png'),
+  require('../../assets/images/icons/kado2/1.png'),
+  require('../../assets/images/icons/kado2/2.png'),
+  require('../../assets/images/icons/kado2/3.png'),
+  require('../../assets/images/icons/kado2/4.png'),
+  require('../../assets/images/icons/kado2/5.png'),
+  require('../../assets/images/icons/kado2/6.png'),
+  require('../../assets/images/icons/kado2/7.png'),
+  require('../../assets/images/icons/kado2/8.png'),
+  require('../../assets/images/icons/kado2/9.png'),
+  require('../../assets/images/icons/kado2/10.png'),
+  require('../../assets/images/icons/kado2/11.png'),
+  require('../../assets/images/icons/kado2/12.png'),
+  require('../../assets/images/icons/kado2/13.png'),
+  require('../../assets/images/icons/kado2/14.png'),
+  require('../../assets/images/icons/kado2/15.png'),
+  require('../../assets/images/icons/kado2/16.png'),
 ];
 
 const centerIndex = Math.round(images.length);
@@ -228,22 +232,22 @@ class DailyLogin extends Component{
                         {this.state.userstatus === true ? 
                         <Image
                             resizeMode='cover'
-                            source={require('../../assets/images/icons/bg_telor2.png')}
+                            source={require('../../assets/images/icons/background_kado.png')}
                             style={{width:'100%',height: Dimensions.get('window').height * 0.96}}>
                         </Image>
                         :
                         <Image
                             resizeMode='cover'
-                            source={require('../../assets/images/icons/no_telor_2.png')}
+                            source={require('../../assets/images/icons/background_kado2.png')}
                             style={{width:'100%',height: Dimensions.get('window').height * 0.96}}>
                         </Image>
                         }
                         {this.state.userstatus === true ? 
-                            <View style={{width:'100%',position:'absolute',bottom:100,left:5}}>
+                            <View style={{width:'100%',position:'absolute',bottom:50,left:5}}>
                                 {this.state.visible === false ? 
                                     <TouchableOpacity 
                                         onPress = {()=> this.setState({visible : true},this.timeout(),this.handleGetItem())}
-                                        style={{width: 300, height: 300,alignItems: 'center',alignSelf: 'center',justifyContent:'center'}}>
+                                        style={{width: 500, height: 300,alignItems: 'center',alignSelf: 'center',justifyContent:'flex-end', borderColor : "#000"}}>
                                         <ImageSequence
                                             images={gerak}
                                             startFrameIndex={centerGerak}
