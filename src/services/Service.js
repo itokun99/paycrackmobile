@@ -4,7 +4,7 @@ export const Settings = {
     isOnline : false,
     // basePath : "http://kes.co.id/dev/paycrack/",
     basePath : "http://192.168.100.5/paycrack/",
-    onlinePath : "http://kes.co.id/dev/paycrack/",
+    onlinePath : "http://34.87.108.11/paycrack/",
     offlinePath : "http://192.168.100.5/paycrack/",
 }
 
