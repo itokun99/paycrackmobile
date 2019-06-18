@@ -12,7 +12,7 @@ class BannerScreen extends Component {
             banners : [],
             currentBanner : {
                 banner_url : "",
-                banner_img : "https://2.bp.blogspot.com/-iyR1FtDudeU/W8Yca14OE5I/AAAAAAAABuo/Rpe8mUUCYL0mzwiIUgPpiojawmFocIG2gCPcBGAYYCw/s1600/ads970x90-min.png"
+                banner_img : ""
             },
             timer : 3,
         }
@@ -69,9 +69,14 @@ class BannerScreen extends Component {
             <ScrollView contentContainerStyle={{flex : 1}}>
                 <SafeAreaView>
                     <View style={{height : '100%', width : "100%", position : "relative", backgroundColor : "#000"}}>
-                        <TouchableOpacity onPress={this.handleLink} style={{position : "absolute", top: 0, left : 0, width : '100%', height : "100%"}}>
-                            <Image source={{uri : this.state.currentBanner.banner_img}} resizeMode="contain" style={{width : '100%', height : "100%"}} />
-                        </TouchableOpacity>
+                        {
+                            this.state.banners.length > 0 ? 
+                            <TouchableOpacity onPress={this.handleLink} style={{position : "absolute", top: 0, left : 0, width : '100%', height : "100%"}}>
+                                <Image source={{uri : this.state.currentBanner.banner_img}} resizeMode="contain" style={{width : '100%', height : "100%"}} />
+                            </TouchableOpacity>
+                            :
+                            null
+                        }
                         <TouchableOpacity style={{position : "absolute", top : 24, right : 24}} >
                             <Text style={{fontSize : 18, fontWeight : "600", color : "#fff"}} >Please wait {this.state.timer}</Text>
                         </TouchableOpacity>

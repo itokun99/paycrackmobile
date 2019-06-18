@@ -65,7 +65,7 @@ class WheelHistory extends Component {
                 </View>
                 <View style={{alignItems : "center", justifyContent : "center"}}>
                     <TouchableOpacity>
-                        <Text>{data.jackpot_status === "1" ? "Success" : "Pending" }</Text>
+                        <Text>{data.jackpot_status === "0" ? "Pending" : data.jackpot_status === "1" ? "On Process" : data.jackpot_status === "2" ? "Success" : "Canceled" }</Text>
                     </TouchableOpacity>
                 </View>
             </View>
