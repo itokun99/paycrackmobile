@@ -16,7 +16,8 @@ class LoadingFirst extends Component {
                         type : "USER_LOGIN",
                         data : loginData
                     })
-                    this.props.navigation.navigate('App');
+                    // this.props.navigation.navigate('App');
+                    this.props.navigation.navigate('BannerScreen');
                 }
             } else {
                 this.props.navigation.navigate('Auth');

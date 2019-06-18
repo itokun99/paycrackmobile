@@ -91,7 +91,7 @@ class Login extends Component {
                             setTimeout(() => {
                                 this.refs.toast.show(result.message)
                                 setTimeout(() => {
-                                    this.props.navigation.navigate('App');
+                                    this.props.navigation.navigate('BannerScreen');
                                 }, 300)
                             },300)
                         })

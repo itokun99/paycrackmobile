@@ -120,13 +120,28 @@ class DetailMenu extends Component {
                 </View>
                 <Text style={AppStyles.detailItem.itemTitle}>{item.item_name}</Text>
                 <Text style={AppStyles.detailItem.itemDesc}>{item.item_description}</Text>
+                <Text style={AppStyles.detailItem.stock}>Stock : {item.item_quantity}</Text>
                 <View style={{marginVertical : 24, justifyContent : "center", flexDirection : "row"}}>
-                    <TouchableOpacity onPress={this.showDialog} style={AppStyles.detailItem.btn}>
-                        <View style={{ flex: 1,flexDirection: 'row',alignItems: 'center',justifyContent: "center",fontSize: 20}}>
-                            <Image source={require("../../assets/images/icons/icon_coin.png")}  style={{width : 18, height : 18, marginRight : 5}} />
-                            <Text style={{fontSize : 24,color:"white", fontWeight : "600"}}>{item.item_point}</Text>
-                        </View>
-                    </TouchableOpacity>
+                    {
+                        parseInt(item.item_quantity)  > 0 ?
+                        (
+                            <TouchableOpacity onPress={this.showDialog} style={AppStyles.detailItem.btn}>
+                                <View style={{ flex: 1,flexDirection: 'row',alignItems: 'center',justifyContent: "center",fontSize: 20}}>
+                                    <Image source={require("../../assets/images/icons/icon_coin.png")}  style={{width : 18, height : 18, marginRight : 5}} />
+                                    <Text style={{fontSize : 24,color:"white", fontWeight : "600"}}>{item.item_point}</Text>
+                                </View>
+                            </TouchableOpacity>
+                        )
+                        :
+                        (
+                            <TouchableOpacity style={{...AppStyles.detailItem.btn, backgroundColor : "#ddd"}}>
+                                <View style={{ flex: 1,flexDirection: 'row',alignItems: 'center',justifyContent: "center",fontSize: 20}}>
+                                    {/* <Image source={require("../../assets/images/icons/icon_coin.png")}  style={{width : 18, height : 18, marginRight : 5}} /> */}
+                                    <Text style={{fontSize : 24,color:"white", fontWeight : "600"}}>Empty Stock</Text>
+                                </View>
+                            </TouchableOpacity>
+                        )
+                    }
                 </View>
                 {/* DIALOG */}
                 <Dialog

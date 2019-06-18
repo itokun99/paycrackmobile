@@ -7,6 +7,7 @@ import {
     SafeAreaView,
     FlatList,
     Dimensions,
+    TouchableOpacity
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import AppStyles from '../../styles/Android';
@@ -15,23 +16,19 @@ import API from '../../services/Service';
 import ListItem from '../../components/ListItem';
 import Toast, {DURATION} from 'react-native-easy-toast';
 import BottomBanner from '../../components/BottomBanner';
+import moment from 'moment';
 
-class PointHistory extends Component {
+class WheelHistory extends Component {
     constructor(props){
         super(props);
         this.state = {
-            historyPoint : [],
+            JackpotHistory : [],
             isLoading : true,
-            toastData : {}
         }
     }
 
-    saveToStorage = (data) => {
-        AsyncStorage.setItem('historyPoint', JSON.stringify(data));
-    }
-
-    getHistoryPoint = () => {
-        let prevState = this.state.historyPoint;
+    getJackpotHistory = () => {
+        let prevState = this.state.JackpotHistory;
         let login_data = this.props.globalState.loginData
         if(typeof(login_data) !== "undefined"){
             let user_id = login_data.user_id;
@@ -39,17 +36,13 @@ class PointHistory extends Component {
                 appkey : login_data.appkey,
                 user_id : user_id
             }
-            API.historyPoint(params)
+            API.getJackpotHistory(params)
             .then((result) => {
                 if(result.status){
                     let history_data = result.data;
-                    if(prevState.length !== history_data.length){
-                        this.setState({
-                            historyPoint : history_data
-                        }, () => {
-                            this.saveToStorage(history_data);
-                        })
-                    }
+                    this.setState({
+                        JackpotHistory : history_data
+                    })
                 } else {
                     if(result.code !== 404){
                         this.refs.toasts.show(result.message);
@@ -59,32 +52,27 @@ class PointHistory extends Component {
         }
     }
 
-    loadDataHistory = async () => {
-        try{
-            var historyPoint = await AsyncStorage.getItem('historyPoint');
-            if(historyPoint !== null){
-                historyPoint = JSON.parse(historyPoint);
-                if(historyPoint.length > 0){
-                    this.setState({
-                        historyPoint : historyPoint
-                    }, () => {
-                        this.getHistoryPoint()
-                    })
-                }
-            } else {
-                this.getHistoryPoint();
-            }
-        }catch(error){
-            this.getHistoryPoint();
-        }
+    componentDidMount(){
+        this.getJackpotHistory()
     }
 
-    componentDidMount(){
-        this.loadDataHistory()
+    renderList = (data) => {
+        return(
+            <View style={{paddingVertical : 14, paddingHorizontal : 24, backgroundColor : "#fff", flexDirection : "row", justifyContent : "space-between", borderColor : "#ddd", borderBottomWidth : 1}}>
+                <View style={{}}>
+                    <Text style={{fontSize : 18, fontWeight : "600"}}>{data.jackpot_item}</Text>
+                    <Text>{moment(data.jackpot_date).format("DD MMMM YYYY")}</Text>
+                </View>
+                <View style={{alignItems : "center", justifyContent : "center"}}>
+                    <TouchableOpacity>
+                        <Text>{data.jackpot_status === "1" ? "Success" : "Pending" }</Text>
+                    </TouchableOpacity>
+                </View>
+            </View>
+        )
     }
 
     render(){
-        // console.warn(this.state.historyPoint)
         return(
             <View style={{flex : 1}}>
                 <View style={{position : "absolute", top : 0, left : 0, height : '100%', width : "100%"}}>
@@ -92,16 +80,13 @@ class PointHistory extends Component {
                         <SafeAreaView>
                             <StatusBar barStyle="light-content" backgroundColor={AppStyles.color.base} />
                             {
-                                this.state.historyPoint.length > 0 ? 
+                                this.state.JackpotHistory.length > 0 ? 
                                 <FlatList
-                                    data = {this.state.historyPoint}
-                                    keyExtractor={item => item.ph_id}
+                                    data = {this.state.JackpotHistory}
+                                    keyExtractor={item => item.jackpot_id}
                                     renderItem = {
                                         ({item}) => {
-                                            // console.warn(item);
-                                            return(
-                                                <ListItem data={item} />
-                                            )
+                                            return this.renderList(item)
                                         }
                                     }
                                 />
@@ -118,4 +103,4 @@ class PointHistory extends Component {
 }
 
 
-export default GlobalConsumer(PointHistory);
+export default GlobalConsumer(WheelHistory);

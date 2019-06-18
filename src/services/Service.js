@@ -76,6 +76,20 @@ const getRedeemItems = (data = {}) => {
     return request(path)
 }
 
+const getJackpotHistory = (data = {}) => {
+    let params = 0;
+    for(let key in data){
+        params++;
+    }
+    let appkey = `${typeof(data.appkey) !== "undefined" ? params > 1 ? "&appkey="+data.appkey : "appkey="+data.appkey : ""}`;    
+    let user_id = `${typeof(data.user_id) !== "undefined" ? params > 1 ? "&user_id="+data.user_id : "user_id="+data.user_id : ""}`;    
+    let limit = `${typeof(data.limit) !== "undefined" ? params > 1 ? "&limit="+data.limit : "limit="+data.limit : ""}`;    
+    let offset = `${typeof(data.offset) !== "undefined" ? params > 1 ? "&offset="+data.offset : "offset="+data.offset : ""}`;    
+    let id = `${typeof(data.id) !== "undefined" ? params > 1 ? "&id="+data.id : "id="+data.id : ""}`;    
+    let path = `api/history/jackpot${params > 0 ? "?" : "" }${appkey}${id}${user_id}${limit}${offset}`;
+    return request(path)
+}
+
 // login user
 const userLogin = (data = {}) => {
     let path = 'api/users/userlogin';
@@ -87,6 +101,17 @@ const userLogout = (data = {}) => {
     let path = "api/users/userlogout";
     let method = "POST";
     return request(path,method, data);
+}
+
+const getBanners = (data = {}) => {
+    let params = 0;
+    for(let key in data){
+        params++;
+    }
+    // http://localhost/paycrack/api/banner/setting?appkey=RiguFb1WGmS2qOBR
+    let appkey = `${typeof(data.appkey) !== "undefined" ? params > 1 ? "&appkey="+data.appkey : "appkey="+data.appkey : ""}`;    
+    let path = `api/banner/setting${params > 0 ? "?" : "" }${appkey}`;
+    return request(path)
 }
 
 // getUser data
@@ -208,6 +233,12 @@ const sendSpinnerResult = (data = {}) => {
     return request(path, method, data)
 }
 
+const changeStatusSpinner = (data = {}) => {
+    let path = "api/spinner/change_status";
+    let method = "POST";
+    return request(path, method, data)
+}
+
 
 
 //user API
@@ -227,7 +258,10 @@ const API = {
     changePassword,
     changeAddress,
     playSpinner,
-    sendSpinnerResult
+    sendSpinnerResult,
+    changeStatusSpinner,
+    getJackpotHistory,
+    getBanners
 }
 
 export default API;

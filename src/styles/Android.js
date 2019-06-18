@@ -173,14 +173,14 @@ let home = StyleSheet.create({
         fontSize: 20
     },
     textHeader : {
-        color : 'black',
+        color : '#fff',
         textAlign: 'center',
         margin: 5,
         fontSize: 20,
         fontWeight: 'bold'
     },
     textSub : {
-        color : 'black',
+        color : '#fff',
         textAlign: 'center',
         margin: 10,
         fontSize: 16
@@ -571,8 +571,13 @@ let detailItem = StyleSheet.create({
         padding : 10,
         backgroundColor : color.base,
         borderRadius :14
+    },
+    stock : {
+        textAlign : "center",
+        fontSize : 18,
+        fontWeight : "bold",
+        marginTop : 20
     }
-
 })
 
 let redeemHistory = StyleSheet.create({

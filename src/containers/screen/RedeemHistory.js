@@ -12,6 +12,7 @@ import ListRedeem from '../../components/ListRedeem';
 import AppStyles from '../../styles/Android';
 import API from '../../services/Service';
 import AsyncStorage from '@react-native-community/async-storage';
+import BottomBanner from '../../components/BottomBanner';
 
 class RedeemHistory extends Component {
     constructor(props){
@@ -79,28 +80,33 @@ class RedeemHistory extends Component {
 
     render(){
         return(
-            <ScrollView style={{width : "100%", height: "100%", backgroundColor : AppStyles.color.backgroundLayer}}>
-                <StatusBar barStyle="light-content" backgroundColor={AppStyles.color.base}  />
-                <SafeAreaView>
-                    {
-                        this.state.redeem.length > 0 ?
-                            <FlatList
-                                data = {this.state.redeem}
-                                keyExtractor = {item => item.rh_id}
-                                renderItem = {({item}) => {
-                                    return(
-                                        <ListRedeem data={item} />
-                                    )
-                                } } 
-                            />
-                        :
-                                <View style={{height : 200, flexDirection : "row", justifyContent : "center", alignItems : "center"}}>
-                                    <Text style={{fontSize : 20, }}>No Redeem History</Text>
-                                </View>
+            <View style={{flex : 1}}>
+                <View style={{position : "absolute", top : 0, left : 0, height : '100%', width : "100%"}}>
+                    <ScrollView style={{width : "100%", height: "100%", backgroundColor : AppStyles.color.backgroundLayer}}>
+                        <StatusBar barStyle="light-content" backgroundColor={AppStyles.color.base}  />
+                        <SafeAreaView>
+                            {
+                                this.state.redeem.length > 0 ?
+                                    <FlatList
+                                        data = {this.state.redeem}
+                                        keyExtractor = {item => item.rh_id}
+                                        renderItem = {({item}) => {
+                                            return(
+                                                <ListRedeem data={item} />
+                                            )
+                                        } } 
+                                    />
+                                :
+                                        <View style={{height : 200, flexDirection : "row", justifyContent : "center", alignItems : "center"}}>
+                                            <Text style={{fontSize : 20, }}>No Redeem History</Text>
+                                        </View>
 
-                    }
-                </SafeAreaView>
-            </ScrollView>
+                            }
+                        </SafeAreaView>
+                    </ScrollView>
+                </View>
+                <BottomBanner />
+            </View>
         )
     }
 }

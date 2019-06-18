@@ -10,15 +10,10 @@ class ForgotPassword extends Component {
             <View style={AppStyles.forgotpassword.container}>
                 <View style={AppStyles.forgotpassword.formWrapper}>
                     <View style={AppStyles.forgotpassword.formGroup}>
-                        <Text style={AppStyles.forgotpassword.formTitle}>Lost Your Password?</Text>
+                        <Text style={{...AppStyles.forgotpassword.formTitle, marginBottom : 14,}}>Lost Your Password?</Text>
+                        <Text style={{textAlign : "center", fontSize : 18}}>Please contact the Admin for reset your password!</Text>
                     </View>
                     <View style={AppStyles.forgotpassword.formGroup}>
-                        <TextInput style={AppStyles.forgotpassword.formControl} keyboardType="email-address" placeholder="Email" />
-                    </View>
-                    <View style={AppStyles.forgotpassword.formGroup}>
-                        <TouchableOpacity style={AppStyles.forgotpassword.btn}>
-                            <Text style={AppStyles.forgotpassword.btnText}>Submit</Text>
-                        </TouchableOpacity>
                         <TouchableOpacity onPress={() => this.props.navigation.goBack()} style={{...AppStyles.forgotpassword.btn, backgroundColor : "#888", marginTop : 8}}>
                             <Text style={AppStyles.forgotpassword.btnText}>Back</Text>
                         </TouchableOpacity>

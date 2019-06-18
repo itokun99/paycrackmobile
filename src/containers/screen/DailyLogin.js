@@ -232,13 +232,13 @@ class DailyLogin extends Component{
                         {this.state.userstatus === true ? 
                         <Image
                             resizeMode='cover'
-                            source={require('../../assets/images/icons/background_kado.png')}
+                            source={require('../../assets/images/icons/background_kado3.jpg')}
                             style={{width:'100%',height: Dimensions.get('window').height * 0.96}}>
                         </Image>
                         :
                         <Image
                             resizeMode='cover'
-                            source={require('../../assets/images/icons/background_kado2.png')}
+                            source={require('../../assets/images/icons/background_kado4.jpg')}
                             style={{width:'100%',height: Dimensions.get('window').height * 0.96}}>
                         </Image>
                         }
