@@ -268,7 +268,7 @@ class Home extends Component {
                                     // flexDirection: "row", 
                                     // justifyContent: "space-between" 
                                 }}>
-                                    <Text style={{fontSize : 18, fontWeight : "600", color : "#111"}}>Reedem Items</Text>
+                                    <Text style={{fontSize : 18, fontWeight : "600", color : "#111"}}>Redeem Items</Text>
                                     <View style={{marginTop : 8, height : 3, width : 30, backgroundColor : AppStyles.color.base, borderRadius : 14}}></View>
                                 </View>
                                 <View style={AppStyles.home.sectionBody}>
