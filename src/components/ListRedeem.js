@@ -19,7 +19,7 @@ const ListRedeem = (props) => {
                     </View>
                 </View>
                 <View style={AppStyles.redeemHistory.redeemItemRight}>
-                    <Text style={{...AppStyles.redeemHistory.redeemStatusText, ...props.data.rh_status === "1" ? {color : "#2ed573", borderColor : "#2ed573"} : {color : "#747d8c", borderColor : "#747d8c"}  }}>{props.data.rh_status === "1" ? "Success" : "Pending"}</Text>
+                    <Text style={{...AppStyles.redeemHistory.redeemStatusText, ...props.data.rh_status === "0" ? {color : "#747d8c", borderColor : "#747d8c"} : props.data.rh_status === "1" ? {color : "#FAA61A", borderColor : "#FAA61A"} : props.data.rh_status === "2" ? {color : "#2ed573", borderColor : "#2ed573"} : {color : "red", borderColor : "red"}  }}>{props.data.rh_status === "0" ? "Pending" : props.data.rh_status === "1" ? "On Proccess" : props.data.rh_status === "2" ? "Success" : "Canceled"}</Text>
                 </View>
             </View>
         </TouchableOpacity>

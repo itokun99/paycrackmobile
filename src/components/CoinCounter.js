@@ -7,8 +7,8 @@ import AppStyles from '../styles/Android';
 
 const CointCounter = (props) => {
     return(
-        <View style={AppStyles.cointIcon.container}>
-            <Text style={AppStyles.cointIcon.coinText}>{props.globalState.loginData.user_point}</Text>
+        <View style={{...AppStyles.cointIcon.container,...props.style}}>
+            <Text style={{...AppStyles.cointIcon.coinText, ...props.textColor}}>{props.globalState.loginData.user_point}</Text>
             <Image
                 source={require('../assets/images/icons/icon_coin.png')}
                 resizeMode="contain" 

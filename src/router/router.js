@@ -22,6 +22,8 @@ import DailyLogin from '../containers/screen/DailyLogin';
 import SettingScreen from '../containers/screen/SettingScreen';
 import Profile from '../containers/screen/Profile';
 import ChangePassword from '../containers/screen/ChangePassword';
+import BannerScreen from '../containers/screen/BannerScreen';
+import WheelHistory from '../containers/screen/WheelHistory';
 
 
 // routing untuk user setelah login
@@ -61,15 +63,24 @@ const HomeStack = createStackNavigator({
             title : "Lucky Change"
         }
     },
+    WheelHistory : {
+        screen : WheelHistory,
+        navigationOptions : {
+            title : "Jackpot",
+            headerRight : null,
+        }
+    },
     DailyLogin : {
         screen : DailyLogin,
-        navigationOptions : {
+        navigationOptions : ({ navigation }) => ({
             title : "Daily Checkin",
             headerTransparent : true,
+            headerTintColor : '#fff',
             headerStyle : {
-                backgroundColor : "transparent"
-            }
-        }
+                backgroundColor : "transparent",
+            },
+            headerRight : <CoinCounter textColor={{color : "#fff"}} style={{borderColor : "#fff"}} navigation={navigation} />
+        })
     },
     Setting : {
         screen : SettingScreen,
@@ -162,6 +173,7 @@ const AppDrawer = createDrawerNavigator({
 // switcher untuk semua routing
 const RootNavigation = createSwitchNavigator({
     Loading : LoadingFirst,
+    BannerScreen : BannerScreen,
     App : AppDrawer,
     Auth : LoginStack,
 }, {

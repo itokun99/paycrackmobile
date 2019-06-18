@@ -57,6 +57,10 @@ class SpinWheel extends Component {
         }
     }
 
+    linkTo = (path, data) => {
+        this.props.navigation.navigate(path, data);
+    }
+
     onRotateChange(state) {
         this.setState({
           rouletteState: state
@@ -82,6 +86,24 @@ class SpinWheel extends Component {
         }
     }
 
+    changeProbsStatus = (action = null) => {
+        let loginData = this.props.globalState.loginData;
+        let params = {
+            appkey : loginData.appkey,
+            probs_id : this.state.probs_id,
+            probs_status : 0
+        }
+
+        API.changeStatusSpinner(params)
+        .then((result) => {
+            if(result.status){
+
+            } else {
+                this.props.navigation.navigate('Home');
+            }
+        })
+    }
+
     resultSpinner = () => {
         setTimeout(() => {
             let spinner = this.state.spinner;
@@ -102,15 +124,25 @@ class SpinWheel extends Component {
             API.sendSpinnerResult(params)
             .then((result) => {
                 if(result.status){
-                    this.setState({
-                        showDialog : true,
-                        dialogData : {
-                            dialogTitle : "Congratulation!",
-                            dialogMessage : result.message,
-                        },
-                        ...spinner_slot === 1 ? { isJackpot : true } : null
-
-                    })
+                    if(spinner_slot === 1){
+                        this.changeProbsStatus()
+                        this.setState({
+                            showDialog : true,
+                            dialogData : {
+                                dialogTitle : "Congratulation!",
+                                dialogMessage : result.message,
+                            },
+                            isJackpot : true
+                        })
+                    } else {
+                        this.setState({
+                            showDialog : true,
+                            dialogData : {
+                                dialogTitle : "Congratulation!",
+                                dialogMessage : result.message,
+                            },    
+                        })
+                    }
                 } else {
                     this.setState({
                         showDialog : true,
@@ -129,6 +161,10 @@ class SpinWheel extends Component {
             optionCustom:option.props.index
         })
     }
+    linkTo = (path) => {
+        this.closeDialog()
+        this.props.navigation.push(path)
+    }
     
     rotate = () => {
         let loginData = this.props.globalState.loginData;
@@ -139,43 +175,45 @@ class SpinWheel extends Component {
         this.setState({
             isWheelLoading : true
         }, () => {
-            API.playSpinner(params)
-            .then((result) => {
-                if(result.status){
-                    let data = result.data;
-                    let user_point = data.user_point;
-                    let status_spin = data.spin;
-                    loginData.user_point = parseInt(user_point);
-                    AsyncStorage.setItem('loginData', JSON.stringify(loginData));
-                    let action = {
-                        type : "USER_UPDATE",
-                        data : loginData
-                    }
-                    this.props.globalAction(action);
-                    this.setState({
-                        isWheelLoading : false,
-                    }, () => {
-                        setTimeout(() => {
-                            this.setState({
-                                rotate : true
-                            }, () => {
-                                this.resultSpinner();
-                            })
-                        }, 500)
-                    })
-                } else {
-                    this.setState({
-                        isWheelLoading : false,
-                    }, () => {
+            this.loadProbData(() => {
+                API.playSpinner(params)
+                .then((result) => {
+                    if(result.status){
+                        let data = result.data;
+                        let user_point = data.user_point;
+                        let status_spin = data.spin;
+                        loginData.user_point = parseInt(user_point);
+                        AsyncStorage.setItem('loginData', JSON.stringify(loginData));
+                        let action = {
+                            type : "USER_UPDATE",
+                            data : loginData
+                        }
+                        this.props.globalAction(action);
                         this.setState({
-                            showDialog : true,
-                            dialogData : {
-                                dialogTitle : "Warning!",
-                                dialogMessage : result.message
-                            }
+                            isWheelLoading : false,
+                        }, () => {
+                            setTimeout(() => {
+                                this.setState({
+                                    rotate : true
+                                }, () => {
+                                    this.resultSpinner();
+                                })
+                            }, 500)
                         })
-                    })
-                }
+                    } else {
+                        this.setState({
+                            isWheelLoading : false,
+                        }, () => {
+                            this.setState({
+                                showDialog : true,
+                                dialogData : {
+                                    dialogTitle : "Warning!",
+                                    dialogMessage : result.message
+                                }
+                            })
+                        })
+                    }
+                })
             })
         })
     }
@@ -213,7 +251,7 @@ class SpinWheel extends Component {
                     </View>
                 </View>
                 <View style={{justifyContent : "center", flexDirection : "row"}}>
-                    <TouchableOpacity onPress={this.closeDialog} style={{backgroundColor : AppStyles.color.base, paddingVertical: 8, paddingHorizontal : 24, borderRadius : 100}}>
+                    <TouchableOpacity onPress={() => this.linkTo('WheelHistory')} style={{backgroundColor : AppStyles.color.base, paddingVertical: 8, paddingHorizontal : 24, borderRadius : 100}}>
                         <Text style={{textAlign : "center", fontSize : 18, fontWeight : "600", color : "#fff"}}>OK</Text>
                     </TouchableOpacity>
                 </View>
@@ -237,6 +275,7 @@ class SpinWheel extends Component {
                 probs = probs.map((value) => parseFloat(value))
                 probs.reverse();
                 this.setState({
+                    probs_id : data.probs_id,
                     probs : probs
                 }, action)
             }
@@ -257,13 +296,11 @@ class SpinWheel extends Component {
                     spinner : data,
                     spinnerCost : data2[0].spinnercost_value
                 }, () => {
-                    this.loadProbData(() => {
-                        setTimeout(() => {
-                            this.setState({
-                                isLoading : false
-                            })
-                        }, 1000)
-                    })       
+                    setTimeout(() => {
+                        this.setState({
+                            isLoading : false
+                        })
+                    }, 1000)
                 })
             } else {
                 if(result.code === 1){
@@ -273,7 +310,7 @@ class SpinWheel extends Component {
         })
     }
 
-    closeDialog = (name = null) => {
+    closeDialog = () => {
         this.setState({
             showDialog : false,
             dialogData : {
@@ -307,10 +344,11 @@ class SpinWheel extends Component {
                                     textContent="Loading..."
                                     textStyle={{color : "#fff"}} 
                                 />
-                                {/* <View>
-                                    <Text>State : {this.state.rouletteCustomState}</Text>
-                                    <Text>Current Index : {this.state.optionCustom}</Text>
-                                </View> */}
+                                <View style={{flexDirection : "row", justifyContent : "flex-end"}}>
+                                    <TouchableOpacity onPress={() => this.linkTo('WheelHistory')}>
+                                        <Text style={{fontSize : 18, fontWeight : "bold", paddingVertical : 8, paddingHorizontal : 14, borderWidth : 1, borderColor : AppStyles.color.base, color : AppStyles.color.base, borderRadius : 100}}>Jackpot History</Text>
+                                    </TouchableOpacity>
+                                </View>
                                 <View style={{marginVertical : 24}}>
                                     <Roulette
                                         rotateWheel={this.state.rotate}
