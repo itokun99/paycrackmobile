@@ -8,7 +8,7 @@ import {
     SafeAreaView,
     StatusBar,
     ActivityIndicator,
-    RefreshControl
+    RefreshControl,
 } from 'react-native';
 import AppStyles from '../../styles/Android';
 import API,{Settings} from '../../services/Service';
@@ -26,6 +26,7 @@ import ItemsList from '../../components/ItemsList';
 import Toast from 'react-native-easy-toast';
 import ImageSequence from 'react-native-image-sequence';
 import BottomBanner from '../../components/BottomBanner';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const images = [
   require('../../assets/images/icons/telor/1.png'),
@@ -104,6 +105,51 @@ class Home extends Component {
         this.handleGetItem()
     }
 
+    handleLogOut = () => {
+        let loginData = this.props.globalState.loginData;
+        let params = {
+            appkey : loginData.appkey
+        }
+        // console.warn(loginData);
+        API.userLogout(params)
+        .then((result) => {
+            if(result.status){
+                this.refs.toast.show(result.message);
+                let action = {
+                    type : "USER_LOGOUT"
+                }
+                this.props.globalAction(action);
+                setTimeout(() => {
+                    AsyncStorage.clear();
+                    this.props.navigation.navigate('Loading');
+                }, 500)
+            } else {
+                this.refs.toast.show(result.message);
+            }
+        })
+    }
+
+    lastLoginCheck = () => {
+        let loginData = this.props.globalState.loginData;
+        let params = {
+            appkey : loginData.appkey,
+            user_id : loginData.user_id,
+        }
+
+        if(loginData.user_status === "0"){
+            setTimeout(() => {
+                this.handleLogOut()
+            }, 1000)
+        } else {
+            API.lastLogin(params)
+            .then((result) => {
+                if(result.status){
+                    this.refs.toast.show(`Welcome back ${loginData.user_fullname}`);
+                }
+            })
+        }
+    }
+
     postdaily = () => {
         if (this.state.id != null) {
             let loginData = this.props.globalState.loginData;
@@ -167,6 +213,7 @@ class Home extends Component {
     componentDidMount() {
         this.handleGetItem();
         this.setUserData();
+        this.lastLoginCheck()
     }
 
 
@@ -184,7 +231,7 @@ class Home extends Component {
                         />
                     }>
                         <SafeAreaView style={AppStyles.home.main}>
-                            <StatusBar barStyle="light-content" backgroundColor={AppStyles.loadingfirst.container.backgroundColor} />
+                            {/* <StatusBar barStyle="light-content" backgroundColor={AppStyles.loadingfirst.container.backgroundColor} /> */}
                             <View style={{ marginBottom: 14 }}></View>
                             
                             {
@@ -268,7 +315,7 @@ class Home extends Component {
                                     // flexDirection: "row", 
                                     // justifyContent: "space-between" 
                                 }}>
-                                    <Text style={{fontSize : 18, fontWeight : "600", color : "#111"}}>Reedem Items</Text>
+                                    <Text style={{fontSize : 18, fontWeight : "600", color : "#111"}}>Redeem Items</Text>
                                     <View style={{marginTop : 8, height : 3, width : 30, backgroundColor : AppStyles.color.base, borderRadius : 14}}></View>
                                 </View>
                                 <View style={AppStyles.home.sectionBody}>
@@ -300,6 +347,7 @@ class Home extends Component {
                             </View>
                         </SafeAreaView>
                     </ScrollView>
+                    <Toast ref="toast" position="top" />
                 </View>
                 <BottomBanner />
             </View>

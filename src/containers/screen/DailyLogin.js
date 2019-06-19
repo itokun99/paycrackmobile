@@ -227,7 +227,7 @@ class DailyLogin extends Component{
                 // contentContainerStyle={{flex : 1}}
              >
                 <SafeAreaView style={AppStyles.home.main}>
-                    <StatusBar barStyle="light-content" backgroundColor={AppStyles.loadingfirst.container.backgroundColor} />
+                    {/* <StatusBar barStyle="light-content" backgroundColor={AppStyles.loadingfirst.container.backgroundColor} /> */}
                     <View style={{flex: 1,flexDirection: 'row',position:'relative'}}>
                         {this.state.userstatus === true ? 
                         <Image

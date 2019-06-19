@@ -57,8 +57,8 @@ class SpinWheel extends Component {
         }
     }
 
-    linkTo = (path, data) => {
-        this.props.navigation.navigate(path, data);
+    linkTo = (path) => {
+        this.props.navigation.push(path);
     }
 
     onRotateChange(state) {
@@ -93,15 +93,7 @@ class SpinWheel extends Component {
             probs_id : this.state.probs_id,
             probs_status : 0
         }
-
         API.changeStatusSpinner(params)
-        .then((result) => {
-            if(result.status){
-
-            } else {
-                this.props.navigation.navigate('Home');
-            }
-        })
     }
 
     resultSpinner = () => {
@@ -153,7 +145,7 @@ class SpinWheel extends Component {
                     })
                 }
             })
-        },3200)   
+        },8000)   
     }
 
     onRotateCustom(option) {
@@ -251,7 +243,9 @@ class SpinWheel extends Component {
                     </View>
                 </View>
                 <View style={{justifyContent : "center", flexDirection : "row"}}>
-                    <TouchableOpacity onPress={() => this.linkTo('WheelHistory')} style={{backgroundColor : AppStyles.color.base, paddingVertical: 8, paddingHorizontal : 24, borderRadius : 100}}>
+                    <TouchableOpacity 
+                    onPress={() => this.linkTo('WheelHistory')}
+                    style={{backgroundColor : AppStyles.color.base, paddingVertical: 8, paddingHorizontal : 24, borderRadius : 100}}>
                         <Text style={{textAlign : "center", fontSize : 18, fontWeight : "600", color : "#fff"}}>OK</Text>
                     </TouchableOpacity>
                 </View>
@@ -345,8 +339,11 @@ class SpinWheel extends Component {
                                     textStyle={{color : "#fff"}} 
                                 />
                                 <View style={{flexDirection : "row", justifyContent : "flex-end"}}>
-                                    <TouchableOpacity onPress={() => this.linkTo('WheelHistory')}>
-                                        <Text style={{fontSize : 18, fontWeight : "bold", paddingVertical : 8, paddingHorizontal : 14, borderWidth : 1, borderColor : AppStyles.color.base, color : AppStyles.color.base, borderRadius : 100}}>Jackpot History</Text>
+                                    <TouchableOpacity 
+                                        onPress={() => this.linkTo('WheelHistory')}
+                                        style={{paddingVertical : 8, paddingHorizontal : 14, borderWidth : 1, borderColor : AppStyles.color.base, color : AppStyles.color.base, borderRadius : 100}}
+                                    >
+                                        <Text style={{fontSize : 18, fontWeight : "bold", textAlign : "center"}}>Jackpot History</Text>
                                     </TouchableOpacity>
                                 </View>
                                 <View style={{marginVertical : 24}}>

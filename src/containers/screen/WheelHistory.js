@@ -78,7 +78,7 @@ class WheelHistory extends Component {
                 <View style={{position : "absolute", top : 0, left : 0, height : '100%', width : "100%"}}>
                     <ScrollView contentContainerStyle={{...AppStyles.global.scrollView, backgroundColor : AppStyles.color.backgroundLayer, height : '100%'}}>
                         <SafeAreaView>
-                            <StatusBar barStyle="light-content" backgroundColor={AppStyles.color.base} />
+                            {/* <StatusBar barStyle="light-content" backgroundColor={AppStyles.color.base} /> */}
                             {
                                 this.state.JackpotHistory.length > 0 ? 
                                 <FlatList
