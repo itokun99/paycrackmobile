@@ -110,7 +110,8 @@ const HomeStack = createStackNavigator({
             elevation : 0,
             showOpacity : 0
         },
-        headerTintColor : AppStyles.color.base,
+        // headerTintColor : AppStyles.color.base,
+        headerTintColor : AppStyles.color.text,
         headerRight : <CoinCounter navigation={navigation} />
     })
 })

@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
   MainContainer: {
     flex: 1,
     alignItems: 'center',
+    paddingHorizontal : 24,
   },
   textInstruction:{
     fontSize: 20 ,

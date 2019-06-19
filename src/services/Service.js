@@ -1,10 +1,11 @@
 import NetInfo from "@react-native-community/netinfo";
 
 export const Settings = {
-    isOnline : false,
+    isOnline : true,
     // basePath : "http://kes.co.id/dev/paycrack/",
-    basePath : "http://192.168.100.5/paycrack/",
-    onlinePath : "http://34.87.108.11/paycrack/",
+    basePath : "http://paycrack.jalanpelajar.com/",
+    // basePath : "http://192.168.100.5/paycrack/",
+    onlinePath : "http://paycrack.jalanpelajar.com/",
     offlinePath : "http://192.168.100.5/paycrack/",
 }
 
@@ -72,7 +73,8 @@ const getRedeemItems = (data = {}) => {
         params++;
     }
     let appkey = `${typeof(data.appkey) !== "undefined" ? params > 1 ? "&appkey="+data.appkey : "appkey="+data.appkey : ""}`;    
-    let path = `api/items${params > 0 ? "?" : "" }${appkey}`;
+    let id = `${typeof(data.id) !== "undefined" ? params > 1 ? "&id="+data.id : "id="+data.id : ""}`;    
+    let path = `api/items${params > 0 ? "?" : "" }${appkey}${id}`;
     return request(path)
 }
 
@@ -239,6 +241,13 @@ const changeStatusSpinner = (data = {}) => {
     return request(path, method, data)
 }
 
+const lastLogin = (data = {}) => {
+    let path = "api/users/user_lastlogin";
+    let method = "POST";
+    
+    return request(path, method, data)
+}
+
 
 
 //user API
@@ -255,6 +264,7 @@ const API = {
     historyRedeem,
     getSpinnerValue,
     dailyPoint,
+    lastLogin,
     changePassword,
     changeAddress,
     playSpinner,

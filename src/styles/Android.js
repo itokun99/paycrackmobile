@@ -3,7 +3,9 @@ import {StyleSheet, Dimensions} from 'react-native';
 //setting up
 let color = {
     // base : '#E61A80',
-    base : "#d0011b",
+    // base : "#d0011b",
+    base : "#ee5253",
+    text : "#111",
     secondary : "#fff",
     backgroundLayer : "#eee",
     defaultFont : "#222",
@@ -492,13 +494,13 @@ let cointIcon = StyleSheet.create({
         marginRight: 14,
         alignItems: "center",
         borderWidth: 1,
-        borderColor: color.base,
+        borderColor: "#ffa801",
         paddingVertical: 4,
         paddingHorizontal: 8,
         borderRadius: 16
     },
     coinText : {
-        color: color.base,
+        color: "#ffa801",
         marginRight: 4,
         fontSize: 18,
         fontWeight: "bold"

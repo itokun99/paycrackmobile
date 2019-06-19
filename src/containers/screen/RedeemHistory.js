@@ -83,7 +83,7 @@ class RedeemHistory extends Component {
             <View style={{flex : 1}}>
                 <View style={{position : "absolute", top : 0, left : 0, height : '100%', width : "100%"}}>
                     <ScrollView style={{width : "100%", height: "100%", backgroundColor : AppStyles.color.backgroundLayer}}>
-                        <StatusBar barStyle="light-content" backgroundColor={AppStyles.color.base}  />
+                        {/* <StatusBar barStyle="light-content" backgroundColor={AppStyles.color.base}  /> */}
                         <SafeAreaView>
                             {
                                 this.state.redeem.length > 0 ?

@@ -46,6 +46,10 @@ class BannerScreen extends Component {
         });
     }
 
+    linkToHome = () => {
+            this.props.navigation.navigate('App')
+    }
+
     componentDidMount(){
         this.loadBanner();
         interval = setInterval(() => {
@@ -56,9 +60,9 @@ class BannerScreen extends Component {
     }
 
     componentDidUpdate(){
-        if(this.state.timer === 0){
-            this.props.navigation.navigate('App')
-        }
+        // if(this.state.timer === 0){
+        //     this.props.navigation.navigate('App')
+        // }
     }
 
     render(){
@@ -77,9 +81,20 @@ class BannerScreen extends Component {
                             :
                             null
                         }
-                        <TouchableOpacity style={{position : "absolute", top : 24, right : 24}} >
-                            <Text style={{fontSize : 18, fontWeight : "600", color : "#fff"}} >Please wait {this.state.timer}</Text>
-                        </TouchableOpacity>
+                        {
+                            this.state.timer === 0 ?
+                            (
+                                <TouchableOpacity onPress={this.linkToHome} style={{position : "absolute", top : 24, right : 24}} >
+                                    <Text style={{fontSize : 18, fontWeight : "600", color : "#fff"}} >Skip >></Text>
+                                </TouchableOpacity>
+                            ) 
+                            :
+                            (
+                                <TouchableOpacity style={{position : "absolute", top : 24, right : 24}} >
+                                    <Text style={{fontSize : 18, fontWeight : "600", color : "#fff"}} >Please wait {this.state.timer}</Text>
+                                </TouchableOpacity>
+                            )
+                        }
                     </View>
                 </SafeAreaView>
             </ScrollView>

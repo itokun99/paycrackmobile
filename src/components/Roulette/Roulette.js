@@ -17,35 +17,6 @@ class Roulette extends Component {
     };
 
     this.step = props.step || (2 * Math.PI) / props.options.length;
-
-    this.panResponder = PanResponder.create({
-      onMoveShouldSetResponderCapture: () => true,
-      onMoveShouldSetPanResponderCapture: () => true,
-      onPanResponderRelease: () => {
-        // let { enableUserRotate, onRotate, onRotateChange, duration, easing, customRoulette, customRotate, onPressAction } = this.props;
-
-        // if (enableUserRotate) {
-        //   let { options, turns } = this.props;
-        //   let { activeItem } = this.state;
-        //   let random = Math.floor(Math.random() * options.length) 
-        //   + (options.length*turns);                    
-        //   const nextItem = random;
-
-        //   this.state._animatedValue.setValue(activeItem);
-        //   let animation = Animated.timing(this.state._animatedValue, { toValue: nextItem, easing, duration })          
-        //   onRotateChange("start");
-        //   animation.start(()=>{
-        //     onRotateChange("stop");
-        //   });
-          
-        //   let newActiveItem = nextItem > options.length ? (nextItem % options.length)  : nextItem;
-        //   if(newActiveItem == 0){
-        //     newActiveItem = options.length
-        //   }
-        //   this.setState({ activeItem: newActiveItem }, () => onRotate(options[options.length - newActiveItem]));
-        // }
-      }
-    });
   }
 
     onPressRotate = () => {
@@ -84,7 +55,6 @@ class Roulette extends Component {
                 next = next + (options.length * turns);
                 nextItem = next;
             } else {
-                // console.warn('masuk22')
                 random = Math.floor(Math.random() * options.length) + (options.length*turns);                    
                 nextItem = random;
             }
@@ -131,7 +101,6 @@ class Roulette extends Component {
         <View>
         
             <Animated.View
-                //   {...this.panResponder.panHandlers}
                 style={[
                     styles.container,
                     { width: radius, height: radius, borderRadius: radius / 2 },
@@ -193,11 +162,11 @@ Roulette.defaultProps = {
   rouletteRotate: 0,
   enableUserRotate: false,
   background: null,
-  turns: 4,
+  turns: 20,
   rotateEachElement: (index) => 0,
   onRotate: () => {},
   onRotateChange: () => {},
-  duration: 3500,
+  duration: 8000,
   easing: Easing.inOut(Easing.ease),
   markerTop: 0,
   markerWidth:20,
