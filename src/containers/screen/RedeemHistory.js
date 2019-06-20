@@ -13,6 +13,7 @@ import AppStyles from '../../styles/Android';
 import API from '../../services/Service';
 import AsyncStorage from '@react-native-community/async-storage';
 import BottomBanner from '../../components/BottomBanner';
+import ActivityWrapper from '../wrapper/ActivityWrapper';
 
 class RedeemHistory extends Component {
     constructor(props){
@@ -105,7 +106,7 @@ class RedeemHistory extends Component {
                         </SafeAreaView>
                     </ScrollView>
                 </View>
-                <BottomBanner />
+                <BottomBanner />                
             </View>
         )
     }

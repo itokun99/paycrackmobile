@@ -6,6 +6,7 @@ import { GlobalConsumer } from '../../contexts/Context';
 import API from '../../services/Service';
 import Spinner from 'react-native-loading-spinner-overlay';
 import AsyncStorage from '@react-native-community/async-storage';
+import ActivityWrapper from '../wrapper/ActivityWrapper';
 
 
 class ChangePassword extends Component {

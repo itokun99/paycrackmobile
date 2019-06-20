@@ -6,11 +6,7 @@ import {
     Dimensions,
     ScrollView,
     ActivityIndicator,
-    Button,
     Image,
-    Alert,
-    AlertIOS,
-    Platform,
     TouchableOpacity
 } from 'react-native';
 import Roulette from '../../components/Roulette/Roulette';
@@ -18,19 +14,15 @@ import API from '../../services/Service';
 import { GlobalConsumer } from '../../contexts/Context';
 import Toast from 'react-native-easy-toast';
 import AppStyles from '../../styles/Android';
-import marker from '../../assets/images/roulette/marker2.png'
-import hore from '../../assets/images/roulette/hore.png'
+import marker from '../../assets/images/roulette/marker2.png';
 import wheel from '../../assets/images/roulette/wheel.png'
 import Spinner from 'react-native-loading-spinner-overlay';
 import AsyncStorage from '@react-native-community/async-storage';
 import {
     Dialog,
-    DialogContent,
-    DialogFooter,
-    DialogButton,
-    DialogTitle,
     ScaleAnimation,
 } from 'react-native-popup-dialog';
+import ActivityWrapper from '../wrapper/ActivityWrapper';
 
 let interval = null;
 class SpinWheel extends Component {
@@ -405,7 +397,7 @@ class SpinWheel extends Component {
                         this.genericDialogContent()
                     }
                     </View>
-                </Dialog>
+                </Dialog>                
             </ScrollView>
         )
     }

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {View, Text, ScrollView, TextInput, Image, TouchableOpacity} from 'react-native';
 import AppStyles from '../../styles/Android';
 import { AndroidToast } from '../../components/Toast';
-import API from '../../services/Service';
+import API, {Settings} from '../../services/Service';
 import AsyncStorage from '@react-native-community/async-storage';
 import { GlobalConsumer } from '../../contexts/Context';
 import Toast, {DURATION} from 'react-native-easy-toast';
@@ -14,10 +14,12 @@ const styles = AppStyles.login;
 class Login extends Component {
     constructor(props){
         super(props);
+        const device = Settings.device_id;
         this.state = {
             loginData : {
                 username : "",
                 password : "",
+                device : device, 
             },
             isLoading : false,
             isSuccessFull : false,
@@ -114,6 +116,7 @@ class Login extends Component {
     }
 
     render(){
+        // console.warn(this.state.loginData.device);
         return(
             // scrollview untuk menghindari lock focus input 
             <ScrollView contentContainerStyle={styles.container} >

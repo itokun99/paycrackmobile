@@ -6,6 +6,7 @@ import moment from 'moment';
 import AsyncStorage from '@react-native-community/async-storage';
 import Spinner from 'react-native-loading-spinner-overlay';
 import API from '../../services/Service';
+import ActivityWrapper from '../wrapper/ActivityWrapper';
 
 
 class Profile extends Component {
@@ -116,7 +117,7 @@ class Profile extends Component {
                         <TouchableOpacity onPress={this.submit} style={AppStyles.profile.saveButton}>
                             <Text style={AppStyles.profile.saveButtonText}>Save Change</Text>
                         </TouchableOpacity>
-                    </View>
+                    </View>                    
                 </SafeAreaView>
             </ScrollView>
         )

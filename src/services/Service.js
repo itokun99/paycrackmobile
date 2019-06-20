@@ -1,12 +1,16 @@
 import NetInfo from "@react-native-community/netinfo";
+import DeviceInfo from 'react-native-device-info';
+
+export const device_id = DeviceInfo.getUniqueID();
 
 export const Settings = {
-    isOnline : true,
+    isOnline : false,
     // basePath : "http://kes.co.id/dev/paycrack/",
-    basePath : "https://paycrack.jalanpelajar.com/",
-    // basePath : "http://192.168.100.5/paycrack/",
+    // basePath : "https://paycrack.jalanpelajar.com/",
+    basePath : "http://192.168.100.5/paycrack/",
     onlinePath : "https://paycrack.jalanpelajar.com/",
     offlinePath : "http://192.168.100.5/paycrack/",
+    device_id : device_id
 }
 
 const request = (path, method, data, formData = false ) => {

@@ -15,6 +15,7 @@ import Dialog, {
     DialogButton,
     DialogFooter
 } from 'react-native-popup-dialog';
+import ActivityWrapper from '../wrapper/ActivityWrapper';
 class DetailMenu extends Component {
     constructor(props) {
         super(props)
@@ -240,7 +241,6 @@ class DetailMenu extends Component {
                     }
                 
                 </Dialog>
-
             </ScrollView>
         )
 

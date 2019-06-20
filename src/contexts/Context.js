@@ -1,7 +1,12 @@
 import React, {Component, createContext} from 'react';
 import AsyncStorage from '@react-native-community/async-storage';
-import API from '../services/Service';
+import API, { Settings } from '../services/Service';
 import Toast from 'react-native-easy-toast';
+import UserInactivity from 'react-native-user-inactivity';
+import Dialog, {
+    ScaleAnimation
+} from 'react-native-popup-dialog';
+import CustomDialog from '../components/CustomDialog';
 
 /*
     Dokumentasi tentang React Context
@@ -25,10 +30,16 @@ const GlobalProvider = (ChildComponent) => {
         //return component dinamis untuk HOC
         class ParentComponent extends Component {
             // state global disini bisa disebuat store.
-            state = {
-                isLogin : false,
-                loginData : {},
-                internet : false,
+            constructor(props){
+                const device = Settings.device_id;
+                super(props);
+                this.state = {
+                    isLogin : false,
+                    loginData : {},
+                    internet : false,
+                    device : device,
+                    user_active : true,
+                }
             }
 
             // action global konsep mirip redux dispatcher.
@@ -104,6 +115,13 @@ const GlobalProvider = (ChildComponent) => {
                 })
             }
 
+            onAction = (active) => {
+                // console.warn(active);
+                this.setState({
+                    user_active : active
+                })
+            }
+
             runCheckUser = () => {
                 setInterval(() => {
                     if(this.state.isLogin){
@@ -129,8 +147,14 @@ const GlobalProvider = (ChildComponent) => {
                 }
                 return(
                     <Provider value={stateManager}>
-                        <ChildComponent {...this.props} />
-                        <Toast ref="toast" />
+                        <UserInactivity
+                            // timernya 2,5 men
+                            timeForInactivity={8000}
+                            onAction={this.onAction}
+                        >   
+                            <ChildComponent {...this.props} />
+                            <Toast ref="toast" />
+                        </UserInactivity>
                     </Provider>
                 )
             }

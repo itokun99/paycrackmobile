@@ -6,69 +6,29 @@ import {
     ScrollView,
     TouchableOpacity,
     SafeAreaView,
-    StatusBar,
+    Dimensions,
     ActivityIndicator,
     RefreshControl,
 } from 'react-native';
 import AppStyles from '../../styles/Android';
 import API,{Settings} from '../../services/Service';
 import Dialog, {
-    DialogContent,
-    DialogFooter,
-    DialogButton,
-  } from 'react-native-popup-dialog';
-import CountDown from 'react-native-countdown-component';
+    ScaleAnimation
+} from 'react-native-popup-dialog';
 
 //import CountDown to show the timer
-import moment from 'moment';
 import { GlobalConsumer } from '../../contexts/Context';
 import ItemsList from '../../components/ItemsList';
 import Toast from 'react-native-easy-toast';
-import ImageSequence from 'react-native-image-sequence';
 import BottomBanner from '../../components/BottomBanner';
 import AsyncStorage from '@react-native-community/async-storage';
+import CustomDialog from '../../components/CustomDialog';
+import ActivityWrapper from '../wrapper/ActivityWrapper';
 
-const images = [
-  require('../../assets/images/icons/telor/1.png'),
-  require('../../assets/images/icons/telor/2.png'),
-  require('../../assets/images/icons/telor/3.png'),
-  require('../../assets/images/icons/telor/4.png'),
-  require('../../assets/images/icons/telor/5.png'),
-  require('../../assets/images/icons/telor/6.png'),
-  require('../../assets/images/icons/telor/7.png'),
-  require('../../assets/images/icons/telor/8.png'),
-  require('../../assets/images/icons/telor/9.png'),
-  require('../../assets/images/icons/telor/10.png'),
-  require('../../assets/images/icons/telor/11.png'),
-  require('../../assets/images/icons/telor/12.png'),
-  require('../../assets/images/icons/telor/13.png'),
-  require('../../assets/images/icons/telor/14.png'),
-  require('../../assets/images/icons/telor/15.png'),
-  require('../../assets/images/icons/telor/16.png'),
-  require('../../assets/images/icons/telor/17.png'),
-  require('../../assets/images/icons/telor/18.png'),
-  require('../../assets/images/icons/telor/19.png'),
-  require('../../assets/images/icons/telor/20.png'),
-  require('../../assets/images/icons/telor/21.png'),
-  require('../../assets/images/icons/telor/22.png'),
-  require('../../assets/images/icons/telor/23.png'),
-  require('../../assets/images/icons/telor/24.png'),
-  require('../../assets/images/icons/telor/25.png'),
-  require('../../assets/images/icons/telor/26.png'),
-  require('../../assets/images/icons/telor/27.png'),
-  require('../../assets/images/icons/telor/28.png'),
-  require('../../assets/images/icons/telor/29.png'),
-  require('../../assets/images/icons/telor/30.png'),
-  require('../../assets/images/icons/telor/31.png'),
-];
-
-const centerIndex = Math.round(images.length / 1);
-
-
+let count = 0;
 class Home extends Component {
     constructor(props) {
         super(props);
-        const { navigation } = this.props;
         this.state = {
             userEmail: "",
             id: "",
@@ -86,6 +46,12 @@ class Home extends Component {
             internet  : true,
             refreshing: false,
             showDialog : false,
+            dialogData : {
+                title : "",
+                message : "",
+            },
+            logoutTimer : 5,
+            userLogout : false,
         }
     }
   
@@ -106,26 +72,30 @@ class Home extends Component {
     }
 
     handleLogOut = () => {
-        let loginData = this.props.globalState.loginData;
-        let params = {
-            appkey : loginData.appkey
-        }
-        // console.warn(loginData);
-        API.userLogout(params)
-        .then((result) => {
-            if(result.status){
-                this.refs.toast.show(result.message);
-                let action = {
-                    type : "USER_LOGOUT"
-                }
-                this.props.globalAction(action);
-                setTimeout(() => {
-                    AsyncStorage.clear();
-                    this.props.navigation.navigate('Loading');
-                }, 500)
-            } else {
-                this.refs.toast.show(result.message);
+        this.setState({
+            showDialog : false
+        }, () => {
+            let loginData = this.props.globalState.loginData;
+            let params = {
+                appkey : loginData.appkey
             }
+            // console.warn(loginData);
+            API.userLogout(params)
+            .then((result) => {
+                if(result.status){
+                    this.refs.toast.show(result.message);
+                    let action = {
+                        type : "USER_LOGOUT"
+                    }
+                    this.props.globalAction(action);
+                    setTimeout(() => {
+                        AsyncStorage.clear();
+                        this.props.navigation.navigate('Loading');
+                    }, 500)
+                } else {
+                    this.refs.toast.show(result.message);
+                }
+            })
         })
     }
 
@@ -213,13 +183,11 @@ class Home extends Component {
     componentDidMount() {
         this.handleGetItem();
         this.setUserData();
-        this.lastLoginCheck()
+        this.lastLoginCheck();
     }
 
 
     render() {
-        // console.warn(this.props.globalState)
-
         return (
             <View style={{flex : 1}}>
                 <View style={{position: 'absolute', top : 0, left : 0, height : '100%', width : "100%"}}>

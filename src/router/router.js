@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import {
     createAppContainer,
     createSwitchNavigator,
@@ -24,6 +24,7 @@ import Profile from '../containers/screen/Profile';
 import ChangePassword from '../containers/screen/ChangePassword';
 import BannerScreen from '../containers/screen/BannerScreen';
 import WheelHistory from '../containers/screen/WheelHistory';
+import ActivityWrapper from '../containers/wrapper/ActivityWrapper';
 
 
 // routing untuk user setelah login
@@ -183,5 +184,8 @@ const RootNavigation = createSwitchNavigator({
 });
 
 // deklarasi nama agar lebih mudah dengan Navigasi selanjutnya akan di import ke App.js
+
+
+
 const Navigation = createAppContainer(RootNavigation);
 export default Navigation;

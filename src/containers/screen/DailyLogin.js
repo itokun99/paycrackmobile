@@ -27,6 +27,7 @@ import { GlobalConsumer } from '../../contexts/Context';
 import ItemsList from '../../components/ItemsList';
 import Toast from 'react-native-easy-toast';
 import ImageSequence from 'react-native-image-sequence';
+import ActivityWrapper from '../wrapper/ActivityWrapper';
 
 const images = [
   require('../../assets/images/icons/kado/1.png'),
@@ -318,7 +319,7 @@ class DailyLogin extends Component{
                             }}>
                             <Text style={AppStyles.home.textCoin}>Anda berhasil check in hari ini, anda mendapat {this.state.userpoint} point</Text>
                         </DialogContent>
-                    </Dialog>
+                    </Dialog>                   
                 </SafeAreaView>
              </ScrollView>
         )
